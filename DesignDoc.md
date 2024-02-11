@@ -49,7 +49,23 @@ This section describes the application architecture.
 
 ### Software Architecture
 [Architecture Design](images/A_Design.jpg)
-> _Describe your software architecture._
+
+The "Price Compare Plus" application employs a microservices architecture to enable robust, scalable online shopping features. The architecture is delineated into several key components:
+
+- **Mobile App**: The front-end interface that interacts with users, pushing alerts and sending user requests.
+- **Microservices**: Decomposed backend services, including:
+  - **Notification Service**: Manages and sends notifications to users.
+  - **Favorites Service**: Handles the management of user favorites.
+  - **Price Comparison Service**: Fetches and compares prices from various sources.
+  - **User Service**: Responsible for authentication and user management.
+  - **Product Service**: Manages product search and details retrieval.
+- **External APIs**: Interfaces with Currency Conversion API and Retailer APIs to update product information and facilitate currency conversion.
+- **API Gateway**: Acts as the entry point for all client requests, routing them to the appropriate microservice and providing security measures like rate limiting.
+- **SQL Database**: Stores user data including credentials and profiles.
+- **NoSQL Database**: Holds product-related data such as price data and favorites for quick retrieval.
+
+The architecture supports both RESTful services and third-party API integration, ensuring that product information is current and accurate. The use of both SQL and NoSQL databases caters to the efficient management of structured and unstructured data respectively.
+
 
 
 ### Use Cases
