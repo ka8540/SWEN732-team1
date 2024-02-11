@@ -48,7 +48,7 @@ The "Price Compare Plus" MVP is a mobile application that enables users to brows
 This section describes the application architecture.
 
 ### Software Architecture
-> _Place a architectural diagram here._
+[Architecture Design](images/A_Design.j)
 > _Describe your software architecture._
 
 
