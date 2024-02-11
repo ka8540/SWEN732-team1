@@ -7,7 +7,7 @@
 > and appear in the generated PDF in italics._
 
 ## Team Information
-* Team name: TEAM !
+* Team name: TEAM 1
 * Team members
   * Kush Jayesh Ahir 
   * Love Jayesh Ahir
