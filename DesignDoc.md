@@ -1,7 +1,7 @@
 
 # PROJECT Design Documentation
 
-Project Name: Price Compare Plus
+## Project Name: Price Compare Plus
 
 ## Team Information
 * Team name: TEAM 1
