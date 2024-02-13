@@ -45,7 +45,7 @@ The "Price Compare Plus" MVP is a mobile application that enables users to brows
 This section describes the application architecture.
 
 ### Software Architecture
-[Architecture Design](images/A_Design.jpg)
+[Architecture Design](images/Architecture Diagrampng.png)
 
 The "Price Compare Plus" application employs a microservices architecture to enable robust, scalable online shopping features. The architecture is delineated into several key components:
 
@@ -58,16 +58,20 @@ The "Price Compare Plus" application employs a microservices architecture to ena
   - **Product Service**: Manages product search and details retrieval.
 - **External APIs**: Interfaces with Currency Conversion API and Retailer APIs to update product information and facilitate currency conversion.
 - **API Gateway**: Acts as the entry point for all client requests, routing them to the appropriate microservice and providing security measures like rate limiting.
-- **SQL Database**: Stores user data including credentials and profiles.
-- **NoSQL Database**: Holds product-related data such as price data and favorites for quick retrieval.
+- **SQL Database**: Stores user data including credentials and profiles as well as product-related data such as price data and favorites for quick retrieval.
 
 The architecture supports both RESTful services and third-party API integration, ensuring that product information is current and accurate. The use of both SQL and NoSQL databases caters to the efficient management of structured and unstructured data respectively.
 
 
 
 ### Use Cases
-> _Place a use case diagram here._
-> _Describe your use case diagram._
+[Use Case Diagram](images/USe Case.png)
+**Actors**: The diagram includes three actors: User, Admin, and System.
+**Use Cases**: Within the "Price Compare Plus" package, there are several key use cases outlined:
+- User-related use cases such as User Authentication, Product Search, Save Favorites, and Sort and Filter Options.
+- System-related use cases including Price Comparison, Product Details Display, Product Image Display, Currency Conversion, and Price Drop Notifications.
+- The Manage User use case is specifically related to the Admin actor, indicating their ability to manage user-related functionalities.
+
 
 
 ### Class Diagram
