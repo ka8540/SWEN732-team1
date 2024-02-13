@@ -65,7 +65,7 @@ The architecture supports both RESTful services and third-party API integration,
 
 
 ### Use Cases
-[Use Case Diagram](images/Use_Case.pngg)
+[Use Case Diagram](images/Use_Case.png)
 **Actors**: The diagram includes three actors: User, Admin, and System.
 **Use Cases**: Within the "Price Compare Plus" package, there are several key use cases outlined:
 - User-related use cases such as User Authentication, Product Search, Save Favorites, and Sort and Filter Options.
