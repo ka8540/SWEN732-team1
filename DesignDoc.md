@@ -76,4 +76,103 @@ The architecture supports both RESTful services and third-party API integration,
 
 ![Class Diagram](images/CD.png)
 
-> _Describe your class diagram._
+1. MobileApplication:
+
+Attributes:
+
+1. isNotificationEnabled: A boolean indicating whether notifications are enabled for the user.
+2. userPreferences: A string that stores user preferences, likely in a serialized format.
+
+Operations: 1. sendUserRequests(): A method for sending user requests, perhaps to an API or server. 2. pushAlerts(): A method to push alerts to the user, likely notifications.
+
+2. APIGateway:
+
+Attributes:
+
+1. maxRequestPerMinute: An integer indicating the maximum number of requests per minute the gateway can handle, used for rate limiting.
+2. isSecurityEnabled: A boolean that indicates whether security measures like authentication and authorization are active.
+
+Operations:
+
+1. routing(): Determines the route for incoming requests to the appropriate services.
+2. security(): Handles security checks for incoming requests.
+3. rateLimiting(): Enforces rate limiting on incoming requests to prevent abuse.
+
+4. ExternalAPI:
+
+Attributes:
+
+1. apiKey: A string used for API authentication, unique to each consumer of the API.
+
+Operations:
+
+1. currencyConversion(): Converts currency values, possibly using external financial data.
+2. retailerAPI(): Interacts with retailer APIs, likely fetching or updating product information.
+
+3. NotificationService:
+
+Attributes:
+
+1. notificationCount: An integer to keep track of notifications sent or pending.
+
+Operations:
+
+1. sendNotifications(): Sends notifications to users, perhaps through email or push notifications.
+
+2. FavoritesService:
+
+Attributes:
+
+1. favoriteItems: An array of strings, probably storing identifiers for user's favorite items.
+
+Operations:
+
+1. manageFavorites(): Provides functionality to add, remove, or update favorite items for a user.
+
+2. PriceComparisonServices:
+
+Attributes:
+
+1. priceSources: An array of strings, likely URLs or identifiers of different price sources.
+
+Operations:
+
+1. fetchPrices(): Retrieves prices from various sources for comparison.
+2. comparePrices(): Compares prices of the same product from different sources.
+
+3. UserServices:
+
+Attributes:
+
+1. isUserAuthenticated: A boolean indicating whether a user is currently authenticated.
+2. currentSessionToken: A string holding the session token for the authenticated user.
+
+Operations:
+
+1. authentication(): Handles user authentication processes.
+2. userManagement(): Manages user data, such as creating, updating, or deleting user accounts.
+
+3. ProductServices:
+
+Attributes:
+
+1. productCatalog: An array of strings, possibly containing product identifiers or names.
+
+Operations:
+
+1. productSearch(): Searches for products in the catalog.
+2. productDetails(): Retrieves detailed information for a specific product.
+
+9.SQLDatabase:
+
+Attributes:
+
+1. connectionString: A string used to establish a connection to the SQL database.
+2. favorites, userData, productInfo, priceData: Arrays of strings to hold corresponding data, structured for database storage.
+
+Operations:
+
+1. queryFavorites(userId: int): Returns a user's favorite items from the database.
+2. insertUser(userData: string): Inserts new user data into the database.
+3. updateProductInfo(productId: int, newInfo: string): Updates product information in the database.
+4. deletePriceData(productId: int): Deletes price data for a product from the database.
