@@ -45,7 +45,7 @@ The "Price Compare Plus" MVP is a mobile application that enables users to brows
 This section describes the application architecture.
 
 ### Software Architecture
-[Architecture Design](images/Architecture_Diagram.png)
+![Architecture Design](images/Architecture_Diagram.png)
 
 The "Price Compare Plus" application employs a microservices architecture to enable robust, scalable online shopping features. The architecture is delineated into several key components:
 
@@ -65,7 +65,7 @@ The architecture supports both RESTful services and third-party API integration,
 
 
 ### Use Cases
-[Use Case Diagram](images/Use_Case.png)
+![Use Case Diagram](images/Use_Case.png)
 
 **Actors**: The diagram includes three actors: User, Admin, and System.
 **Use Cases**: Within the "Price Compare Plus" package, there are several key use cases outlined:
