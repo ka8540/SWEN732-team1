@@ -74,6 +74,6 @@ The architecture supports both RESTful services and third-party API integration,
 
 ### Class Diagram
 
-![Class Diagram](images/ClassDiagram.png)
+![Class Diagram](images/CD.png)
 
 > _Describe your class diagram._
