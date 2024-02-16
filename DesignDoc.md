@@ -74,3 +74,68 @@ The architecture supports both RESTful services and third-party API integration,
 
 ### Class Diagram
 ![class diagram.drawio.png](images/class_diagram_drawio.png)
+
+### Class Diagram Description
+- **User Class:**
+  -**Attributes:**:
+    UserID: int - A unique identifier for each user.
+    Username: String - The username of the user.
+    Password: String - The password of the user.
+    Email: String - The email address of the user.
+  -**Operations**:
+    login(): void - Allows the user to log in to the application.
+    register(): void - Allows the user to register for an account.
+    logout(): void - Allows the user to log out of the application.
+
+- **Product Class**:
+  - **Attributes**:
+    productID: int - A unique identifier for each product.
+    description: String - A description of the product.
+    price: double - The price of the product.
+    brand: string - The brand of the product.
+  - **Operations**:
+    getdetails(): void - Retrieves the details of a product.
+    imageurl(): void - Retrieves the image URL of a product.
+
+- **Notification Class**:
+  - **Attributes**:
+    notificationID: int - A unique identifier for each notification.
+    userID: int - The ID of the user who received the notification.
+    message string - The content of the notification.
+    timestamp: DateTime - The date and time the notification was sent.
+
+- **Authentication Class**:
+  - **Attributes**:
+    Username: String - The username of the user.
+    Password: String - The password of the user.
+  - **Operations**:
+    login(): void - Allows the user to log in to the application.
+    logout(): void - Allows the user to log out of the application.
+
+- **Shopping Cart Class**:
+  - **Attributes**:
+    cartID: int - A unique identifier for each shopping cart.
+    userID: int - The ID of the user who owns the shopping cart.
+    productlist: list<products> - A list of products in the shopping cart.
+    totalamount double - The total amount of the items in the shopping cart.
+  - **Operations**:
+    addproduct(): void - Adds a product to the shopping cart.
+    removeproduct():void - Removes a product from the shopping cart.
+    checkout():void - Completes the checkout process.
+
+- **Favorites Class**:
+  - **Attributes**:
+    favoriteID: int - A unique identifier for each favorite item.
+    userID int - The ID of the user who favorited the item.
+    productID: int - The ID of the product that is favorited.
+
+- **Price Comparison Class**:
+  - **Attributes**:
+    ProductID: int - The ID of the product
+    retailerD int - The ID of the retailer who is selling it.
+
+- **Currency Conversion Class**:
+  - **Operations**:
+    convert: int - Converts currency into different types.
+    
+    
