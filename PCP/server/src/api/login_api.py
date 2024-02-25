@@ -12,19 +12,33 @@ class AddUserAPI(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('username', type=str,required=True, location='json')
         parser.add_argument('password', type=str,required=True, location='json')
-        
         parser.add_argument('email', type=str,required=True, location='json')
-        
         parser.add_argument('firstname',type=str,required=True, location='json')
         parser.add_argument('lastname',type=str,required=True, location='json')
         parser.add_argument('role', type=str,required=True, location='json')
         args = parser.parse_args()
-        print(args['password'],'lol kush ')
-        print(args['email'])
         response = user_details(**args)
         return jsonify(response)
 
-    
+class LoginAPI(Resource):
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('username', type=str, required=True, location='json')
+        parser.add_argument('password', type=str, required=True, location='json')
+        args = parser.parse_args()
+
+        # Hash the password the same way it's hashed when a user is created
+        hashed_password = hashlib.sha224(args['password'].encode()).hexdigest()
+
+        user_id = check_user_credentials(args['username'], hashed_password)
+        print("it is :",user_id)
+        if user_id:
+            return jsonify(user_id)
+            
+        else:
+            # If credentials are incorrect, return an error message
+            return jsonify("Invalide Creds"), 401
+         
     
     
 

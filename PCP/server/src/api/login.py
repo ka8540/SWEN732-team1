@@ -20,10 +20,14 @@ def list_info_items():
     return result
 
 def check_user_credentials(username, hashed_password):
-    query = '''SELECT username, session_key FROM users WHERE username = %s AND session_key = %s;'''
-    result = exec_get_all(query, (username,hashed_password))
-    print(result,"result of query to check user")
-    return len(result) > 0
+    query = '''SELECT username FROM user_authentication WHERE username = %s AND hashed_password = %s;'''
+    result = exec_get_all(query, (username, hashed_password))
+    print(result, "result of query to check user")
+    
+    # If the result is not empty, credentials are correct
+    if len(result)>0:
+        return True 
+    return False
 
 def user_details(**kwargs):
     firstname = kwargs.get('firstname')
