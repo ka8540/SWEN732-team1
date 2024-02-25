@@ -7,6 +7,9 @@ import sys
 import os
 from PCP.server.src.api.login_api import *
 from PCP.server.src.utilities.swen_344_db_utils import *
+import hashlib
+import secrets
+
 
 def rebuild_tables():
     exec_sql_file('UserDetail.sql')
@@ -15,6 +18,31 @@ def list_info_items():
     """Fetches all records from the User table."""
     result = exec_get_all('''SELECT * FROM user_authentication''')
     return result
+
+def check_user_credentials(username, hashed_password):
+    query = '''SELECT username, session_key FROM users WHERE username = %s AND session_key = %s;'''
+    result = exec_get_all(query, (username,hashed_password))
+    print(result,"result of query to check user")
+    return len(result) > 0
+
+def user_details(id,username,password,role):
+    password=hashlib.sha224(password.encode()).hexdigest()
+    print("Password:",password)
+    print("UserName:",username)
+    tuple= (id,username,password,role)
+    query= 'SELECT * FROM users WHERE id = %s AND username = %s AND hashed_password = %s AND role = %s;'
+    catch_return=exec_get_all(query,tuple)
+    print("catch empty:",catch_return)
+    if (len(catch_return)==0):
+        tuple_1= (id,username,password,role)
+        print("creds:",tuple_1)
+        result= 'INSERT INTO users (id,username,hashed_password,role) VALUES (%s,%s, %s,%s);'
+        catch_return=exec_commit(result,tuple_1)
+        print(catch_return)
+        return result
+    else:
+        return "The user already axists",401
+
 
 def insert_info_item(**kwargs):
     sql = '''INSERT INTO user_authentication (username, hashed_password, email, role) VALUES (%s, %s, %s, %s) RETURNING id;'''
