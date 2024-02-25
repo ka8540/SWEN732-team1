@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from flask_cors import CORS
 
 from src.utilities.swen_344_db_utils import *
-from PCP.server.src.api.login_api import *
+from src.api.login_api import *
 
 app = Flask(__name__) #create Flask instance
 CORS(app) #Enable CORS on Flask server to work with Nodejs pages

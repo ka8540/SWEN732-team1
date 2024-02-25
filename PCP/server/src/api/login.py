@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 import sys
 import os
-from PCP.server.src.api.login_api import *
-from PCP.server.src.utilities.swen_344_db_utils import *
+from src.api.login_api import *
+from src.utilities.swen_344_db_utils import *
 import hashlib
 import secrets
 
@@ -25,23 +25,38 @@ def check_user_credentials(username, hashed_password):
     print(result,"result of query to check user")
     return len(result) > 0
 
-def user_details(id,username,password,role):
-    password=hashlib.sha224(password.encode()).hexdigest()
-    print("Password:",password)
-    print("UserName:",username)
-    tuple= (id,username,password,role)
-    query= 'SELECT * FROM users WHERE id = %s AND username = %s AND hashed_password = %s AND role = %s;'
-    catch_return=exec_get_all(query,tuple)
-    print("catch empty:",catch_return)
-    if (len(catch_return)==0):
-        tuple_1= (id,username,password,role)
-        print("creds:",tuple_1)
-        result= 'INSERT INTO users (id,username,hashed_password,role) VALUES (%s,%s, %s,%s);'
-        catch_return=exec_commit(result,tuple_1)
+def user_details(**kwargs):
+    firstname = kwargs.get('firstname')
+    lastname = kwargs.get('lastname')
+    username = kwargs.get('username')
+    password_kwargs = kwargs.get('password')
+    email = kwargs.get('email')
+    role = kwargs.get('role')
+    password = hashlib.sha224(password_kwargs.encode()).hexdigest()
+
+    # Log statements (useful for debugging, but should be removed or commented out in production)
+    print("Password:", password)
+    print("UserName:", username)
+    
+    # Prepare the tuple with the correct number of arguments
+    tuple_to_check = (username, password)
+    tuple_to_insert = (firstname, lastname, username, password, email ,role)
+    
+    # Check if user already exists
+    query_check = 'SELECT * FROM user_authentication WHERE username = %s AND hashed_password = %s;'
+    catch_return = exec_get_all(query_check, tuple_to_check)
+    
+    print("catch empty:", catch_return)
+    
+    # If the user does not exist, insert the new user
+    if len(catch_return) == 0:
+        print("creds:", tuple_to_insert)
+        query_insert = 'INSERT INTO user_authentication (firstname, lastname, username, hashed_password, email , role) VALUES (%s,%s, %s, %s, %s, %s);'
+        catch_return = exec_commit(query_insert, tuple_to_insert)
         print(catch_return)
-        return result
+        return catch_return
     else:
-        return "The user already axists",401
+        return "The user already exists", 400
 
 
 def insert_info_item(**kwargs):
