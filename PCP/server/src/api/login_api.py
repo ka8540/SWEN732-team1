@@ -1,13 +1,12 @@
 from flask_restful import Resource
-
+from flask import jsonify
 from flask_restful import request
 from flask_restful import reqparse
 import json
 from ..utilities.swen_344_db_utils import *
+from api.login import *
 
-class ExampleApi(Resource):
+class LoginAPIS(Resource):
     def get(self):
-    # NOTE: No need to replicate code; use the util function!
-       result = exec_get_all("SELECT * FROM people")
-       return result
+        return jsonify(list_info_items())
 
