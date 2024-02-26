@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Alert, StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import { SafeAreaView, Alert, StyleSheet, Text, View, TextInput, TouchableOpacity,Image} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 export default function Login({ navigation }) {
@@ -56,6 +56,10 @@ export default function Login({ navigation }) {
       
       {/* App Content */}
       <View style={styles.content}>
+      <Image 
+          source={{ uri: '/Users/kayahir/Desktop/SWEN732/SWEN732-team1/images/icon.png' }} 
+          style={styles.image}
+        />
         <Text style={styles.header}>Login</Text>
         <View style={styles.row}>
       </View>
@@ -134,12 +138,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#fff',
   },
+  image: {
+    width: 120, 
+    height: 250,
+    borderRadius: 5,
+  },
   button: {
     backgroundColor: 'navy',
     padding: 15,
     marginTop: 20,
     borderRadius: 10,
-    width: '90%',
+    width: '70%',
     alignItems: 'center',
   },
   buttonText: {
