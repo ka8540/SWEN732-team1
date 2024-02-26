@@ -96,7 +96,7 @@ export default function SignUp() {
           placeholder="Password"
           value={password}
           onChangeText={setPassword}
-          keyboardType="number-pad" 
+          keyboardType="default"
         />
 
         <TextInput
@@ -104,7 +104,7 @@ export default function SignUp() {
           placeholder="role"
           value={role}
           onChangeText={setRole}
-          keyboardType="default " 
+          keyboardType="default" 
         />
 
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>

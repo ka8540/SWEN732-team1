@@ -11,4 +11,4 @@ CREATE TABLE user_authentication (
     role VARCHAR(50) NOT NULL
 );
 
-INSERT INTO user_authentication ( firstname, lastname, username, hashed_password, email, role) VALUES('Kush','Ahir','kush_ahir', 'kush1234', 'kay@gmail.com', 'USER');
+INSERT INTO user_authentication ( firstname, lastname, username, hashed_password, email, role) VALUES('Kush','Ahir','kush_ahir', '5775c5782a9e218ebd3c971f689cfccb45fde0560db23aa4b4057e08', 'kay@gmail.com', 'USER');

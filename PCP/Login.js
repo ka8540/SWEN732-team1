@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { SafeAreaView, Alert, StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-export default function Login() {
+export default function Login({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigateToSignUp = () => {
+    navigation.navigate('SignUp');
+  };
   const handleSubmit = () => {
     // Endpoint URL
     const url = 'http://127.0.0.1:5000/login';
@@ -33,7 +36,7 @@ export default function Login() {
     })
     .then(data => {
       console.log(data);
-      Alert.alert("Success", "Form submitted successfully.");
+      Alert.alert("Login Successfully");
     })
     .catch(error => {
       console.error('There was an error!', error);
@@ -47,8 +50,9 @@ export default function Login() {
       <StatusBar style="auto" />
       
       {/* Orange Navbar */}
-      <View style={styles.navbar}>
-      </View>
+      <TouchableOpacity onPress={navigateToSignUp} style={styles.signupButton}>
+        <Text style={styles.signupButtonText}>Signup</Text>
+      </TouchableOpacity>
       
       {/* App Content */}
       <View style={styles.content}>
@@ -95,6 +99,19 @@ const styles = StyleSheet.create({
   navbarText: {
     color: '#fff',
     fontSize: 18,
+    fontWeight: 'bold',
+  },
+  signupButton: {
+    backgroundColor: 'green', 
+    padding: 5,
+    marginTop: 5,
+    marginLeft:300, // Adjust the margin as needed
+    borderRadius: 10,
+    width: '20%',
+    alignItems: 'center',
+  },
+  signupButtonText: {
+    color: 'white',
     fontWeight: 'bold',
   },
   content: {
