@@ -8,9 +8,13 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role,setRole] = useState('');
+  const [confirmpassword,setConfirmPassword] = useState('');
 
   const handleSubmit = () => {
+    if (password !== confirmpassword) {
+      Alert.alert("Password Mismatch", "The passwords do not match. Please try again.");
+      return;
+    }
     // Endpoint URL
     const url = 'http://127.0.0.1:5000/signUp';
   
@@ -21,7 +25,7 @@ export default function SignUp() {
       email: email,
       username: username,
       password: password,
-      role: role
+      confirmpassword: confirmpassword,
     };
   
     // POST request options
@@ -97,18 +101,20 @@ export default function SignUp() {
           value={password}
           onChangeText={setPassword}
           keyboardType="default"
+          secureTextEntry={true}
         />
 
         <TextInput
           style={styles.input}
-          placeholder="role"
-          value={role}
-          onChangeText={setRole}
+          placeholder="ConfirmPassword"
+          value={confirmpassword}
+          onChangeText={setConfirmPassword}
           keyboardType="default" 
+          secureTextEntry={true}
         />
 
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-          <Text style={styles.buttonText}>Submit</Text>
+          <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

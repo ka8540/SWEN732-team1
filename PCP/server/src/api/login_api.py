@@ -39,7 +39,7 @@ class AddUserAPI(Resource):
         parser.add_argument('email', type=str, required=True, location='json')
         parser.add_argument('firstname', type=str, required=True, location='json')
         parser.add_argument('lastname', type=str, required=True, location='json')
-        parser.add_argument('role', type=str, required=True, location='json')
+        parser.add_argument('confirmpassword', type=str, required=True, location='json')
         args = parser.parse_args()
 
         # Call user_details function to create the user

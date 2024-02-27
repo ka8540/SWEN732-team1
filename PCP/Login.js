@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, Alert, StyleSheet, Text, View, TextInput, TouchableOpacity,Image} from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { Platform,StatusBar } from 'expo-status-bar';
 
 export default function Login({ navigation }) {
   const [username, setUsername] = useState('');
@@ -81,7 +81,7 @@ export default function Login({ navigation }) {
         />
 
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-          <Text style={styles.buttonText}>Submit</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

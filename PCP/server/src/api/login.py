@@ -35,7 +35,6 @@ def user_details(**kwargs):
     username = kwargs.get('username')
     password_kwargs = kwargs.get('password')
     email = kwargs.get('email')
-    role = kwargs.get('role')
     password = hashlib.sha224(password_kwargs.encode()).hexdigest()
 
     # Log statements (useful for debugging, but should be removed or commented out in production)
@@ -44,7 +43,7 @@ def user_details(**kwargs):
     
     # Prepare the tuple with the correct number of arguments
     tuple_to_check = (username, password)
-    tuple_to_insert = (firstname, lastname, username, password, email ,role)
+    tuple_to_insert = (firstname, lastname, username, password, email)
     
     # Check if user already exists
     query_check = 'SELECT * FROM user_authentication WHERE username = %s AND hashed_password = %s;'
@@ -55,7 +54,7 @@ def user_details(**kwargs):
     # If the user does not exist, insert the new user
     if len(catch_return) == 0:
         print("creds:", tuple_to_insert)
-        query_insert = 'INSERT INTO user_authentication (firstname, lastname, username, hashed_password, email , role) VALUES (%s,%s, %s, %s, %s, %s);'
+        query_insert = 'INSERT INTO user_authentication (firstname, lastname, username, hashed_password, email) VALUES (%s,%s, %s, %s, %s);'
         catch_return = exec_commit(query_insert, tuple_to_insert)
         print(catch_return)
         return catch_return
