@@ -39,6 +39,10 @@ export default function SignUp() {
     .then(response => {
       if (response.ok) {
         return response.json();
+      } else if (response.status === 409) {
+        // Correctly handle the case when a user already exists
+        Alert.alert("User Exists", "This username is already taken. Please choose another one.");
+        return Promise.reject(new Error('User already exists'));
       } else {
         throw new Error('Network response was not ok.');
       }
@@ -49,7 +53,9 @@ export default function SignUp() {
     })
     .catch(error => {
       console.error('There was an error!', error);
-      Alert.alert("Network Error", "Failed to submit form. Please check your network connection and try again.");
+      if (error.message !== 'User already exists') {
+        Alert.alert("Network Error", "Failed to submit form. Please check your network connection and try again.");
+      }
     });
 
   };

@@ -10,16 +10,13 @@ export default function Login({ navigation }) {
     navigation.navigate('SignUp');
   };
   const handleSubmit = () => {
-    // Endpoint URL
     const url = 'http://127.0.0.1:5000/login';
   
-    // Form data to be sent
     const formData = {
       username: username,
       password: password,
     };
   
-    // POST request options
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -30,8 +27,10 @@ export default function Login({ navigation }) {
     .then(response => {
       if (response.ok) {
         return response.json();
+      } else if (response.status === 410) {
+        throw new Error('username or password is wrong');
       } else {
-        throw new Error('Network response was not ok.');
+        throw new Error('Some error occurred, please try again later.');
       }
     })
     .then(data => {
@@ -39,11 +38,14 @@ export default function Login({ navigation }) {
       Alert.alert("Login Successfully");
     })
     .catch(error => {
-      console.error('There was an error!', error);
-      Alert.alert("Network Error", "Failed to submit form. Please check your network connection and try again.");
+      if (error.message === 'username or password is wrong') {
+        Alert.alert("Invalide Username or Password", error.message);
+      } else {
+        console.error('Error:', error);
+      }
     });
-
   };
+  
 
   return (
     <SafeAreaView style={styles.container}>

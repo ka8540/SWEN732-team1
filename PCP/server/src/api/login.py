@@ -26,8 +26,8 @@ def check_user_credentials(username, hashed_password):
     
     # If the result is not empty, credentials are correct
     if len(result)>0:
-        return True 
-    return False
+        return "Login Creds are Correct",200 
+    return "Login Creds are Incorrect",410
 
 def user_details(**kwargs):
     firstname = kwargs.get('firstname')
@@ -37,28 +37,22 @@ def user_details(**kwargs):
     email = kwargs.get('email')
     password = hashlib.sha224(password_kwargs.encode()).hexdigest()
 
-    # Log statements (useful for debugging, but should be removed or commented out in production)
-    print("Password:", password)
-    print("UserName:", username)
-    
-    # Prepare the tuple with the correct number of arguments
-    tuple_to_check = (username, password)
+    # Check if user already exists based on username
+    user_exists_query = 'SELECT username FROM user_authentication WHERE username = %s;'
+    user_exists = exec_get_all(user_exists_query, (username,))
+    print(user_exists,'username !!')
+    if user_exists:
+        print("user_exist")
+        # If user exists, return immediately with an appropriate message and status
+        return {"message": "User already exists"}, 409  # HTTP 409 Conflict
+
+    # If the user does not exist, proceed to insert the new user
     tuple_to_insert = (firstname, lastname, username, password, email)
-    
-    # Check if user already exists
-    query_check = 'SELECT * FROM user_authentication WHERE username = %s AND hashed_password = %s;'
-    catch_return = exec_get_all(query_check, tuple_to_check)
-    
-    print("catch empty:", catch_return)
-    
-    # If the user does not exist, insert the new user
-    if len(catch_return) == 0:
-        print("creds:", tuple_to_insert)
-        query_insert = 'INSERT INTO user_authentication (firstname, lastname, username, hashed_password, email) VALUES (%s,%s, %s, %s, %s);'
-        catch_return = exec_commit(query_insert, tuple_to_insert)
-        print(catch_return)
-        return catch_return
-    else:
-        return "The user already exists", 400
+    query_insert = 'INSERT INTO user_authentication (firstname, lastname, username, hashed_password, email) VALUES (%s, %s, %s, %s, %s);'
+    exec_commit(query_insert, tuple_to_insert)
+
+    # Return a success message (consider also returning an appropriate status code)
+    return {"message": "User registered successfully"}, 200
+
 
 

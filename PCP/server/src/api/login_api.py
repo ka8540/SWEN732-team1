@@ -3,7 +3,7 @@ API Endpoints for user management and authentication.
 
 These endpoints handle user registration and login functionality.
 """
-
+from flask import make_response
 from flask_restful import Resource
 from flask import jsonify
 from flask_restful import request
@@ -14,9 +14,12 @@ from src.api.login import *  # Importing login functions
 import hashlib  # Importing hashlib module for password hashing
 
 class AddUserAPI(Resource):
+
     """
     API endpoint to add a new user.
     """
+    def get(self):
+        return jsonify(list_info_items())
 
     def post(self):
         """
@@ -39,14 +42,14 @@ class AddUserAPI(Resource):
         parser.add_argument('email', type=str, required=True, location='json')
         parser.add_argument('firstname', type=str, required=True, location='json')
         parser.add_argument('lastname', type=str, required=True, location='json')
-        parser.add_argument('confirmpassword', type=str, required=True, location='json')
         args = parser.parse_args()
 
         # Call user_details function to create the user
-        response = user_details(**args)
+        response, status_code = user_details(**args)
+        
         
         # Return JSON response with user details
-        return jsonify(response)
+        return make_response(jsonify(response), status_code)
 
 class LoginAPI(Resource):
     """
@@ -73,11 +76,11 @@ class LoginAPI(Resource):
         hashed_password = hashlib.sha224(args['password'].encode()).hexdigest()
 
         # Check user credentials
-        user_id = check_user_credentials(args['username'], hashed_password)
+        response, status_code = check_user_credentials(args['username'], hashed_password)
         
-        if user_id:
+        if response:
             # If credentials are correct, return JSON response with user ID
-            return jsonify(user_id)
+            return make_response(jsonify(response),status_code)
         else:
             # If credentials are incorrect, return an error message
-            return jsonify("Invalid Credentials"), 401
+            return make_response(jsonify(response),status_code)
