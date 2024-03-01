@@ -7,6 +7,7 @@ import sys
 import os
 from src.api.login_api import *
 from src.utilities.swen_344_db_utils import *
+from src.model.user import *
 import hashlib
 import secrets
 
@@ -20,14 +21,25 @@ def list_info_items():
     return result
 
 def check_user_credentials(username, hashed_password):
-    query = '''SELECT username FROM user_authentication WHERE username = %s AND hashed_password = %s;'''
-    result = exec_get_all(query, (username, hashed_password))
-    print(result, "result of query to check user")
+    # Query to check if the username exists
+    query_username = '''SELECT username FROM user_authentication WHERE username = %s;'''
+    result_username = exec_get_all(query_username, (username,))
     
-    # If the result is not empty, credentials are correct
-    if len(result)>0:
-        return "Login Creds are Correct",200 
-    return "Login Creds are Incorrect",410
+    # Query to check if the username and hashed password combination is correct
+    query_credentials = '''SELECT username FROM user_authentication WHERE username = %s AND hashed_password = %s;'''
+    result_credentials = exec_get_all(query_credentials, (username, hashed_password))
+    
+    # Check the results and apply logic to return the correct message
+    if result_username and not result_credentials:
+        # Username exists, but password is incorrect
+        return check_password(query_username)
+    elif not result_username:
+        # Username does not exist
+        return check_username_and_password([], [])  # Passing empty lists to indicate no results found
+    else:
+        # Username and password combination is correct
+        return check_username_and_password(result_username, result_credentials)
+
 
 def user_details(**kwargs):
     firstname = kwargs.get('firstname')
@@ -41,10 +53,9 @@ def user_details(**kwargs):
     user_exists_query = 'SELECT username FROM user_authentication WHERE username = %s;'
     user_exists = exec_get_all(user_exists_query, (username,))
     print(user_exists,'username !!')
-    if user_exists:
-        print("user_exist")
-        # If user exists, return immediately with an appropriate message and status
-        return {"message": "User already exists"}, 409  # HTTP 409 Conflict
+    result = check_username(user_exists)
+    if result is not None:
+        return result
 
     # If the user does not exist, proceed to insert the new user
     tuple_to_insert = (firstname, lastname, username, password, email)

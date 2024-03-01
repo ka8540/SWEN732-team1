@@ -29,6 +29,8 @@ export default function Login({ navigation }) {
         return response.json();
       } else if (response.status === 410) {
         throw new Error('username or password is wrong');
+      }  else if (response.status === 411) {
+        throw new Error('Invalid Password');
       } else {
         throw new Error('Some error occurred, please try again later.');
       }
@@ -40,7 +42,9 @@ export default function Login({ navigation }) {
     .catch(error => {
       if (error.message === 'username or password is wrong') {
         Alert.alert("Invalide Username or Password", error.message);
-      } else {
+      }else if (error.message === 'Invalid Password') {
+        Alert.alert("Password is incorrect", error.message);
+      }else {
         console.error('Error:', error);
       }
     });

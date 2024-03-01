@@ -14,7 +14,7 @@ def connect():
                             port=config['port'])
 
 def exec_sql_file(path):
-    full_path = os.path.join(os.path.dirname(__file__), f'/Users/kayahir/Desktop/SWEN732/SWEN732-team1/PCP/server/src/db/UserDetail.sql')
+    full_path = os.path.join(os.path.dirname(__file__), f'/Users/kayahir/Desktop/SWEN732/SWEN732-team1/PCP/server/data/UserDetail.sql')
     conn = connect()
     cur = conn.cursor()
     with open(full_path, 'r') as file:

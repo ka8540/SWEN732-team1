@@ -10,7 +10,7 @@ from flask_restful import request
 from flask_restful import reqparse
 import json
 from src.utilities.swen_344_db_utils import *  # Importing database utilities
-from src.api.login import *  # Importing login functions
+from src.db.login import *  # Importing login functions
 import hashlib  # Importing hashlib module for password hashing
 
 class AddUserAPI(Resource):
