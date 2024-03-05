@@ -1,7 +1,12 @@
 import React from 'react';
-import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-export default function Home() {
+
+export default function Home({ navigation }) {
+    const handleFooterButtonPress = () => {
+        navigation.navigate('Account');
+      };  
   return (
     <SafeAreaView style={styles.container}>
       {/* Navbar */}
@@ -16,7 +21,10 @@ export default function Home() {
 
       {/* Footer */}
       <View style={styles.footer}>
-        <Text style={styles.footerText}>Footer Content Here</Text>
+        <TouchableOpacity style={styles.footerButton} onPress={handleFooterButtonPress}>
+          {/* Replace 'icon.png' with your actual icon image */}
+          <Ionicons name="person-outline" size={32} color="black" />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -53,4 +61,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
   },
+  footerIcon: {
+    width: 10, // Adjust the size as needed
+    height: 10, // Adjust the size as needed
+    marginRight: 12, // Adds some spacing between the icon and the text
+  },
+  footerButtonText: {
+    fontSize: 16,
+    color: '#fff',
+  }
 });

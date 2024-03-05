@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './Login';
 import SignUp from './Signup'
 import Home from './Home'
-
+import Account from './Account';
 export default function App() {
   const Stack = createNativeStackNavigator();
 
@@ -18,10 +18,17 @@ export default function App() {
           name="Home"
           component={Home}
           options={{
-            headerLeft: () => null, // This hides the back button
-            headerTitleAlign: 'center', // Optional: centers the header title
+            headerLeft: () => null, 
+            headerTitleAlign: 'center', 
           }}
         />
+      <Stack.Screen    
+          name="Account"
+          component={Account}
+          options={{
+            headerLeft: () => null, 
+            headerTitleAlign: 'center', 
+          }} />  
     </Stack.Navigator>
   </NavigationContainer>
   );
