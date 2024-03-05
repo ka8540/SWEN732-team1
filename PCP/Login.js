@@ -38,6 +38,10 @@ export default function Login({ navigation }) {
     .then(data => {
       console.log(data);
       Alert.alert("Login Successfully");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      });
     })
     .catch(error => {
       if (error.message === 'username or password is wrong') {
