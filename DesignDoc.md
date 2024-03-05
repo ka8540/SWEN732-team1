@@ -73,7 +73,7 @@ The architecture supports both RESTful services and third-party API integration,
 - The Manage User use case is specifically related to the Admin actor, indicating their ability to manage user-related functionalities.
 
 ### Class Diagram
-![class diagram.drawio.png](images/class_diagram_drawio.png)
+![class diagram.drawio.png](images/class_diagram_drawio.jpg)
 
 ### Class Diagram Description
 - **User Class:**
