@@ -37,6 +37,9 @@ def check_user_credentials(username, hashed_password):
         # Username does not exist
         return check_username_and_password([], [])  # Passing empty lists to indicate no results found
     else:
+        session_key = generate_session_key()
+        update_session_key_query = '''UPDATE user_authentication SET session_key = %s WHERE username = %s;'''
+        result=exec_commit(update_session_key_query, (session_key, username))
         # Username and password combination is correct
         return check_username_and_password(result_username, result_credentials)
 

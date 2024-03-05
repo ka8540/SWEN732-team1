@@ -1,5 +1,5 @@
 from src.db.login import *
-
+import secrets
 def check_username_and_password(result_username, result_credentials):
     if result_credentials:
         # If the username and password combination is correct
@@ -23,3 +23,7 @@ def check_username(username):
         # If user exists, return immediately with an appropriate message and status
         return {"message": "User already exists"}, 409  # HTTP 409 Conflict
     return None
+
+def generate_session_key():
+    # Generate a 16-byte (128-bit) hex string
+    return secrets.token_hex(16)
