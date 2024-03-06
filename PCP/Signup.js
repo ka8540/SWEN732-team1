@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, Alert, StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-export default function SignUp() {
+export default function SignUp({ navigation }) {
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -13,6 +13,14 @@ export default function SignUp() {
   const handleSubmit = () => {
     if (password !== confirmpassword) {
       Alert.alert("Password Mismatch", "The passwords do not match. Please try again.");
+      return;
+    }
+    if (!firstname || !lastname || !email || !username || !password || !confirmpassword) {
+      Alert.alert("Invalid Input", "Please fill in all fields.");
+      return;
+    }
+    if(!email.includes('@')){
+      Alert.alert("Invalid Email","email should contain @.")
       return;
     }
     // Endpoint URL
@@ -49,7 +57,12 @@ export default function SignUp() {
     })
     .then(data => {
       console.log(data);
-      Alert.alert("Success", "Form submitted successfully.");
+      Alert.alert("User Registered", "Registration has been completed");
+      navigation.navigate('SignUp');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
     })
     .catch(error => {
       console.error('There was an error!', error);
