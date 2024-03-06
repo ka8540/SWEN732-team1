@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -9,24 +10,44 @@ export default function Account({ navigation }) {
     const [username, setUsername] = useState('');
 
     useEffect(() => {
-        // This should be replaced with your actual fetch call
-        fetch('http://127.0.0.1:5000/userdetail')
-            .then(response => response.json())
-            .then(data => {
-              if (data && data.length > 0) {
-                const user = data[0]; // Access the first user details
-                setFirstName(user.firstname);
-                setLastName(user.lastname);
-                setEmail(user.email);
-                setUsername(user.username);
-              }
-            })
-            .catch(error => {
+        const fetchUserDetails = async () => {
+            try {
+                // Retrieve the session key from storage
+                const sessionKey = await AsyncStorage.getItem('sessionKey');
+                if (!sessionKey) {
+                    console.error('Session key not found');
+                    return;
+                }
+
+                const response = await fetch('http://127.0.0.1:5000/userdetail', {
+                    method: 'GET',
+                    headers: {
+                        // Include the session key in the request headers
+                        'X-Session-Key': sessionKey,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                if (data && data.length > 0) {
+                    const user = data[0]; // Access the first user details
+                    setFirstName(user.firstname);
+                    setLastName(user.lastname);
+                    setEmail(user.email);
+                    setUsername(user.username);
+                }
+            } catch (error) {
                 console.error('There was an error fetching the user details:', error);
-            });
+            }
+        };
+
+        fetchUserDetails();
     }, []);
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         Alert.alert(
             "Logout",
             "Are you sure you want to logout?",
@@ -39,6 +60,7 @@ export default function Account({ navigation }) {
                 { 
                     text: "Yes", onPress: () => {
                       console.log("Logout Pressed");
+                      AsyncStorage.removeItem('sessionKey'); // Clear session key on logout
                       navigation.reset({
                         index: 0,
                         routes: [{ name: 'Login' }],

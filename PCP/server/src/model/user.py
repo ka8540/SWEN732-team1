@@ -1,13 +1,13 @@
 from src.db.login import *
 import secrets
-def check_username_and_password(result_username, result_credentials):
+def check_username_and_password(result_username, result_credentials,session_key):
     if result_credentials:
         # If the username and password combination is correct
-        return "Login Creds are Correct", 200
+        return {"message": "Login Creds are Correct", "sessionKey": session_key}, 200
     elif result_username and not result_credentials:
         # Username exists but the combination is incorrect, indicating password issue
         return "Password Invalid", 411
-    else:
+    else: 
         # Username does not exist
         return "Login Creds are Incorrect", 410
 
