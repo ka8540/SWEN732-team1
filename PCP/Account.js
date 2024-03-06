@@ -58,13 +58,48 @@ export default function Account({ navigation }) {
                     style: "cancel"
                 },
                 { 
-                    text: "Yes", onPress: () => {
-                      console.log("Logout Pressed");
-                      AsyncStorage.removeItem('sessionKey'); // Clear session key on logout
-                      navigation.reset({
-                        index: 0,
-                        routes: [{ name: 'Login' }],
-                      });
+                    text: "Yes", onPress: async () => {
+                        console.log("Logout Pressed");
+                        // Retrieve the session key from storage
+                        const sessionKey = await AsyncStorage.getItem('sessionKey');
+                        if (sessionKey) {
+                            // Send a POST request to the backend to notify about the logout
+                            try {
+                                const response = await fetch('http://127.0.0.1:5000/logout', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        // Optionally include the session key in the headers if required
+                                        'X-Session-Key': sessionKey
+    
+                                    },
+                                    body: JSON.stringify({
+                                        session_key: sessionKey, // Include session key in the body if this is your backend's expected format
+                                    }),
+                                });
+    
+                                if (!response.ok) {
+                                    throw new Error('Failed to notify backend about logout');
+                                }
+    
+                                // Handle response from the backend, if necessary
+                                console.log('Logout successful, backend notified');
+                                
+                                // Optionally remove sessionKey from AsyncStorage here, if required
+                                // await AsyncStorage.removeItem('sessionKey');
+    
+                                // Navigate back to the login screen or perform other cleanup
+                                navigation.reset({
+                                    index: 0,
+                                    routes: [{ name: 'Login' }],
+                                });
+    
+                            } catch (error) {
+                                console.error('There was an error notifying the backend about logout:', error);
+                            }
+                        } else {
+                            console.log('No session key found');
+                        }
                     } 
                 }
             ]
