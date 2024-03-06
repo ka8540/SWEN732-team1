@@ -31,7 +31,6 @@ class AddUserAPI(Resource):
         - email (str): Email address of the new user.
         - firstname (str): First name of the new user.
         - lastname (str): Last name of the new user.
-        - role (str): Role of the new user.
 
         Returns:
             JSON response with details of the newly created user.
