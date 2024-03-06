@@ -5,12 +5,14 @@ from flask_cors import CORS
 from src.utilities.swen_344_db_utils import *
 from src.api.login_api import *
 from src.api.signup_api import *
+from src.api.user_detail_api import *
 app = Flask(__name__) #create Flask instance
 CORS(app) #Enable CORS on Flask server to work with Nodejs pages
 api = Api(app) #api router
 
 api.add_resource(AddUserAPI,'/signUp')
 api.add_resource(LoginAPI,'/login')
+api.add_resource(UserDetail,'/userdetail')
 if __name__ == '__main__':
     print("Loading db")
     exec_sql_file('UserDetail.sql')

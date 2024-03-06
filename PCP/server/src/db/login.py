@@ -15,6 +15,18 @@ import secrets
 def rebuild_tables():
     exec_sql_file('UserDetail.sql')
 
+def list_user_detail():
+    print('User entered to get the detail!!')
+    query = '''SELECT firstname, lastname, username, email FROM user_authentication;'''
+    users = exec_get_all(query)
+    print(users, 'user detail!!')
+    
+    user_details = [{'firstname': user[0], 'lastname': user[1], 'username': user[2], 'email': user[3]} for user in users]
+    
+    return user_details
+
+
+
 def list_info_items():
     """Fetches all records from the User table."""
     result = exec_get_all('''SELECT * FROM user_authentication''')

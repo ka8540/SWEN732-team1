@@ -27,3 +27,4 @@ def check_username(username):
 def generate_session_key():
     # Generate a 16-byte (128-bit) hex string
     return secrets.token_hex(16)
+
