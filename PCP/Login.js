@@ -10,6 +10,10 @@ export default function Login({ navigation }) {
     navigation.navigate('SignUp');
   };
   const handleSubmit = () => {
+    if (!username || !password) {
+      Alert.alert("Invalid Input", "username and password must not be empty");
+      return;
+    }
     const url = 'http://127.0.0.1:5000/login';
   
     const formData = {
