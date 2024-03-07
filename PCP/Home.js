@@ -1,31 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native';
 
 
-export default function Home({ navigation }) {
-    const handleFooterButtonPress = () => {
-        navigation.navigate('Account');
-      };  
+export default function Home() {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    // Perform the search operation here
+    // You can call an API or filter local data based on the searchQuery
+  };
   return (
     <SafeAreaView style={styles.container}>
-      {/* Navbar */}
+      {/* Navbar with Search */}
       <View style={styles.navbar}>
-        <Text style={styles.navbarText}>Home Page</Text>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search..."
+          placeholderTextColor="#888"
+          value={searchQuery}
+          onChangeText={handleSearch}
+        />
       </View>
-
       {/* Main Content */}
       <View style={styles.content}>
         <Text>Welcome to the Home Screen!</Text>
       </View>
 
-      {/* Footer */}
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerButton} onPress={handleFooterButtonPress}>
-          {/* Replace 'icon.png' with your actual icon image */}
-          <Ionicons name="person-outline" size={32} color="black" />
-        </TouchableOpacity>
-      </View>
     </SafeAreaView>
   );
 }
@@ -40,11 +42,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'cyan',
+    flexDirection: 'row', // Align items horizontally
+    paddingHorizontal: 10, // Add some padding on the sides
   },
-  navbarText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
+  searchInput: {
+    flex: 1, // Take up all available space
+    height: 40, // Fixed height for the search bar
+    backgroundColor: '#fff', // A different background color for the input
+    borderRadius: 20, // Rounded corners
+    paddingHorizontal: 10, // Inner padding
+    fontSize: 16, // Text size
+    color: '#000', // Text color
   },
   content: {
     flex: 1,
@@ -52,22 +60,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   footer: {
+    flexDirection: 'row', // Change the footer layout to horizontal
     height: 60,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around', // This will distribute the space around the child components evenly
     backgroundColor: 'cyan',
+  },
+  footerButton: {
+    // Add padding, if needed, to ensure the touchable area is sufficiently large
+    paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   footerText: {
     fontSize: 16,
     color: '#fff',
   },
   footerIcon: {
-    width: 10, // Adjust the size as needed
-    height: 10, // Adjust the size as needed
-    marginRight: 12, // Adds some spacing between the icon and the text
+    width: 24, // Adjust if necessary
+    height: 24, // Adjust if necessary
   },
-  footerButtonText: {
-    fontSize: 16,
-    color: '#fff',
-  }
 });

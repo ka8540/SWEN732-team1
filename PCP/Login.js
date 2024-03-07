@@ -51,8 +51,9 @@ export default function Login({ navigation }) {
           Alert.alert("Login Successfully");
           navigation.reset({
             index: 0,
-            routes: [{ name: 'Home' }], // Navigates to Home after login
+            routes: [{ name: 'MainApp' }], // Navigates to Home after login
           });
+
         })
         .catch(error => console.error('AsyncStorage error: ', error));
     })

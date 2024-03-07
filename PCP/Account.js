@@ -108,10 +108,6 @@ export default function Account({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* Navbar */}
-            <View style={styles.navbar}>
-                <Text style={styles.navbarText}>Account</Text>
-            </View>
 
             {/* Main Content */}
             <View style={styles.content}>
