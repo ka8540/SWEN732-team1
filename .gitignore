@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 *.pyc
 **/db.yml
 node_modules/
 
 .vscode/
+=======
+node_modules
+.idea/
+>>>>>>> 7d8de25eaec6f4ab1de35cbd6e252a18e4ef4e7c
