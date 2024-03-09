@@ -1,1 +1,5 @@
-node_modules
+*.pyc
+**/db.yml
+node_modules/
+
+.vscode/
