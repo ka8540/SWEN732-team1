@@ -15,6 +15,28 @@ import secrets
 def rebuild_tables():
     exec_sql_file('UserDetail.sql')
 
+def list_user_detail(username):
+    print('User entered to get the detail!!')
+    # Updated query to filter by username using parameterized queries for security
+    query = '''SELECT firstname, lastname, username, email FROM user_authentication WHERE username = %s;'''
+    users = exec_get_all(query, (username,))  # Note the comma after username to make it a tuple
+    print(users, 'user detail!!')
+    
+    if users:
+        user_details = [{'firstname': user[0], 'lastname': user[1], 'username': user[2], 'email': user[3]} for user in users]
+    else:
+        user_details = []
+    
+    return user_details
+def verify_session_key(session_key):
+    # Implement the logic to verify session key and return the associated username
+    # This is a placeholder for your SQL query to find the username with the given session_key
+    query = '''SELECT username FROM user_authentication WHERE session_key = %s;'''
+    result = exec_get_all(query, (session_key,))
+    if result:
+        return result[0][0]  # Assuming exec_get_all returns a list of tuples
+    return None
+
 def list_info_items():
     """Fetches all records from the User table."""
     result = exec_get_all('''SELECT * FROM user_authentication''')
@@ -29,20 +51,26 @@ def check_user_credentials(username, hashed_password):
     query_credentials = '''SELECT username FROM user_authentication WHERE username = %s AND hashed_password = %s;'''
     result_credentials = exec_get_all(query_credentials, (username, hashed_password))
     
-    # Check the results and apply logic to return the correct message
-    if result_username and not result_credentials:
-        # Username exists, but password is incorrect
-        return check_password(query_username)
-    elif not result_username:
+    if not result_username:
         # Username does not exist
-        return check_username_and_password([], [])  # Passing empty lists to indicate no results found
+        return {"message": "Login Creds are Incorrect", "sessionKey": None}, 410
+    elif result_username and not result_credentials:
+        # Username exists, but password is incorrect
+        # Here, we should not attempt to generate or use a session key since login failed.
+        return {"message": "Password Invalid", "sessionKey": None}, 411
     else:
+        # Correct credentials; proceed with session key generation and update.
         session_key = generate_session_key()
         update_session_key_query = '''UPDATE user_authentication SET session_key = %s WHERE username = %s;'''
-        result=exec_commit(update_session_key_query, (session_key, username))
-        # Username and password combination is correct
-        return check_username_and_password(result_username, result_credentials)
+        exec_commit(update_session_key_query, (session_key, username))
+        # Return success with the session key.
+        return {"message": "Login Creds are Correct", "sessionKey": session_key}, 200
 
+def user_logout(kwargs):
+    session_key = kwargs.get('session_key')
+    logout_query = '''UPDATE user_authentication SET session_key = NULL WHERE session_key = %s;'''
+    exec_commit(logout_query, (session_key,))
+    return {"message":"User Logout Successfully!"},200
 
 def user_details(**kwargs):
     firstname = kwargs.get('firstname')

@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
 import { SafeAreaView, Alert, StyleSheet, Text, View, TextInput, TouchableOpacity,Image} from 'react-native';
 import { Platform,StatusBar } from 'expo-status-bar';
@@ -41,11 +42,20 @@ export default function Login({ navigation }) {
     })
     .then(data => {
       console.log(data);
-      Alert.alert("Login Successfully");
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Home' }],
-      });
+      console.log("API Response:", data);
+      // Assuming `data` includes something like { sessionKey: 'your_session_key_here' }
+      const sessionKey = data.sessionKey;
+      // Store the session key
+      AsyncStorage.setItem('sessionKey', sessionKey)
+        .then(() => {
+          Alert.alert("Login Successfully");
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'MainApp' }], // Navigates to Home after login
+          });
+
+        })
+        .catch(error => console.error('AsyncStorage error: ', error));
     })
     .catch(error => {
       if (error.message === 'username or password is wrong') {

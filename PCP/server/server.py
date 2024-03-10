@@ -13,6 +13,8 @@ api = Api(app) #api router
 
 api.add_resource(AddUserAPI,'/signUp')
 api.add_resource(LoginAPI,'/login')
+api.add_resource(UserDetail,'/userdetail')
+api.add_resource(LogoutAPI,'/logout')
 if __name__ == '__main__':
     print("Loading db")
     exec_sql_file('UserDetail.sql')
