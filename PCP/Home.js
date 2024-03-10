@@ -1,16 +1,35 @@
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native';
-
+import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image, TextInput,Dimensions } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeIndex, setActiveIndex] = useState(0);
+  const carouselItems = [
+    {
+      // Example item structure
+      source: '/Users/kayahir/Desktop/SWEN732/SWEN732-team1/images/mcimage.jpeg',
+    },
+    {
+      source: '/Users/kayahir/Desktop/SWEN732/SWEN732-team1/images/ipimage.png',
+    },
+    {
+      source: '/Users/kayahir/Desktop/SWEN732/SWEN732-team1/images/accimage.jpeg',
+    },
+  ];
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-    // Perform the search operation here
-    // You can call an API or filter local data based on the searchQuery
   };
+  const renderItem = ({item, index}) => {
+    return (
+      <View style={styles.carouselItem}>
+        <Image style={styles.image} source={{ uri: item.source }} />
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {/* Navbar with Search */}
@@ -21,6 +40,17 @@ export default function Home() {
           placeholderTextColor="#888"
           value={searchQuery}
           onChangeText={handleSearch}
+        />
+      </View>
+      {/* Carousel */}
+      <View style={styles.carouselContainer}>
+        <Carousel
+          layout={"default"}
+          data={carouselItems}
+          sliderWidth={Dimensions.get('window').width}
+          itemWidth={300}
+          renderItem={renderItem}
+          onSnapToItem={index => setActiveIndex(index)}
         />
       </View>
       {/* Main Content */}
@@ -42,17 +72,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'cyan',
-    flexDirection: 'row', // Align items horizontally
-    paddingHorizontal: 10, // Add some padding on the sides
+    flexDirection: 'row', 
+    paddingHorizontal: 10, 
   },
   searchInput: {
-    flex: 1, // Take up all available space
-    height: 40, // Fixed height for the search bar
-    backgroundColor: '#fff', // A different background color for the input
-    borderRadius: 20, // Rounded corners
-    paddingHorizontal: 10, // Inner padding
-    fontSize: 16, // Text size
-    color: '#000', // Text color
+    flex: 1, 
+    height: 40,
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    paddingHorizontal: 10, 
+    fontSize: 16, 
+    color: '#000', 
   },
   content: {
     flex: 1,
@@ -60,14 +90,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   footer: {
-    flexDirection: 'row', // Change the footer layout to horizontal
+    flexDirection: 'row',
     height: 60,
     alignItems: 'center',
-    justifyContent: 'space-around', // This will distribute the space around the child components evenly
+    justifyContent: 'space-around', 
     backgroundColor: 'cyan',
   },
   footerButton: {
-    // Add padding, if needed, to ensure the touchable area is sufficiently large
     paddingHorizontal: 10,
     paddingVertical: 10,
   },
@@ -76,7 +105,27 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   footerIcon: {
-    width: 24, // Adjust if necessary
-    height: 24, // Adjust if necessary
+    width: 24, 
+    height: 24,
+  },
+  carouselContainer: {
+    height: 200, 
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  carouselItem: {
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    width: '100%', 
+    height: 250, 
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  image: {
+    width: 300, 
+    height: 240, 
+    resizeMode: 'contain', 
+    paddingleft:45
   },
 });

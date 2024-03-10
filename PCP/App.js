@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import Login from './Login';
 import SignUp from './Signup';
@@ -34,8 +36,11 @@ function MainAppTabs() {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'cyan',
+        tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'gray',
+        tabBarStyle: { 
+          backgroundColor: '#D1FFFF', // Set the background color of the tab bar
+        },
       })}
     >
       <Tab.Screen name="Home" component={Home} />
@@ -48,22 +53,23 @@ function MainAppTabs() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen
-          name="MainApp"
-          component={MainAppTabs}
-          options={{
-            headerShown: false, // Hides header for the main app
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen
+            name="MainApp"
+            component={MainAppTabs}
+            options={{
+              headerShown: false, // Hides header for the main app
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
