@@ -10,7 +10,7 @@ from flask_restful import request
 from flask_restful import reqparse
 import json
 from utilities.swen_344_db_utils import *  # Importing database utilities
-from db.login import *  # Importing login functions
+from db.user_details import *  # Importing login functions
 import hashlib  # Importing hashlib module for passwo
 
 class UserDetail(Resource):
