@@ -9,8 +9,8 @@ from flask import jsonify
 from flask_restful import request
 from flask_restful import reqparse
 import json
-from src.utilities.swen_344_db_utils import *  # Importing database utilities
-from src.db.login import *  # Importing login functions
+from utilities.swen_344_db_utils import *  # Importing database utilities
+from db.login import *  # Importing login functions
 import hashlib  # Importing hashlib module for password hashing
 
 
@@ -40,6 +40,8 @@ class LoginAPI(Resource):
 
         # Check user credentials
         response, status_code = check_user_credentials(args['username'], hashed_password)
+        
+        print("username:"+args['username']+"password:"+args['password']+"hashed_password:"+hashed_password)
         
         if response:
             # If credentials are correct, return JSON response with user ID

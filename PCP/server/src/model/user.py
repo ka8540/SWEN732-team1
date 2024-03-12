@@ -1,4 +1,4 @@
-from src.db.login import *
+from db.login import *
 import secrets
 def check_username_and_password(result_username, result_credentials,session_key):
     if result_credentials:

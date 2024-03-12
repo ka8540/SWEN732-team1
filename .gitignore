@@ -1,1 +1,19 @@
-node_modules
+# ide files
+.idea/
+
+# python virtual env
+venv/
+env/
+
+# application files
+*.pyc
+**/db.yml
+
+# .vscode
+.vscode/
+
+# npm
+node_modules/
+
+# coverage
+.coverage
