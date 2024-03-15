@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Resource, Api
 from api.login import user_details 
-from api.login import signupapi
+from api.signup import signupapi
 from api.login import loginAPI
 from api.management import *
 from flask_cors import CORS 
