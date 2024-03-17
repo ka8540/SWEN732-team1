@@ -7,7 +7,7 @@ Price Compare Plus's User Authentication feature ensures a secure and personaliz
 ## Features
 
 ### Sign Up
-![Sign Up Page](images/signup.png)
+![Sign Up Page](images/SignUp.png)
 
 The sign-up page is the entry point for new users. The process is straightforward, requesting essential information:
 
