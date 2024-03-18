@@ -11,4 +11,3 @@ class Init(Resource):
 class Version(Resource):
     def get(self):
         return (exec_get_one('SELECT VERSION()'))
-        
