@@ -10,10 +10,8 @@ class LoginApiTestCase(unittest.TestCase):
         
     def test_1_successful_login(self):
         new_user = {
-            # "username": "la3679",
-            # "hashed_password": "Vishulk1234",
-            "username": "bp6191",
-            "password": "Secret123"
+            "username": "la3679",
+            "hashed_password": "Vishulk1234",
         }
         response = requests.post(self.BASE_URL, json=new_user)
         self.assertEqual(response.status_code, 200)
