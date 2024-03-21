@@ -7,6 +7,7 @@ from db.logout import user_logout
 from utilities.swen_344_db_utils import exec_commit
 from db.logout import user_logout
 
+
 class MyTestCase(unittest.TestCase):
     def test_a_user_logout(self):
         # This test case verifies the functionality of the user_logout function, which is responsible for logging out a user by invalidating their session key.
@@ -16,6 +17,7 @@ class MyTestCase(unittest.TestCase):
         # Asserting the expected outcome
         self.assertEqual(actual_result, expected_result)
         self.assertEqual(status_code, 200)
+
 
 if __name__ == '__main__':
     unittest.main()

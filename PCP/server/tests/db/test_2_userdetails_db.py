@@ -1,6 +1,6 @@
 import unittest
-
 from db.user_details import list_user_detail, verify_session_key
+
 
 class user_details(unittest.TestCase):
     def test_a_existing_user(self):
@@ -25,5 +25,3 @@ class user_details(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-

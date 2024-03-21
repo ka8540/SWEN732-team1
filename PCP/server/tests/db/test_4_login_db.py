@@ -2,6 +2,7 @@ import unittest
 
 from db.login import check_user_credentials
 
+
 class MyTestCase(unittest.TestCase):
     def test_a_validCredentials(self):
         # This test case verifies the behavior of the check_user_credentials function when valid credentials are provided.
@@ -35,9 +36,6 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(actual_result, expected_message)
         self.assertEqual(status_code, 411)
-
-
-
 
 
 if __name__ == '__main__':

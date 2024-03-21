@@ -9,7 +9,6 @@ from db.signup import user_signup
 
 
 class SignUpDBTestCase(unittest.TestCase):
-
     def test_a_list_info_items(self):
         printing_response = list_info_items()  # Call the function to list all user records
         print(printing_response)  # Print the response for inspection
@@ -26,10 +25,12 @@ class SignUpDBTestCase(unittest.TestCase):
         }
         # Call the user_signup function to register a new user
         response, status_code = user_signup(**user_data)
-        self.assertEqual(status_code, 200) # Assert that the registration was successful (status code 200 and appropriate message)
+        self.assertEqual(status_code,
+                         200)  # Assert that the registration was successful (status code 200 and appropriate message)
         self.assertEqual(response['message'], 'User registered successfully')
 
         # This function verifies the functionality of the user_signup function when trying to register a user with a username that already exists in the database.
+
     def test_c_existing_user(self):
         # Attempt to register with an existing username
         userdata = {
@@ -41,7 +42,8 @@ class SignUpDBTestCase(unittest.TestCase):
         }
         # Attempt to register a user with an existing username
         response, status_code = user_signup(**userdata)
-        self.assertEqual(status_code, 409)  # Assert that the registration failed due to an existing user (status code 409)
+        self.assertEqual(status_code,
+                         409)  # Assert that the registration failed due to an existing user (status code 409)
         self.assertEqual(response['message'], 'User already exists')
 
 
