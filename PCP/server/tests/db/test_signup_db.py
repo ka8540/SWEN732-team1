@@ -8,7 +8,6 @@ from db.signup import list_info_items
 
 from db.signup import user_signup
 
-
 class SignUpDBTestCase(unittest.TestCase):
 
     def test_a_list_info_items(self):
