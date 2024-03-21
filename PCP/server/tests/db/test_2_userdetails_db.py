@@ -11,13 +11,16 @@ class user_details(unittest.TestCase):
             'username': 'bp6191',
             'email': 'bp6191@rit.edu'
         }
+        # Fetch actual user details for the user 'bp6191'
         actual_users = list_user_detail('bp6191')
+        # Assert that the actual user details match the expected user details
         self.assertEqual(actual_users, [expected_user])
 
     def test_non_existing_user(self):
         # Testing with 'bhara'. The username which does not exist in the database
         actual_users = list_user_detail('bhara')
-        self.assertEqual(actual_users, []) # returns an empty set when user doesnt exists in the database
+        # Assert that the actual user details are empty (as no user with username 'bhara' exists)
+        self.assertEqual(actual_users, [])
 
 
 if __name__ == '__main__':
