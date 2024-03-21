@@ -19,9 +19,9 @@ class SignUpDBTestCase(unittest.TestCase):
         user_data = {
             'firstname': 'bharathi',
             'lastname': 'pandurangan',
-            'username': 'bp6191',
-            'password': 'Secret123!',
-            'email': 'bp6191@rit.edu'
+            'username': 'bp61987',
+            'password': 'hecret123',
+            'email': 'bp6191@ric.com'
         }
         # Call the user_signup function to register a new user
         response, status_code = user_signup(**user_data)
