@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS user_authentication;
 
-
 CREATE TABLE user_authentication (
     user_id SERIAL PRIMARY KEY,
     firstname VARCHAR(255) NOT NULL,
