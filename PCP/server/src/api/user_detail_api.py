@@ -34,4 +34,3 @@ class UserDetail(Resource):
         return jsonify(user_details)
     
 
-    

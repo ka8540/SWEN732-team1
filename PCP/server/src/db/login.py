@@ -21,11 +21,11 @@ def check_user_credentials(username, hashed_password):
     # Query to check if the username exists
     query_username = '''SELECT username FROM user_authentication WHERE username = %s;'''
     result_username = exec_get_all(query_username, (username,))
-    
+
     # Query to check if the username and hashed password combination is correct
     query_credentials = '''SELECT username FROM user_authentication WHERE username = %s AND hashed_password = %s;'''
     result_credentials = exec_get_all(query_credentials, (username, hashed_password))
-    
+
     if not result_username:
         # Username does not exist
         return {"message": "Login Creds are Incorrect", "sessionKey": None}, 410

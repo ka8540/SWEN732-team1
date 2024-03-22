@@ -21,4 +21,3 @@ if __name__ == '__main__':
     print("Starting flask")
     app.run(debug=True), #starts Flask
 
-    
