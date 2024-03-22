@@ -7,8 +7,8 @@ class MyTestCase(unittest.TestCase):
     def test_a_validCredentials(self):
         # This test case verifies the behavior of the check_user_credentials function when valid credentials are provided.
 
-        username = 'bp6192'
-        hashed_password = '0af7a6d4a76c96a4e1f1c5c3be1560b2c6d8d9eb0082fb0a41eca348'
+        username = 'bp61980'
+        hashed_password = '3d45597256050bb1e93bd9c10aee4c8716f8774f5a48c995bf0cf860'
         expected_message = "Login Creds are Correct"
         actual_result, status_code = check_user_credentials(username, hashed_password)
         self.assertEqual(actual_result["message"], expected_message)
@@ -20,7 +20,7 @@ class MyTestCase(unittest.TestCase):
 
         # The username 'nonexistent_user' doesn't exist in the database
         username = 'nonexistent_user'
-        hashed_password = '0af7a6d4a76c96a4e1f1c5c3be1560b2c6d8d9eb0082fb0a41eca348'
+        hashed_password = '3d45597256050bb1e93bd9c10aee4c8716f8774f5a48c995bf0cf860'
         expected_message = {"message": "Login Creds are Incorrect", "sessionKey": None}
         actual_result, status_code = check_user_credentials(username, hashed_password)
 
@@ -29,7 +29,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_c_invalidPassword(self):
         #  This test case verifies the behavior of the check_user_credentials function when an invalid password is provided for an existing username.
-        username = 'bp6192'
+        username = 'bp6191'
         hashed_password = 'wrong_password'
         expected_message = {"message": "Password Invalid", "sessionKey": None}
         actual_result, status_code = check_user_credentials(username, hashed_password)

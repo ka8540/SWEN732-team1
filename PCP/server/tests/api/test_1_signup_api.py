@@ -1,7 +1,5 @@
 import json
 import unittest
-
-import requests
 from tests.test_utils import *
 
 class SignUpApiTestCase(unittest.TestCase):

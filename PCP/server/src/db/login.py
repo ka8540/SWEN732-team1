@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import sys
 import os
+from api.login_api import *
 from utilities.swen_344_db_utils import *
 from model.user import *
 import hashlib
@@ -15,7 +16,6 @@ def list_info_items():
     """Fetches all records from the User table."""
     result = exec_get_all('''SELECT * FROM user_authentication''')
     return result
-
 
 def check_user_credentials(username, hashed_password):
     # Query to check if the username exists
@@ -40,3 +40,6 @@ def check_user_credentials(username, hashed_password):
         exec_commit(update_session_key_query, (session_key, username))
         # Return success with the session key.
         return {"message": "Login Creds are Correct", "sessionKey": session_key}, 200
+
+
+

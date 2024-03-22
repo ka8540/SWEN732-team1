@@ -9,7 +9,7 @@ class user_details(unittest.TestCase):
             'firstname': 'bharathi',
             'lastname': 'pandurangan',
             'username': 'bp6191',
-            'email': 'bp6191@rit.edu'
+            'email': 'bp6191@example.com'
         }
         # Fetch actual user details for the user 'bp6191'
         actual_users = list_user_detail('bp6191')

@@ -4,7 +4,7 @@ from utilities.swen_344_db_utils import exec_sql_file
 
 class PCPSetupDB(unittest.TestCase):
     """
-    This test file contains unit tests for setting up database tables and
+    This test file contains unit test for setting up database tables and
     initial data required for testing purposes.
     """
 
