@@ -29,3 +29,4 @@ jobs:
       - name: Run unit tests
         run: |
           python -m unittest discover PCP/server/tests -v
+        working-directory: PCP/server  
