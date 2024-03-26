@@ -30,9 +30,6 @@ jobs:
       - name: Start Flask server
         run: |
           flask run --host=0.0.0.0 &
-        env:
-          FLASK_APP: server.py #update server.py
-        working-directory: ${{ github.workspace }}/PCP/server
     
       - name: Run unit tests
         run: |
