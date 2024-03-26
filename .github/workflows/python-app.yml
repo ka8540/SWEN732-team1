@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Adjusted for the file in the root directory
+        pip install -r reqruirements.txt  # Adjusted for the file in the root directory
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
