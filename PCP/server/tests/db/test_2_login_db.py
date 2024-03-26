@@ -1,6 +1,9 @@
 import unittest
 
-from db.login import check_user_credentials
+try:
+    from ...src.api.login_api import check_user_credentials 
+except:
+    from src.db.login import check_user_credentials
 
 
 class MyTestCase(unittest.TestCase):

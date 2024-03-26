@@ -9,9 +9,13 @@ from flask import jsonify
 from flask_restful import request
 from flask_restful import reqparse
 import json
-from utilities.swen_344_db_utils import *  # Importing database utilities
-from db.user_details import *  # Importing login functions
 import hashlib  # Importing hashlib module for passwo
+try:
+    from src.utilities.swen_344_db_utils import *
+    from src.db.user_details import *
+except:
+    from utilities.swen_344_db_utils import *
+    from db.user_details import *
 
 class UserDetail(Resource):
     def get(self):

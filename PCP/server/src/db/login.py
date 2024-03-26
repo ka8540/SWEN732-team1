@@ -5,11 +5,15 @@ import pandas as pd
 import numpy as np
 import sys
 import os
-from api.login_api import *
-from utilities.swen_344_db_utils import *
-from model.user import *
-import hashlib
-import secrets
+try:
+    from src.api.login_api import *
+    from src.utilities.swen_344_db_utils import *
+    from src.model.user import *
+except:
+    from api.login_api import *
+    from utilities.swen_344_db_utils import *
+    from model.user import *
+
 
 
 def list_info_items():

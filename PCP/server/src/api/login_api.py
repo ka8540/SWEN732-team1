@@ -9,10 +9,13 @@ from flask import jsonify
 from flask_restful import request
 from flask_restful import reqparse
 import json
-from utilities.swen_344_db_utils import *  # Importing database utilities
-from db.login import *  # Importing login functions
 import hashlib  # Importing hashlib module for password hashing
-
+try:
+    from src.utilities.swen_344_db_utils import *
+    from src.db.login import *
+except:
+    from db.login import *
+    from utilities.swen_344_db_utils import *
 
 class LoginAPI(Resource):
     """
