@@ -1,25 +1,3 @@
-Skip to content
-ka8540
-/
-SWEN732-team1
-
-Type / to search
-
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-Python application
-Update python-app.yml #16
-Jobs
-Run details
-Workflow file for this run
-.github/workflows/python-app.yml at ae18fbf
 name: Python application
 
 on:
@@ -37,17 +15,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.9'  # Specify your Python version here
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Specify your Python version here
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Install dependencies from your requirements.txt file
-    - name: Run unit tests
-      run: |
-        python -m unittest discover PCP/server/tests -v
-Update python-app.yml · ka8540/SWEN732-team1@ae18fbf
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Install dependencies from your requirements.txt file
+
+      - name: Run unit tests
+        run: |
+          python -m unittest discover PCP/server/tests -v
