@@ -25,9 +25,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r reqruirements.txt  # Install other necessary packages
+        pip install -r requirements.txt  # Install dependencies from your requirements.txt file
 
     - name: Run unit tests
       run: |
-        python -m coverage run --data-file=coverage_unittest.data --source=src/db,tests -m unittest -v
+        python -m unittest discover -s tests -v
+
 
