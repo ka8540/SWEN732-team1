@@ -25,15 +25,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r reqruirements.txt  # Note the typo in 'reqruirements.txt' is preserved as per your file name
-      working-directory: SWEN732-team1/PCP/server  # This specifies the correct directory where your requirements file is
+        pip install -r requirements.txt  # Adjusted for the file in the root directory
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      working-directory: SWEN732-team1/PCP/server  # Adjust this if you want flake8 to lint the code in this specific directory
     - name: Test with pytest
       run: pytest
-      working-directory: SWEN732-team1/PCP/server  # Adjust this if you want pytest to run tests in this specific directory
