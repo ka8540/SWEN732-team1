@@ -32,7 +32,7 @@ jobs:
           flask run --host=0.0.0.0 &
         env:
           FLASK_APP: server.py
-        working-directory: ${{ github.workspace }}/PCP/server/src
+        working-directory: ${{ github.workspace }}/PCP/server
     
       - name: Run unit tests
         run: |
