@@ -15,7 +15,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     services:
-      # Example for setting up PostgreSQL, adjust as needed
       postgres:
         image: postgres:14
         env:
@@ -23,13 +22,12 @@ jobs:
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
-        # Set up any other necessary services here
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'  # Specify your Python version here
+          python-version: '3.9'
 
       - name: Install dependencies
         run: |
@@ -37,22 +35,18 @@ jobs:
           pip install -r requirements.txt
 
       - name: Set FLASK_APP environment variable
-        run: echo "src/server.py" >> $GITHUB_ENV
-        # Replace your_application_entry_point with the path to your Flask app, e.g., src/server.py
-        working-directory: ${{ github.workspace }}/PCP/server 
-        
+        run: echo "FLASK_APP=src/server.py" >> $GITHUB_ENV
+        working-directory: ${{ github.workspace }}/PCP/server
 
       - name: Start Flask server
-        run: |
-          flask run --host=0.0.0.0 &
+        run: flask run --host=0.0.0.0 &
         env:
-          # Ensure all necessary environment variables for your Flask app are set here
           FLASK_ENV: development
 
       - name: Delay for Flask server to start
-        run: sleep 5  # Adjust the sleep time as necessary
+        run: sleep 5
 
       - name: Run unit tests
         run: |
           python -m unittest discover tests -v
-        working-directory: ${{ github.workspace }}/PCP/server # Adjust if necessary
+        working-directory: ${{ github.workspace }}/PCP/server
