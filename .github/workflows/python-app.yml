@@ -32,9 +32,9 @@ jobs:
           flask run --host=0.0.0.0 &
         env:
           FLASK_APP: server.py #update server.py
-        working-directory: ${{ github.workspace }}SWEN732-team1/PCP/server
+        working-directory: ${{ github.workspace }}/PCP/server
     
       - name: Run unit tests
         run: |
           python -m unittest discover tests -v
-        working-directory: ${{ github.workspace }}SWEN732-team1/PCP/server #okay  
+        working-directory: ${{ github.workspace }}/PCP/server #okay  
