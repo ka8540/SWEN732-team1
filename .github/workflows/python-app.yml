@@ -35,8 +35,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Set FLASK_APP environment variable
-        run: echo "FLASK_APP=src/server.py" >> $GITHUB_ENV
-        working-directory: ${{ github.workspace }}/PCP/server
+        run: echo "FLASK_APP=server.py" >> $GITHUB_ENV
+        working-directory: ${{ github.workspace }}/PCP/server/src
 
       - name: Start Flask server
         run: flask run --host=0.0.0.0 &
