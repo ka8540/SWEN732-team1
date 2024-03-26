@@ -1,6 +1,6 @@
 import unittest
 
-from db.login import check_user_credentials
+from src.db.login import check_user_credentials
 
 
 class MyTestCase(unittest.TestCase):
