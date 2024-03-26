@@ -4,8 +4,8 @@ import unittest
 from flask_restful import Resource
 from utilities.swen_344_db_utils import exec_get_all, exec_commit
 from ..test_utils import *
-from db.signup import list_info_items
-from db.signup import user_signup
+from src.db.signup import list_info_items
+from src.db.signup import user_signup
 
 
 class SignUpDBTestCase(unittest.TestCase):
