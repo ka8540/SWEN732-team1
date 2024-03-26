@@ -1,13 +1,12 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Python application
 
 on:
   push:
-    branches: [ "master" ]  # Consider changing "master" to "main" if your default branch is named "main"
+    branches: 
+      - "*"  # Run on all branches for any push events
   pull_request:
-    branches: [ "master" ]  # Same as above, consider the name of your default branch
+    branches: 
+      - "*"  # Run on all branches for any pull request events
 
 permissions:
   contents: read
@@ -30,6 +29,3 @@ jobs:
     - name: Run unit tests
       run: |
         python -m unittest discover -s PCP/server/tests -v
-
-
-
