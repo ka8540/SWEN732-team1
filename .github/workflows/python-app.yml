@@ -35,17 +35,23 @@ jobs:
           pip install flask_cors
           pip install -r requirements.txt
 
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=${{ github.workspace }}/PCP/server/src" >> $GITHUB_ENV
+   
+     
       - name: Set FLASK_APP environment variable
-        run: echo "FLASK_APP=server.py" >> $GITHUB_ENV
+        run: echo "FLASK_APP=src/server.py" >> $GITHUB_ENV
+      
+      - name: List files in the src directory
+        run: ls -alh
         working-directory: ${{ github.workspace }}/PCP/server/src
-
+        
       - name: Start Flask server
-        run: |
-          export FLASK_APP=server.py
-          flask run --host=0.0.0.0 &
+        run: flask run --host=0.0.0.0 &
         env:
           FLASK_ENV: development
         working-directory: ${{ github.workspace }}/PCP/server/src
+
 
       - name: Delay for Flask server to start
         run: sleep 5
