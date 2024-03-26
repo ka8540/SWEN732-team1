@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 import sys
 import os
-from api.login_api import *
-from utilities.swen_344_db_utils import *
+from src.api.login_api import *
+from src.utilities.swen_344_db_utils import *
 import hashlib
 import secrets
 
