@@ -36,20 +36,29 @@ class SignUpDBTestCase(unittest.TestCase):
 
         # This function verifies the functionality of the user_signup function when trying to register a user with a username that already exists in the database.
 
-    # def test_c_existing_user(self):
-    #     # Attempt to register with an existing username
-    #     userdata = {
-    #         'firstname': 'bharathi',
-    #         'lastname': 'pandurangan',
-    #         'username': 'bp6191',
-    #         'password': 'Secret123',
-    #         'email': 'bp6191@example.com'
-    #     }
-    #     # Attempt to register a user with an existing username
-    #     response, status_code = user_signup(**userdata)
-    #     self.assertEqual(status_code,
-    #                      409)  # Assert that the registration failed due to an existing user (status code 409)
-    #     self.assertEqual(response['message'], 'User already exists')
+    def test_c_existing_user(self):
+        # Attempt to register with an existing username
+        userdata_1 = {
+            'firstname': 'bharathi',
+            'lastname': 'pandurangan',
+            'username': 'bp6191',
+            'password': 'Secret123',
+            'email': 'bp6191@example.com'
+        }
+        
+        userdata_2 = {
+            'firstname': 'bharathi',
+            'lastname': 'pandurangan',
+            'username': 'bp6191',
+            'password': 'Secret123',
+            'email': 'bp6191@example.com'
+        }
+        # Attempt to register a user with an existing username
+        response, status_code = user_signup(**userdata_1)
+        self.assertEqual(status_code,200)  # Assert that the registration failed due to an existing user (status code 409)
+        response, status_code = user_signup(**userdata_2)
+        self.assertEqual(status_code,409)
+        self.assertEqual(response['message'], 'User already exists')
 
 
 if __name__ == '__main__':

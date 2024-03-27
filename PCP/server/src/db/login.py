@@ -22,28 +22,30 @@ def list_info_items():
     return result
 
 def check_user_credentials(username, hashed_password):
-    # Query to check if the username exists
-    query_username = '''SELECT username FROM user_authentication WHERE username = %s;'''
-    result_username = exec_get_all(query_username, (username,))
+    # Check if the username exists
+    query_username_exists = '''SELECT 1 FROM user_authentication WHERE username = %s;'''
+    username_exists = exec_get_one(query_username_exists, (username,))
 
-    # Query to check if the username and hashed password combination is correct
-    query_credentials = '''SELECT username FROM user_authentication WHERE username = %s AND hashed_password = %s;'''
-    result_credentials = exec_get_all(query_credentials, (username, hashed_password))
-
-    if not result_username:
+    if not username_exists:
         # Username does not exist
         return {"message": "Login Creds are Incorrect", "sessionKey": None}, 410
-    elif result_username and not result_credentials:
-        # Username exists, but password is incorrect
-        # Here, we should not attempt to generate or use a session key since login failed.
-        return {"message": "Password Invalid", "sessionKey": None}, 411
     else:
-        # Correct credentials; proceed with session key generation and update.
-        session_key = generate_session_key()
-        update_session_key_query = '''UPDATE user_authentication SET session_key = %s WHERE username = %s;'''
-        exec_commit(update_session_key_query, (session_key, username))
-        # Return success with the session key.
-        return {"message": "Login Creds are Correct", "sessionKey": session_key}, 200
+        # Username exists, now check if the password is correct
+        query_password_correct = '''SELECT 1 FROM user_authentication WHERE username = %s AND hashed_password = %s;'''
+        password_correct = exec_get_one(query_password_correct, (username, hashed_password))
+
+        if not password_correct:
+            # Password is incorrect
+            return {"message": "Password Invalid", "sessionKey": None}, 411
+        else:
+            # Credentials are correct
+            session_key = generate_session_key()  # Make sure you have a function to generate a session key
+            # Update the session key in the database
+            update_session_key_query = '''UPDATE user_authentication SET session_key = %s WHERE username = %s;'''
+            exec_commit(update_session_key_query, (session_key, username))
+            return {"message": "Login Creds are Correct", "sessionKey": session_key}, 200
+
+
 
 
 

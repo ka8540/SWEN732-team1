@@ -1,13 +1,12 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Python application
 
 on:
   push:
-    branches: [ "master" ]  # Consider changing "master" to "main" if your default branch is named "main"
+    branches:
+      - "*" # Run on all branches for any push events
   pull_request:
-    branches: [ "master" ]  # Same as above, consider the name of your default branch
+    branches:
+      - "*" # Run on all branches for any pull request events
 
 permissions:
   contents: read
@@ -15,21 +14,48 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.9'  # Specify your Python version here
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Install dependencies from your requirements.txt file
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flask_cors
+          pip install pandas 
+          pip install -r requirements.txt
+      #okay
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=${{ github.workspace }}/PCP/server/src" >> $GITHUB_ENV
 
-    - name: Run unit tests
-      run: |
-        python -m unittest discover -s PCP/server/tests -v
+      - name: Set FLASK_APP environment variable
+        run: echo "FLASK_APP=src/server.py" >> $GITHUB_ENV
 
+      - name: List files in the src directory
+        run: ls -alh
+        working-directory: ${{ github.workspace }}/PCP/server/src
 
+      - name: Start Flask server
+        run: flask run --host=0.0.0.0 &
+        env:
+          FLASK_ENV: development
+        working-directory: ${{ github.workspace }}/PCP/server/src
 
+      - name: Delay for Flask server to start
+        run: sleep 5
+
+      - name: Run unit tests
+        run: |
+          python -m unittest discover tests -v
+        working-directory: ${{ github.workspace }}/PCP/server

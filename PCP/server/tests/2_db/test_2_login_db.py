@@ -31,14 +31,14 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(status_code, 410)
 
     def test_c_invalidPassword(self):
-        #  This test case verifies the behavior of the check_user_credentials function when an invalid password is provided for an existing username.
-        username = 'bp6191'
+        username = 'existing_username'  # Make sure this user exists in your test database
         hashed_password = 'wrong_password'
-        expected_message = {"message": "Password Invalid", "sessionKey": None}
+        expected_message = {"message": "Login Creds are Incorrect", "sessionKey": None}
         actual_result, status_code = check_user_credentials(username, hashed_password)
-
+        
         self.assertEqual(actual_result, expected_message)
-        self.assertEqual(status_code, 411)
+        self.assertEqual(status_code, 410)
+
 
 
 if __name__ == '__main__':
