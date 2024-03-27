@@ -35,11 +35,11 @@ jobs:
           pip install flask_cors
           pip install pandas 
           pip install -r requirements.txt
-#okay
+        # Optional: You can keep or remove this comment based on your preference
+
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=${{ github.workspace }}/PCP/server/src" >> $GITHUB_ENV
-   
-     
+
       - name: Set FLASK_APP environment variable
         run: echo "FLASK_APP=src/server.py" >> $GITHUB_ENV
       
@@ -52,7 +52,6 @@ jobs:
         env:
           FLASK_ENV: development
         working-directory: ${{ github.workspace }}/PCP/server/src
-
 
       - name: Delay for Flask server to start
         run: sleep 5
