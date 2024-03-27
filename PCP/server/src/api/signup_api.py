@@ -4,8 +4,11 @@ from flask import jsonify
 from flask_restful import request
 from flask_restful import reqparse
 import json
-from utilities.swen_344_db_utils import*
-from db.signup import *
+
+try:
+    from src.db.signup import *
+except:
+    from db.signup import *
 
 class SignUpApi(Resource):
     def get(self):
@@ -24,5 +27,3 @@ class SignUpApi(Resource):
 
         response, status_code = user_signup(**args)
         return make_response(jsonify(response), status_code)
-        
-

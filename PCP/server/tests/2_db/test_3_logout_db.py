@@ -2,10 +2,16 @@ import unittest
 
 import requests
 
-from db import login
-from db.logout import user_logout
-from utilities.swen_344_db_utils import exec_commit
-from db.logout import user_logout
+# from db import login
+try:
+    from ...src.db.logout import user_logout
+    from ...src.utilities.swen_344_db_utils import exec_commit
+    from ...src.db.logout import user_logout
+except:
+    from src.db.logout import user_logout
+    from src.utilities.swen_344_db_utils import exec_commit
+    from src.db.logout import user_logout
+    
 
 
 class MyTestCase(unittest.TestCase):

@@ -9,9 +9,12 @@ from flask import jsonify
 from flask_restful import request
 from flask_restful import reqparse
 import json
-from utilities.swen_344_db_utils import *  # Importing database utilities
-from db.logout import *  # Importing login functions
-import hashlib  # Importing hashlib module for password hashing
+try:
+    from src.utilities.swen_344_db_utils import *
+    from src.db.logout import *
+except:
+    from utilities.swen_344_db_utils import *
+    from db.logout import *
 
 
 class LogoutAPI(Resource):

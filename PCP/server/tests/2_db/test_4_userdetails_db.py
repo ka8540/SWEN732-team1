@@ -1,5 +1,8 @@
 import unittest
-from db.user_details import list_user_detail, verify_session_key
+try:
+    from ...src.db.user_details import list_user_detail, verify_session_key
+except:
+    from src.db.user_details import list_user_detail, verify_session_key
 
 
 class user_details(unittest.TestCase):
