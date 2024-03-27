@@ -2,11 +2,11 @@ name: Python application
 
 on:
   push:
-    branches:
-      - "*" # Run on all branches for any push events
+    branches: 
+      - "*"  # Run on all branches for any push events
   pull_request:
-    branches:
-      - "*" # Run on all branches for any pull request events
+    branches: 
+      - "*"  # Run on all branches for any pull request events
 
 permissions:
   contents: read
@@ -35,7 +35,7 @@ jobs:
           pip install flask_cors
           pip install pandas 
           pip install -r requirements.txt
-      #okay
+
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=${{ github.workspace }}/PCP/server/src" >> $GITHUB_ENV
 
