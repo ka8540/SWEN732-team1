@@ -1,6 +1,9 @@
 import unittest
 
-from utilities.swen_344_db_utils import exec_sql_file
+try:
+    from ...src.utilities.swen_344_db_utils import exec_sql_file
+except:
+    from src.utilities.swen_344_db_utils import exec_sql_file
 
 class PCPSetupDB(unittest.TestCase):
     """
