@@ -44,8 +44,3 @@ def check_user_credentials(username, hashed_password):
             update_session_key_query = '''UPDATE user_authentication SET session_key = %s WHERE username = %s;'''
             exec_commit(update_session_key_query, (session_key, username))
             return {"message": "Login Creds are Correct", "sessionKey": session_key}, 200
-
-
-
-
-
