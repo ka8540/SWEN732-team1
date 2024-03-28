@@ -15,7 +15,7 @@ class PCPSetupDB(unittest.TestCase):
     def test_0_setup_tables(self):
         print("Setting up test data...")
         # Execute SQL commands from a specified file to set up the database schema and initial data
-        result = exec_sql_file("data/UserDetail.sql")
+        result = exec_sql_file("data/data.sql")
 
 
 if __name__ == '__main__':

@@ -27,8 +27,6 @@ class ProductById(Resource):
 
 class ProductSearch(Resource):
     def get(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument('query', required=True, help="Query cannot be blank!")
-        args = parser.parse_args()
-        products = search_products(args['query'])
+        query = request.args.get('query')
+        products = search_products(query)
         return make_response(jsonify([{'ProductID': prod[0], 'ProductName': prod[1], 'ProductDescription': prod[2], 'CategoryID': prod[3], 'ImageURL': prod[4]} for prod in products]), 200)
