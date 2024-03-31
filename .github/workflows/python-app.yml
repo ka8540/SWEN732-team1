@@ -18,8 +18,8 @@ jobs:
       postgres:
         image: postgres:14
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: SWEN732
+          POSTGRES_PASSWORD: kl,.
         ports:
           - 5432:5432
     steps:
