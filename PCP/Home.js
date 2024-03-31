@@ -1,11 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image, TextInput,Dimensions } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image, TextInput, FlatList, Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-
-export default function Home() {
-  const [searchQuery, setSearchQuery] = useState('');
+import { Button } from 'react-native';
+export default function Home({navigation}) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categories, setCategories] = useState([]);
+  
+  useEffect(() => {
+    const fetchCategoriesAndProducts = async () => {
+      try {
+        // Fetch categories
+        const categoriesResponse = await fetch('http://127.0.0.1:5000/categories');
+        const categoriesJson = await categoriesResponse.json();
+  
+        // Fetch products
+        const productsResponse = await fetch('http://127.0.0.1:5000/products');
+        const productsJson = await productsResponse.json();
+  
+        // Map through categories and find the first product image for each category
+        const categoriesWithImages = categoriesJson.map(category => {
+          const firstProduct = productsJson.find(product => product.CategoryID === category.CategoryID);
+          return {
+            ...category,
+            ImageURL: firstProduct ? firstProduct.ImageURL : '/Users/kayahir/Desktop/SWEN732/SWEN732-team1/images/icon.png', // Replace 'default-image-url' with your placeholder image URL
+          };
+        });
+  
+        setCategories(categoriesWithImages);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+  
+    fetchCategoriesAndProducts();
+  }, []);
+  
+  const renderCategoryButton = ({ item }) => {
+    return (
+      <View style={styles.categoryCard}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Phones', { CategoryId: item.CategoryID })}
+        >
+          <Image style={styles.categoryImage} source={{ uri: item.ImageURL }} />
+          <Text style={styles.buttonText}>{item.CategoryName}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  
   const carouselItems = [
     {
       // Example item structure
@@ -55,8 +100,17 @@ export default function Home() {
       </View>
       {/* Main Content */}
       <View style={styles.content}>
-        <Text>Welcome to the Home Screen!</Text>
+        <FlatList
+          data={categories}
+          renderItem={renderCategoryButton}
+          keyExtractor={item => item.CategoryID.toString()}
+          numColumns={2}
+          // Add the key prop here, which changes when numColumns changes
+          key={2} // since numColumns is 2, you can hardcode the key as 2
+          // rest of your props...
+        />
       </View>
+
 
     </SafeAreaView>
   );
@@ -86,8 +140,23 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row', // Align children in a row
+    alignItems: 'center', // Center items vertically
+    justifyContent: 'flex-start', // Start from the left side
+    paddingLeft: 10, // Add some padding on the left
+  },
+  button: {
+    marginRight: 10, // Add some margin to the right of the button
+    backgroundColor: 'yellow', // A light grey background for the button
+    paddingHorizontal: 20, // Horizontal padding
+    paddingVertical: 10, // Vertical padding
+    borderRadius: 5, // Rounded corners
+    height: 110,
+    width: 120,
+  },
+  buttonText: {
+    color: '#000', // Text color
+    fontSize: 16, // Font size
   },
   footer: {
     flexDirection: 'row',
