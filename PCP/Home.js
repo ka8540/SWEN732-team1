@@ -42,7 +42,7 @@ export default function Home({navigation}) {
       <View style={styles.categoryCard}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Phones', { CategoryId: item.CategoryID })}
+          onPress={() => navigation.navigate('Retailer', { CategoryId: item.CategoryID })}
         >
           <Image style={styles.categoryImage} source={{ uri: item.ImageURL }} />
           <Text style={styles.buttonText}>{item.CategoryName}</Text>

@@ -14,6 +14,7 @@ import Account from './Account';
 import FavouritesScreen from './Favourite';
 import ShoppingCart from './ShoppingCart';
 import Phones from './Phones';
+import Retailer from './Retailer';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -21,6 +22,7 @@ function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="HomeMain" component={Home} options={{ headerShown: false , title: 'Back'}} />
+      <HomeStack.Screen name="Retailer" component={Retailer} options={{ title: 'Retailer' }} />
       <HomeStack.Screen name="Phones" component={Phones} options={{ title: 'Products' }} />
     </HomeStack.Navigator>
   );
