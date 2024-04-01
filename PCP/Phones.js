@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Phones = ({ route }) => {
   const { CategoryId } = route.params;
   const [phones, setPhones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const navigation = useNavigation();
   useEffect(() => {
     const fetchProductsAndPrices = async () => {
       try {
@@ -51,14 +53,17 @@ const Phones = ({ route }) => {
   }
 
   const renderItem = ({ item }) => (
-    <View style={styles.productContainer}>
-      <Image source={{ uri: item.ImageURL }} style={styles.productImage} />
-      <View style={styles.infoContainer}>
-        <Text style={styles.productName}>{item.ProductName}</Text>
-        <Text style={styles.productPrice}>{item.Currency} {item.Price}</Text>
+    <TouchableOpacity onPress={() => navigation.navigate('Retailer', { CategoryId: item.CategoryID, ProductID:item.ProductID })}>
+      <View style={styles.productContainer}>
+        <Image source={{ uri: item.ImageURL }} style={styles.productImage} />
+        <View style={styles.infoContainer}>
+          <Text style={styles.productName}>{item.ProductName}</Text>
+          <Text style={styles.productPrice}>{item.Currency} {item.Price}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
+  
 
   return (
     <FlatList

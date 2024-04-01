@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image, TextInput, FlatList, Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { Button } from 'react-native';
+const screenWidth = Dimensions.get('window').width;
 export default function Home({navigation}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
@@ -38,18 +39,33 @@ export default function Home({navigation}) {
   }, []);
   
   const renderCategoryButton = ({ item }) => {
+    let imageSource = { uri: 'https://via.placeholder.com/150' }; 
+    
+    if (item.CategoryName === 'Phone') {
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/71WcjsOVOmL._AC_SX679_.jpg' };
+    } else if (item.CategoryName === 'Headphone') {
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/71Hx8b6HGbL._AC_SY450_.jpg' };
+    } else if (item.CategoryName === 'Entertainment') {
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/51d5Rc6DNML._AC_SY450_.jpg' };
+    } else if (item.CategoryName === 'Accessories') {
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/71gY9E+cTaS._AC_SX679_.jpg' };
+    } else if (item.CategoryName === 'Tablet') {
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/716NHsSc3HL._AC_SX425_.jpg' };
+    }
+  
     return (
       <View style={styles.categoryCard}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Retailer', { CategoryId: item.CategoryID })}
+          onPress={() => navigation.navigate('Phones', { CategoryId: item.CategoryID })}
         >
-          <Image style={styles.categoryImage} source={{ uri: item.ImageURL }} />
+          <Image style={styles.categoryImage} source={imageSource} />
           <Text style={styles.buttonText}>{item.CategoryName}</Text>
         </TouchableOpacity>
       </View>
     );
   };
+  
   
   const carouselItems = [
     {
@@ -93,22 +109,21 @@ export default function Home({navigation}) {
           layout={"default"}
           data={carouselItems}
           sliderWidth={Dimensions.get('window').width}
-          itemWidth={300}
+          itemWidth={500}
           renderItem={renderItem}
           onSnapToItem={index => setActiveIndex(index)}
         />
       </View>
       {/* Main Content */}
       <View style={styles.content}>
-        <FlatList
-          data={categories}
-          renderItem={renderCategoryButton}
-          keyExtractor={item => item.CategoryID.toString()}
-          numColumns={2}
-          // Add the key prop here, which changes when numColumns changes
-          key={2} // since numColumns is 2, you can hardcode the key as 2
-          // rest of your props...
-        />
+      <FlatList
+        data={categories}
+        renderItem={renderCategoryButton}
+        keyExtractor={item => item.CategoryID.toString()}
+        numColumns={2}
+        columnWrapperStyle={styles.columnWrapper}
+        contentContainerStyle={styles.listContentContainer} 
+      />
       </View>
 
 
@@ -140,23 +155,33 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    flexDirection: 'row', // Align children in a row
-    alignItems: 'center', // Center items vertically
-    justifyContent: 'flex-start', // Start from the left side
-    paddingLeft: 10, // Add some padding on the left
+    paddingHorizontal: 5, 
+  },
+  columnWrapper: {
+    justifyContent: 'space-between', 
+  },
+  listContentContainer: {
+    paddingHorizontal: -12000, 
   },
   button: {
-    marginRight: 10, // Add some margin to the right of the button
-    backgroundColor: 'yellow', // A light grey background for the button
-    paddingHorizontal: 20, // Horizontal padding
-    paddingVertical: 10, // Vertical padding
-    borderRadius: 5, // Rounded corners
-    height: 110,
-    width: 120,
+    justifyContent: 'center', 
+    alignItems: 'center',
+    margin: 5, 
+    backgroundColor: 'white',
+    paddingVertical: 20,
+    borderRadius: 5,
+    height: 170,
+    width: (screenWidth / 2) - 12,
   },
   buttonText: {
-    color: '#000', // Text color
-    fontSize: 16, // Font size
+    color: '#000', 
+    fontSize: 16, 
+  },
+  categoryImage: {
+    width: '90%',
+    height: '100%', 
+    resizeMode: 'contain', 
+    marginBottom: 5,
   },
   footer: {
     flexDirection: 'row',
@@ -178,23 +203,26 @@ const styles = StyleSheet.create({
     height: 24,
   },
   carouselContainer: {
-    height: 200, 
-    flex: 1,
+    height: 250, 
+    flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
+    overflow: 'hidden',
+    borderRadius: 20, 
   },
   carouselItem: {
     backgroundColor: '#fff',
-    borderRadius: 5,
+    borderRadius: 20, 
     width: '100%', 
-    height: 250, 
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center'
   },
   image: {
-    width: 300, 
-    height: 240, 
-    resizeMode: 'contain', 
-    paddingleft:45
+    width: '90%', 
+    height: '100%', 
+    borderRadius: 20,
+    resizeMode: 'cover', 
   },
 });

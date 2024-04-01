@@ -1,30 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { View, Text, StyleSheet, Image, ScrollView, Button, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
-const Retailer = () => {
+const ProductDetails = () => {
+  const [product, setProduct] = useState(null);
   const [retailers, setRetailers] = useState([]);
+  const [priceInfo, setPriceInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigation = useNavigation();
   const route = useRoute();
-  const { CategoryId } = route.params; // Get CategoryId from navigation parameters
+  const { ProductID } = route.params; // Get ProductID from navigation parameters
 
   useEffect(() => {
-    const fetchRetailers = async () => {
+    const fetchProductDetails = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/retailers');
-        const data = await response.json();
-        setRetailers(data);
+        // Fetch product details
+        const productResponse = await fetch(`http://127.0.0.1:5000/products/${ProductID}`);
+        const productData = await productResponse.json();
+        setProduct(productData);
+        
+        // Fetch retailers
+        const retailersResponse = await fetch('http://127.0.0.1:5000/retailers');
+        const retailersData = await retailersResponse.json();
+        setRetailers(retailersData);
+        
+        // Fetch price information
+        const priceResponse = await fetch('http://127.0.0.1:5000/prices');
+        const priceData = await priceResponse.json();
+        const productPriceInfo = priceData.find(price => price.ProductID === ProductID);
+        setPriceInfo(productPriceInfo);
+        
       } catch (e) {
-        setError('Failed to fetch retailers: ' + e.toString());
+        setError('Failed to fetch data: ' + e.toString());
       } finally {
         setLoading(false);
       }
     };
 
-    fetchRetailers();
-  }, []);
+    fetchProductDetails();
+  }, [ProductID]);
 
   if (loading) {
     return <View style={styles.centered}><ActivityIndicator size="large" /></View>;
@@ -34,22 +48,24 @@ const Retailer = () => {
     return <View style={styles.centered}><Text>{error}</Text></View>;
   }
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.retailerButton}
-      onPress={() => navigation.navigate('Phones', { RetailerID: item.RetailerID, CategoryId: CategoryId })}
-    >
-      <Text style={styles.retailerButtonText}>{item.RetailerName}</Text>
-    </TouchableOpacity>
-  );
-
   return (
-    <FlatList
-      data={retailers}
-      renderItem={renderItem}
-      keyExtractor={item => item.RetailerID.toString()}
-      contentContainerStyle={styles.container}
-    />
+    <ScrollView contentContainerStyle={styles.container}>
+      {product && (
+        <>
+          <Text style={styles.productTitle}>{product.ProductName}</Text>
+          <Image source={{ uri: product.ImageURL }} style={styles.productImage} />
+          <Text style={styles.productDescription}>{product.ProductDescription}</Text>
+          {retailers.map(retailer => (
+            <View key={retailer.RetailerID} style={styles.retailerContainer}>
+              <TouchableOpacity onPress={() => {/* navigation logic to retailer */}}>
+                <Text style={styles.retailerName}>{retailer.RetailerName}</Text>
+                {priceInfo && <Text style={styles.productPrice}>{priceInfo.Currency} {priceInfo.Price}</Text>}
+              </TouchableOpacity>
+            </View>
+          ))}
+        </>
+      )}
+    </ScrollView>
   );
 };
 
@@ -58,26 +74,46 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 20,
+    padding: 20,
   },
   centered: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  retailerButton: {
-    backgroundColor: '#007bff',
-    padding: 15,
-    borderRadius: 5,
-    marginVertical: 10,
-    width: 200,
-    alignItems: 'center',
-  },
-  retailerButtonText: {
-    color: 'white',
+  productTitle: {
+    fontSize: 24,
     fontWeight: 'bold',
-    fontSize: 16,
+    marginBottom: 20,
   },
+  productImage: {
+    width: '100%',
+    height: 300,
+    resizeMode: 'contain',
+    marginBottom: 20,
+  },
+  productDescription: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  productPrice: {
+    fontSize: 22,
+    color: 'green',
+    marginBottom: 20,
+  },
+  retailerContainer: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%'
+  },
+  retailerName: {
+    fontSize: 18,
+    color: '#007bff'
+  }
 });
 
-export default Retailer;
+export default ProductDetails;
