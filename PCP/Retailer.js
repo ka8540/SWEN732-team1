@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   productPrice: {
-    fontSize: 22,
+    fontSize: 15,
     color: 'green',
     marginBottom: 20,
   },
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   retailerName: {
-    fontSize: 18,
+    fontSize: 22,
     color: '#007bff'
   }
 });
