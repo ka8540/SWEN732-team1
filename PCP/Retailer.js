@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, ScrollView, Button, ActivityIndicator, T
 import { useRoute } from '@react-navigation/native';
 
 const ProductDetails = () => {
+  const [productDescription, setProductDescription] = useState('');
   const [product, setProduct] = useState(null);
   const [retailers, setRetailers] = useState([]);
   const [priceInfo, setPriceInfo] = useState(null);
@@ -19,6 +20,12 @@ const ProductDetails = () => {
         const productData = await productResponse.json();
         setProduct(productData);
         
+        if (productData && productData.ProductDescription) {
+          // Split the description into paragraphs and rejoin with double newlines
+          const formattedDescription = productData.ProductDescription.split('\\n').join('\n\n\n\n');
+          setProductDescription(formattedDescription);
+        }
+
         // Fetch retailers
         const retailersResponse = await fetch('http://127.0.0.1:5000/retailers');
         const retailersData = await retailersResponse.json();
@@ -54,7 +61,7 @@ const ProductDetails = () => {
         <>
           <Text style={styles.productTitle}>{product.ProductName}</Text>
           <Image source={{ uri: product.ImageURL }} style={styles.productImage} />
-          <Text style={styles.productDescription}>{product.ProductDescription}</Text>
+          <Text style={styles.productDescription}>{productDescription}</Text>
           {retailers.map(retailer => (
             <View key={retailer.RetailerID} style={styles.retailerContainer}>
               <TouchableOpacity onPress={() => {/* navigation logic to retailer */}}>
