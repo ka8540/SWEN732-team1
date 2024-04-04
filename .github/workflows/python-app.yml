@@ -33,9 +33,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install flask_cors
-          pip install pandas 
+          pip install pandas
           pip install -r requirements.txt
-        # Optional: You can keep or remove this comment based on your preference
+          pip install coverage
 
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=${{ github.workspace }}/PCP/server/src" >> $GITHUB_ENV
@@ -52,11 +52,16 @@ jobs:
         env:
           FLASK_ENV: development
         working-directory: ${{ github.workspace }}/PCP/server/src
-
       - name: Delay for Flask server to start
         run: sleep 5
 
-      - name: Run unit tests
+      - name: Generate coverage report
         run: |
-          python -m unittest discover tests -v
+          python -m coverage run --source=src -m unittest discover tests -v
+          python -m coverage xml
         working-directory: ${{ github.workspace }}/PCP/server
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
