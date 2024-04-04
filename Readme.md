@@ -62,7 +62,7 @@ featuring:
 
 ### ProductDescription
 
-![ProductsDescription](images/ProductsDescription.png)
+![ProductsDescription](images/ProductDescription.png)
 ![ProductsRetailers](images/RetailerPrice.png)
 The Product Description page provides in-depth information about each product, including camera specs, processor details, and other unique features.
 
