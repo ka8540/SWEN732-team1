@@ -97,3 +97,7 @@ A logout option is available for users to end their session. On logout, the sess
 ### Coverage 
 [![codecov](https://codecov.io/gh/ka8540/SWEN732-team1/graph/badge.svg?token=EDJ42TSNSN)](https://codecov.io/gh/ka8540/SWEN732-team1)
 
+### LICENSE 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
+`[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
+
