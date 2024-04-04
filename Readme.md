@@ -42,12 +42,13 @@ Upon successful authentication, a unique session key is generated to manage the 
 
 ### Home
 
-![Home Page](images/Home.png)
+![Home Page](images/Home_Page.png)
 
 The home page serves as the main dashboard, featuring:
 
 - A search bar for product queries.
 - Navigation buttons for the Home, Favorites, Shopping Cart, and Account sections.
+- Products Available for purchase eg. Phones,Headphones etc.
 
 ### Product
 
