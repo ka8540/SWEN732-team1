@@ -1,26 +1,32 @@
-import hashlib
-import json
 import unittest
-from flask_restful import Resource
+from unittest.mock import patch
+from src.api.signup_api import list_info_items, user_signup
 from src.utilities.swen_344_db_utils import exec_get_all, exec_commit
-from ..test_utils import *
-try:
-    from ...src.api.signup_api import list_info_items
-    from ...src.api.signup_api import user_signup
-except:
-    from src.api.signup_api import list_info_items
-    from src.api.signup_api import user_signup
-    
-
 
 class SignUpDBTestCase(unittest.TestCase):
-    def test_a_list_info_items(self):
-        printing_response = list_info_items()  # Call the function to list all user records
-        print(printing_response)  # Print the response for inspection
 
-    # This function verifies the functionality of the user_signup function
-    def test_b_new_user_registration(self):
-        # # Input data for a new user registration
+    def setUp(self):
+        # Setup your test database or clean it
+        pass
+
+    def tearDown(self):
+        # Teardown your test database or clean it
+        pass
+
+    @patch('src.utilities.swen_344_db_utils.exec_get_all')
+    def test_a_list_info_items(self, mock_exec_get_all):
+        # Mock the exec_get_all to return expected data
+        mock_exec_get_all.return_value = [{'username': 'testuser', 'email': 'test@example.com'}]
+        
+        printing_response = list_info_items()
+        print(printing_response)  # This will show the mocked response
+        # You can add assertions here to check the printing_response content if it's structured
+
+    @patch('src.utilities.swen_344_db_utils.exec_commit')
+    def test_b_new_user_registration(self, mock_exec_commit):
+        # Mock the exec_commit to simulate database insert without actually inserting
+        mock_exec_commit.return_value = None  # Adjust based on your actual function's return value on success
+
         user_data = {
             'firstname': 'bharathi',
             'lastname': 'pandurangan',
@@ -28,16 +34,16 @@ class SignUpDBTestCase(unittest.TestCase):
             'password': 'password123',
             'email': 'bp6191@rit.com'
         }
-        # Call the user_signup function to register a new user
         response, status_code = user_signup(**user_data)
-        self.assertEqual(status_code,
-                         200)  # Assert that the registration was successful (status code 200 and appropriate message)
+        self.assertEqual(status_code, 200)
         self.assertEqual(response['message'], 'User registered successfully')
 
-        # This function verifies the functionality of the user_signup function when trying to register a user with a username that already exists in the database.
+    @patch('src.utilities.swen_344_db_utils.exec_commit')
+    def test_c_existing_user(self, mock_exec_commit):
+        # First call to exec_commit simulates successful user registration
+        # Second call simulates a database error due to unique constraint, for example
+        mock_exec_commit.side_effect = [None, Exception("Unique constraint failed")]
 
-    def test_c_existing_user(self):
-        # Attempt to register with an existing username
         userdata_1 = {
             'firstname': 'bharathi',
             'lastname': 'pandurangan',
@@ -45,21 +51,15 @@ class SignUpDBTestCase(unittest.TestCase):
             'password': 'Secret123',
             'email': 'bp6191@example.com'
         }
-        
-        userdata_2 = {
-            'firstname': 'bharathi',
-            'lastname': 'pandurangan',
-            'username': 'bp6191',
-            'password': 'Secret123',
-            'email': 'bp6191@example.com'
-        }
-        # Attempt to register a user with an existing username
-        response, status_code = user_signup(**userdata_1)
-        self.assertEqual(status_code,200)  # Assert that the registration failed due to an existing user (status code 409)
-        response, status_code = user_signup(**userdata_2)
-        self.assertEqual(status_code,409)
-        self.assertEqual(response['message'], 'User already exists')
 
+        # First user registration should succeed
+        response, status_code = user_signup(**userdata_1)
+        self.assertEqual(status_code, 200)
+
+        # Second registration with the same username should fail
+        response, status_code = user_signup(**userdata_1)
+        self.assertEqual(status_code, 409)
+        self.assertEqual(response['message'], 'User already exists')
 
 if __name__ == '__main__':
     unittest.main()
