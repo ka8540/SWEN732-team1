@@ -8,7 +8,7 @@ export default function Home({navigation}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [categories, setCategories] = useState([]);
-  
+  const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
     const fetchCategoriesAndProducts = async () => {
       try {
@@ -80,9 +80,31 @@ export default function Home({navigation}) {
     },
   ];
 
-  const handleSearch = (query) => {
-    setSearchQuery(query);
+  const handleSearch = async (query) => {
+    try {
+      const encodedQuery = encodeURIComponent(query);
+      const categoryResponse = await fetch(`http://127.0.0.1:5000/categories/search?query=${encodedQuery}`);
+      const categoryResults = await categoryResponse.json();
+
+      if (categoryResults.length > 0) {
+        const firstCategory = categoryResults[0];
+        navigation.navigate('Phones', { CategoryId: firstCategory.CategoryID }); 
+      } else {
+        const productResponse = await fetch(`http://127.0.0.1:5000/products/search?query=${encodedQuery}`);
+        const productResults = await productResponse.json();
+
+        if (productResults.length > 0) {
+          const firstProduct = productResults[0];
+          navigation.navigate('Retailer', { ProductID: firstProduct.ProductID });
+        } else {
+          console.log('No categories or products found for this search query.');
+        }
+      }
+    } catch (error) {
+      console.error("Error during search:", error);
+    }
   };
+  
   const renderItem = ({item, index}) => {
     return (
       <View style={styles.carouselItem}>
@@ -94,15 +116,20 @@ export default function Home({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       {/* Navbar with Search */}
-      <View style={styles.navbar}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search..."
-          placeholderTextColor="#888"
-          value={searchQuery}
-          onChangeText={handleSearch}
-        />
-      </View>
+    <View style={styles.navbar}>
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search..."
+        placeholderTextColor="#888"
+        value={searchQuery}
+        onChangeText={setSearchQuery} // Update to change searchQuery state
+      />
+      <Button
+        title="Search"
+        onPress={() => handleSearch(searchQuery)}
+      />
+    </View>
+
       {/* Carousel */}
       <View style={styles.carouselContainer}>
         <Carousel
