@@ -11,7 +11,7 @@ except:
 
 def insert_data_from_excel():
     # Load the data from Excel
-    excel_file = os.path.join(os.path.dirname(__file__), 'C:/Users/lovea/OneDrive/Desktop/homework/RIT_Classes/SWEN.732.01 - Collaborative Software Dev. (SWEN73201.2235)/Project/SWEN732-team1/PCP/server/data/Amazon.xlsx')
+    excel_file = os.path.join(os.path.dirname(__file__), '../../data/Amazon.xlsx')
     df = pd.read_excel(excel_file)
     
     for index, row in df.iterrows():    

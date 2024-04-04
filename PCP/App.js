@@ -13,9 +13,20 @@ import Home from './Home';
 import Account from './Account';
 import FavouritesScreen from './Favourite';
 import ShoppingCart from './ShoppingCart';
-
+import Phones from './Phones';
+import Retailer from './Retailer';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const HomeStack = createNativeStackNavigator();
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="HomeMain" component={Home} options={{ headerShown: false , title: 'Home'}} />
+      <HomeStack.Screen name="Retailer" component={Retailer} options={{ title: 'ProductDescription' }} />
+      <HomeStack.Screen name="Phones" component={Phones} options={{ title: 'Products' }} />
+    </HomeStack.Navigator>
+  );
+}
 
 function MainAppTabs() {
   return (
@@ -43,14 +54,13 @@ function MainAppTabs() {
         },
       })}
     >
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Home" component={HomeStackScreen} />
       <Tab.Screen name="Favourites" component={FavouritesScreen} />
       <Tab.Screen name="ShoppingCart" component={ShoppingCart} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
 }
-
 export default function App() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>

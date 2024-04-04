@@ -8,7 +8,6 @@ env/
 # application files
 *.pyc
 **/db.yml
-
 # .vscode
 .vscode/
 
