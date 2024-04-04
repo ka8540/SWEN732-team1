@@ -93,3 +93,7 @@ The Account section displays the logged-in user's:
 A logout option is available for users to end their session. On logout, the session key is reset to null to maintain security, preventing unauthorized access and maintaining the privacy and integrity of the user's session.
 
 ---
+
+### Coverage 
+[![codecov](https://codecov.io/gh/ka8540/SWEN732-team1/graph/badge.svg?token=EDJ42TSNSN)](https://codecov.io/gh/ka8540/SWEN732-team1)
+
