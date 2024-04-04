@@ -17,4 +17,4 @@ node_modules/
 # coverage
 .coverage
 
-../../db.yml
+../db.yml
