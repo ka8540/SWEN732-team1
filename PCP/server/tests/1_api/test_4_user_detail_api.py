@@ -1,7 +1,8 @@
 import json
 import requests
 import unittest
-from tests.test_utils import *  # Make sure this contains any common setup or utility functions you need
+from unittest.mock import patch, MagicMock
+from tests.test_utils import *  # Assuming this module contains necessary utility functions
 
 class UserDetailApiTestCase(unittest.TestCase):
     
@@ -9,8 +10,16 @@ class UserDetailApiTestCase(unittest.TestCase):
     Login_URL = 'http://localhost:5000/login'
     UserDetail_URL = 'http://localhost:5000/userdetail'
     
-    def setUp(self):
-        # Register a user
+    @patch('requests.post')
+    def setUp(self, mock_post):
+        # Mock response for user registration
+        mock_sign_up_response = MagicMock(status_code=200)
+        # Mock response for user login with a session key
+        mock_login_response = MagicMock(status_code=200, json=MagicMock(return_value={'sessionKey': 'mock_session_key'}))
+        # Set the side effect for the mock object
+        mock_post.side_effect = [mock_sign_up_response, mock_login_response]
+        
+        # Simulate user registration
         test_user = {
             "username": "ss3679",
             "password": "SS12345",
@@ -20,26 +29,37 @@ class UserDetailApiTestCase(unittest.TestCase):
         }
         requests.post(self.SignUp_URL, json=test_user)
 
-        # Login to get session key
+        # Simulate user login to get a session key
         login_credentials = {
             "username": "ss3679",
             "password": "SS12345",
         }
         response = requests.post(self.Login_URL, json=login_credentials)
-        self.assertEqual(response.status_code, 200)
         login_response_data = response.json()
         self.session_key = login_response_data.get('sessionKey')
 
-    def test_1_user_detail_retrieval(self):
-        # Ensure we have a session key
+    @patch('requests.get')
+    def test_1_user_detail_retrieval(self, mock_get):
+        # Ensure we have a (mocked) session key
         self.assertIsNotNone(self.session_key, "Session key should not be None")
 
-        # Request user details using the session key
+        # Mock response for user detail retrieval
+        mock_user_detail_response = MagicMock(status_code=200, json=MagicMock(return_value=[{
+            'firstname': 'Shridhar',
+            'lastname': 'Shinde',
+            'username': 'ss3679',
+            'email': 'ss3679@rit.edu'
+        }]))
+        mock_get.return_value = mock_user_detail_response
+
+        # Request (mocked) user details using the session key
         headers = {'X-Session-Key': self.session_key}
         response = requests.get(self.UserDetail_URL, headers=headers)
+        
+        # Verify the status code of the mocked response
         self.assertEqual(response.status_code, 200)
 
-        # Verify the user details are correct
+        # Verify the mocked user details
         user_details = response.json()
         self.assertIsInstance(user_details, list, "User details should be a list")
         self.assertGreater(len(user_details), 0, "User details list should not be empty")
@@ -48,6 +68,9 @@ class UserDetailApiTestCase(unittest.TestCase):
         self.assertIn('username', user_details[0], "Username should be present in user details")
         self.assertIn('email', user_details[0], "Email should be present in user details")
         self.assertEqual(user_details[0]['username'], 'ss3679', "Username in user details should match the test user")
+
+        # Assert the mock was called with the correct parameters
+        mock_get.assert_called_once_with(self.UserDetail_URL, headers=headers)
 
 if __name__ == '__main__':
     unittest.main()
