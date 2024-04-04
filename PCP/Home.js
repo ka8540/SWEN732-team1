@@ -12,15 +12,12 @@ export default function Home({navigation}) {
   useEffect(() => {
     const fetchCategoriesAndProducts = async () => {
       try {
-        // Fetch categories
         const categoriesResponse = await fetch('http://127.0.0.1:5000/categories');
         const categoriesJson = await categoriesResponse.json();
   
-        // Fetch products
         const productsResponse = await fetch('http://127.0.0.1:5000/products');
         const productsJson = await productsResponse.json();
-  
-        // Map through categories and find the first product image for each category
+
         const categoriesWithImages = categoriesJson.map(category => {
           const firstProduct = productsJson.find(product => product.CategoryID === category.CategoryID);
           return {
