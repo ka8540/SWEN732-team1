@@ -99,5 +99,4 @@ A logout option is available for users to end their session. On logout, the sess
 
 ### LICENSE 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
-`[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
 
