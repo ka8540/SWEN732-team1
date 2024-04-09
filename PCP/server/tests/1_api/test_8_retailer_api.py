@@ -11,7 +11,7 @@ class TestRetailerAPI(unittest.TestCase):
     def test_get_all_retailers(self, mock_get):
         url = f'{self.BASE_URL}/retailers'
 
-        # Mock the response for getting all retailers
+        # Creating a mock response object for getting all retailers
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = [{'id': 1, 'name': 'Retailer 1'}, {'id': 2, 'name': 'Retailer 2'}]
@@ -28,7 +28,7 @@ class TestRetailerAPI(unittest.TestCase):
         retailer_id = 1  # Assuming retailer ID 1 exists
         url = f'{self.BASE_URL}/retailers/{retailer_id}'
 
-        # Mock the response for getting a retailer by ID
+        # Creating a mock response object for getting a retailer by ID
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = {'id': retailer_id, 'name': 'Retailer 1'}

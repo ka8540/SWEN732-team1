@@ -12,7 +12,7 @@ class TestPriceAPI(unittest.TestCase):
         product_id = 1
         url = f'{self.BASE_URL}/prices/products/{product_id}'
 
-        # Mock the response for getting prices by product ID
+        # Creating a mock response object for getting prices by product ID
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = [{'product_id': product_id, 'price': '100'}]
@@ -28,7 +28,7 @@ class TestPriceAPI(unittest.TestCase):
     def test_get_all_prices(self, mock_get):
         url = f'{self.BASE_URL}/prices'
 
-        # Mock the response for getting all prices
+        # Creating a mock response object for getting all prices
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = [{'product_id': 1, 'price': '100'}, {'product_id': 2, 'price': '200'}]

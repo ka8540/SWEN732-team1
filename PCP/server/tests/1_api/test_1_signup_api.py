@@ -9,20 +9,18 @@ class SignUpApiTestCase(unittest.TestCase):
     
     @patch('requests.get')
     def test_a_user_list(self, mock_get):
-        # Create a mock response object, with a `status_code` property
+        # Creating a mock response object
         mock_response = unittest.mock.Mock()
         mock_response.status_code = 200
         
-        # Configure the mock to return the mock response when called
+        # Configuring the mock return values
         mock_get.return_value = mock_response
         
-        # Call the function that should make a `get` request
+        # Calling the function
         response = requests.get(self.BASE_URL)
         
-        # Assert the mock was called correctly
+        # Mock Assertion
         mock_get.assert_called_once_with(self.BASE_URL)
-        
-        # Assert the response has the status code we expect
         self.assertEqual(response.status_code, 200)
         
     @patch('requests.post')
@@ -35,20 +33,18 @@ class SignUpApiTestCase(unittest.TestCase):
             "lastname": "Ahir"
         }
 
-        # Create a mock response object for the POST request
+        # Creating a mock response object for signup
         mock_response = unittest.mock.Mock()
         mock_response.status_code = 200
         
-        # Configure the mock to return the mock response when called
+        # Configuring the mock return values
         mock_post.return_value = mock_response
         
-        # Call the function that should make a `post` request
+        # Calling the function
         response = requests.post(self.BASE_URL, json=new_user)
         
-        # Assert the mock was called correctly
+        # Mock Assertion
         mock_post.assert_called_once_with(self.BASE_URL, json=new_user)
-        
-        # Assert the response has the status code we expect
         self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
