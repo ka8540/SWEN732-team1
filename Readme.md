@@ -53,22 +53,22 @@ Running "Price Compare Plus" involves setting up both the backend (Flask) and th
       source venv/bin/activate
       ```
 3. **Install Dependencies**: Install all required Python packages for the backend.
-   pip install -r requirements.txt
+     pip install -r requirements.txt
     
 4. **Start the Flask Server**: Run the Flask application.
-   python src/server.py
+     python src/server.py
 
    This command starts the backend server, typically running on `http://localhost:5000`.
 
 ### Frontend Setup (React Native)
 
   1. **Install Expo CLI**: Expo CLI is a command-line utility for React Native. Install it globally using npm.
-      npm install -g expo-cli
+        npm install -g expo-cli
   2. **Install Dependencies**: Navigate to the frontend directory and install the required npm packages.
-      cd path/to/your/frontend/directory
-      npm install
+        cd path/to/your/frontend/directory
+        npm install
   3. **Start the Expo Development Server**: Run the following command to start the Expo development server.
-     expo start
+        expo start
      This command will open a new tab in your default web browser with the Expo developer tools. You can run the app on a simulator or on a physical device by scanning the QR code.
 
 ## Testing
