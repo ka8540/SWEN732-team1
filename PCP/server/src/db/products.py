@@ -5,10 +5,10 @@ import numpy as np
 import sys
 import os
 try:
-    from src.api.products_api import *
+    # from src.api.products_api import *
     from src.utilities.swen_344_db_utils import *
 except:
-    from api.products_api import *
+    # from api.products_api import *
     from utilities.swen_344_db_utils import *
     
 
@@ -31,4 +31,3 @@ def search_products(query):
     result = exec_get_all(sql, (search_query,))
     return result
 
-    
