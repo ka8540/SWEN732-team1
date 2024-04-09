@@ -59,4 +59,3 @@ def insert_data_from_excel():
             INSERT INTO Prices(ProductID,RetailerID,Price,Currency)
             VALUES (%s, %s, %s, %s)
             """,(product_id,retailer_id,product_price,price_currency))
-        
