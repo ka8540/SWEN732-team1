@@ -5,7 +5,7 @@ from unittest.mock import patch
 try:
     from ...src.db.products import get_all_products, get_product_by_id, search_products
 except:
-    from src.db.products import geat_all_products, get_product_by_id, search_products
+    from src.db.products import get_all_products, get_product_by_id, search_products
 
 class MyTestCase(unittest.TestCase):
     @patch('src.db.products.exec_get_all')
