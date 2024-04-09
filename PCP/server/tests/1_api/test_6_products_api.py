@@ -11,7 +11,7 @@ class TestProductsAPI(unittest.TestCase):
     
     @patch('requests.get')
     def test_get_all_products(self, mock_get):
-        # Mock the response for getting all products
+        # Creating a mock response object for getting all products
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = [{'id': 1, 'name': 'Product 1'}, {'id': 2, 'name': 'Product 2'}]
@@ -29,7 +29,7 @@ class TestProductsAPI(unittest.TestCase):
         product_id = 1  # Assuming product ID 1 exists
         url = f'{self.BASE_URL}/{product_id}'
         
-        # Mock the response for getting a product by ID
+        # Creating a mock response object for getting a product by ID
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = {'id': product_id, 'name': 'Product 1'}
@@ -47,7 +47,7 @@ class TestProductsAPI(unittest.TestCase):
         query = 'SAMSUNG Galaxy S24 Ultra Cell Phone, 256GB AI Smartphone'  # Assuming a valid search query
         url = self.PRODUCT_SEARCH_URL.format(query=query)
         
-        # Mock the response for product search
+        # Creating a mock response object for product search
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = [{'id': 3, 'name': query}]

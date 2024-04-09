@@ -11,7 +11,7 @@ class TestUserFavoritesAPI(unittest.TestCase):
         url = f'{self.BASE_URL}/user_favorites'
         data = {'user_id': 1, 'product_id': 1}  # Assuming user ID and product ID exist in the database
         
-        # Mock the POST response
+        # Creating a mock response object to POST favorite product
         mock_response = MagicMock()
         mock_response.status_code = 201
         mock_response.json.return_value = {'message': 'Favorite product added successfully'}
@@ -28,7 +28,7 @@ class TestUserFavoritesAPI(unittest.TestCase):
         user_id = 1  # Assuming user ID 1 exists in the database
         url = f'{self.BASE_URL}/user_favorites/{user_id}'
         
-        # Mock the GET response
+        # Creating a mock response object to GET favorite product
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = [{'user_id': 1, 'product_id': 1}]

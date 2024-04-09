@@ -2,7 +2,7 @@ import json
 import requests
 import unittest
 from unittest.mock import patch, MagicMock
-from tests.test_utils import *  # Assuming this module contains necessary utility functions
+from tests.test_utils import *  
 
 class TestCategoriesAPI(unittest.TestCase):
     
@@ -12,7 +12,7 @@ class TestCategoriesAPI(unittest.TestCase):
     
     @patch('requests.get')
     def test_get_all_categories(self, mock_get):
-        # Mock the response for getting all categories
+        # Creating a mock response object for getting all categories
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = [{'id': 1, 'name': 'Electronics'}, {'id': 2, 'name': 'Books'}]
@@ -30,7 +30,7 @@ class TestCategoriesAPI(unittest.TestCase):
         category_id = 1  # Assuming category ID 1 exists
         url = f'http://localhost:5000/categories/{category_id}'
         
-        # Mock the response for getting a category by ID
+        # Creating a mock response object for getting a category by ID
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = {'id': category_id, 'name': 'Electronics'}
@@ -48,7 +48,7 @@ class TestCategoriesAPI(unittest.TestCase):
         query = 'phone'
         url = self.CATEGORY_SEARCH_URL.format(query=query)
         
-        # Mock the response for category search
+        # Creating a mock response object for category search
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = [{'id': 3, 'name': 'Smartphones'}]
