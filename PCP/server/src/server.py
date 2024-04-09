@@ -2,18 +2,31 @@ from flask import Flask
 from flask_restful import Resource, Api
 from flask_cors import CORS
 
-from utilities.swen_344_db_utils import *
-from api.login_api import *
-from api.signup_api import *
-from api.user_detail_api import *
-from api.logout_api import *
-from model.amazon import *
-from api.categories_api import *
-from api.products_api import *
-from api.retailer_api import *
-from api.prices_api import *
-from api.user_favorites_api import *
-
+try:
+    from utilities.swen_344_db_utils import *
+    from api.login_api import *
+    from api.signup_api import *
+    from api.user_detail_api import *
+    from api.logout_api import *
+    from model.amazon import *
+    from api.categories_api import *
+    from api.products_api import *
+    from api.retailer_api import *
+    from api.prices_api import *
+    from api.user_favorites_api import *
+except:
+    from .utilities.swen_344_db_utils import *
+    from .api.login_api import *
+    from .api.signup_api import *
+    from .api.user_detail_api import *
+    from .api.logout_api import *
+    from .model.amazon import *
+    from .api.categories_api import *
+    from .api.products_api import *
+    from .api.retailer_api import *
+    from .api.prices_api import *
+    from .api.user_favorites_api import *
+    
 app = Flask(__name__)  # create Flask instance
 CORS(app)  # Enable CORS on Flask server to work with Nodejs pages
 api = Api(app)  # api router
