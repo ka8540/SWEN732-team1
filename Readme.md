@@ -31,5 +31,33 @@ https://github.com/ka8540/SWEN732-team1/blob/master/DesignDoc.md
 
 ## Testing
 
+### Overview
+
+Testing is a critical part of the "Price Compare Plus" project development process, ensuring the reliability, security, and performance of the application. Our testing strategy encompasses various aspects of the application, including API endpoints, user authentication processes (sign up, sign in, sign out), and product-related functionalities (category API, product API, etc.). By adopting a comprehensive testing approach, we aim to identify and mitigate potential issues early in the development cycle, enhancing the overall quality of the application.
+
+### Testing Framework and Tools
+
+We utilize Python's `unittest` framework, a powerful and versatile tool for developing automated tests. This choice allows us to write clear and concise test cases, leveraging features such as test discovery, test fixtures, and assertions to verify our code's correctness. Additionally, the `unittest.mock` module is extensively used to isolate tests from their external dependencies, enabling us to simulate various scenarios and responses from external services and APIs.
+
+### Mocking and Patching
+
+A significant aspect of our testing methodology involves the use of mocking and patching techniques, facilitated by the `unittest.mock` module. This approach allows us to create mock objects that simulate the behavior of real-world entities, such as HTTP responses from external APIs. By patching parts of our system during tests, we can control the inputs and outputs of various components, ensuring that our tests are not only fast and reliable but also independent of external factors.
+
+### Test Case Structure
+
+Our test cases are methodically structured to cover a wide range of scenarios, including positive flows, error handling, and edge cases. For instance, the `SignUpApiTestCase` class contains tests for user registration, where we simulate both successful sign-ups and various failure scenarios (e.g., invalid inputs, duplicate users). Similarly, test cases for sign in, sign out, category management, and product functionalities are designed to validate each endpoint's expected behavior under different conditions.
+
+### Continuous Integration and Deployment
+
+Integration with Continuous Integration (CI) tools forms an integral part of our testing strategy. Upon each code commit, our test suite is automatically executed, allowing us to detect and resolve issues early in the development process. This automated pipeline ensures that all new changes are thoroughly tested before they are merged into the main branch, maintaining the integrity and stability of our codebase.
+
+### Code Coverage
+
+We strive to achieve high code coverage with our tests, ensuring that a significant portion of our codebase is verified for correctness. Tools such as Codecov are integrated into our CI pipeline, providing detailed insights into our testing coverage and highlighting areas that may require additional testing. This practice helps us maintain a robust and reliable codebase, reducing the likelihood of bugs and regressions in production.
+
+### Conclusion
+
+Our testing approach emphasizes thoroughness, automation, and continuous improvement. By leveraging advanced testing frameworks and methodologies, we ensure that "Price Compare Plus" meets the highest standards of quality and reliability. This commitment to quality testing reflects our dedication to providing a seamless and secure shopping comparison experience for our users.
+
 
 
