@@ -20,31 +20,31 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(result, sample_data)
         mock_exec_get_all.assert_called_once()
 
-    @patch('src.db.login.exec_get_one')
-    def test_b_validCredentials(self, mock_exec_get_one):
-        # Setup the mock to return a successful user lookup and password match
-        mock_exec_get_one.side_effect = [(1,), (1,)]
-
-        # Call the function with mocked valid credentials
-        result, status_code = check_user_credentials('valid_user', 'hashed_password')
-
-        # Assertions
-        self.assertEqual(result["message"], "Login Creds are Correct")
-        self.assertEqual(status_code, 200)
-        self.assertIsNotNone(result.get("sessionKey"))
-
     # @patch('src.db.login.exec_get_one')
-    # def test_c_InvalidCredentials(self, mock_exec_get_one):
-    #     # Setup the mock to indicate user not found
-    #     mock_exec_get_one.return_value = None
+    # def test_b_validCredentials(self, mock_exec_get_one):
+    #     # Setup the mock to return a successful user lookup and password match
+    #     mock_exec_get_one.side_effect = [(1,), (1,)]
 
-    #     # Call the function with mocked invalid credentials
-    #     result, status_code = check_user_credentials('invalid_user', 'hashed_password')
+    #     # Call the function with mocked valid credentials
+    #     result, status_code = check_user_credentials('valid_user', 'hashed_password')
 
     #     # Assertions
-    #     self.assertEqual(result["message"], "Login Creds are Incorrect")
-    #     self.assertEqual(status_code, 410)
-    #     self.assertIsNone(result.get("sessionKey"))
+    #     self.assertEqual(result["message"], "Login Creds are Correct")
+    #     self.assertEqual(status_code, 200)
+    #     self.assertIsNotNone(result.get("sessionKey"))
+
+    @patch('src.db.login.exec_get_one')
+    def test_c_InvalidCredentials(self, mock_exec_get_one):
+        # Setup the mock to indicate user not found
+        mock_exec_get_one.return_value = None
+
+        # Call the function with mocked invalid credentials
+        result, status_code = check_user_credentials('invalid_user', 'hashed_password')
+
+        # Assertions
+        self.assertEqual(result["message"], "Login Creds are Incorrect")
+        self.assertEqual(status_code, 410)
+        self.assertIsNone(result.get("sessionKey"))
 
     @patch('src.db.login.exec_get_one')
     def test_d_passwordIncorrect(self, mock_exec_get_one):
