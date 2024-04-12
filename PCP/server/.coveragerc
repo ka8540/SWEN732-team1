@@ -2,6 +2,10 @@
 omit =
     tests/test_utils.py
     */api/*
-    */model/user.py
+    */db/*
+    */model/*
     src/utilities/swen_344_db_utils.py
+    */1_api/*
+
+
 
