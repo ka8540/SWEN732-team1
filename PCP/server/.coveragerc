@@ -1,4 +1,7 @@
 [run]
 omit =
-    */test_utils/*
+    tests/test_utils.py
     */api/*
+    */model/user.py
+    src/utilities/swen_344_db_utils.py
+
