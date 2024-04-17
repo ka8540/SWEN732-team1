@@ -3,8 +3,6 @@ from unittest.mock import patch, MagicMock
 
 from tests.test_utils import *
 
-from api.cart_api import get
-
 
 class LogOutApiTestCase(unittest.TestCase):
     SignUp_URL = 'http://localhost:5000/signUp'
