@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS Retailers CASCADE;
 DROP TABLE IF EXISTS ProductCategories CASCADE;
 DROP TABLE IF EXISTS user_authentication CASCADE;
 DROP TABLE IF EXISTS Currency CASCADE;
+DROP TABLE IF EXISTS Cart CASCADE;
 
 
 -- Create Product User Authentication Table
@@ -91,5 +92,15 @@ CREATE TABLE PriceAlerts (
     ThresholdPrice DECIMAL(10, 2) NOT NULL,
     IsActive BOOLEAN NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user_authentication(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE
+);
+
+-- Create Cart table
+CREATE TABLE Cart (
+    CartID SERIAL PRIMARY KEY,
+    UserID INT NOT NULL,
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL DEFAULT 1,
+    FOREIGN KEY (UserID) REFERENCES user_authentication(user_id) ON DELETE CASCADE,
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE
 );

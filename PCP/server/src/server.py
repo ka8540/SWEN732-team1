@@ -1,6 +1,6 @@
 from flask import Flask
-from flask_restful import Api
 from flask_cors import CORS
+from flask_restful import Api
 
 try:
     from utilities.swen_344_db_utils import *
@@ -14,6 +14,7 @@ try:
     from api.retailer_api import *
     from api.prices_api import *
     from api.user_favorites_api import *
+    from api.cart_api import Cart
 except:
     from .utilities.swen_344_db_utils import *
     from .api.login_api import *
@@ -26,6 +27,7 @@ except:
     from .api.retailer_api import *
     from .api.prices_api import *
     from .api.user_favorites_api import *
+    from .api.cart_api import Cart
     
 app = Flask(__name__)  # create Flask instance
 CORS(app)  # Enable CORS on Flask server to work with Nodejs pages
@@ -47,6 +49,7 @@ api.add_resource(PricesByProduct, '/prices/products/<int:product_id>')
 api.add_resource(Prices, '/prices')
 api.add_resource(UserFavorites, '/user_favorites')
 api.add_resource(UserFavoritesById, '/user_favorites/<int:user_id>')
+api.add_resource(Cart, '/cart/<int:user_id>')
 
 
 def setup_database():
