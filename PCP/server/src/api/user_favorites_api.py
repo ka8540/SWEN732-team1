@@ -1,17 +1,13 @@
+from flask import jsonify
 from flask import make_response
 from flask_restful import Resource
-from flask import jsonify
-from flask_restful import request
 from flask_restful import reqparse
-import json
 
 try:
-    # from src.utilities.swen_344_db_utils import *
     from src.db.user_favorites import add_user_favorite, get_user_favorites
 except:
-    # from utilities.swen_344_db_utils import *
     from db.user_favorites import add_user_favorite, get_user_favorites
-    
+
 
 class UserFavorites(Resource):
     def post(self):
@@ -21,8 +17,10 @@ class UserFavorites(Resource):
         args = parser.parse_args()
         add_user_favorite(args['user_id'], args['product_id'])
         return make_response(jsonify({'message': 'Favorite product added successfully'}), 201)
-    
+
+
 class UserFavoritesById(Resource):
     def get(self, user_id):
         favorites = get_user_favorites(user_id)
-        return jsonify([{'FavoriteID': fav[4], 'ProductID': fav[0], 'ProductName': fav[1], 'ProductDescription': fav[2], 'ImageURL': fav[3]} for fav in favorites])
+        return jsonify([{'FavoriteID': fav[4], 'ProductID': fav[0], 'ProductName': fav[1], 'ProductDescription': fav[2],
+                         'ImageURL': fav[3]} for fav in favorites])

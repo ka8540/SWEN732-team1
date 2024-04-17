@@ -3,18 +3,13 @@ API Endpoints for user management and authentication.
 
 These endpoints handle user registration and login functionality.
 """
-from flask import make_response
 from flask_restful import Resource
 from flask import jsonify
 from flask_restful import request
-from flask_restful import reqparse
-import json
-import hashlib  # Importing hashlib module for passwo
+
 try:
-    # from src.utilities.swen_344_db_utils import *
     from src.db.user_details import verify_session_key, list_user_detail
 except:
-    # from utilities.swen_344_db_utils import *
     from db.user_details import verify_session_key, list_user_detail
 
 class UserDetail(Resource):

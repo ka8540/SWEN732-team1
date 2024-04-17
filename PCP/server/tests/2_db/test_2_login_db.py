@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import patch
+
 from src.db.login import list_info_items, check_user_credentials
+
 
 class MyTestCase(unittest.TestCase):
 
@@ -19,19 +21,6 @@ class MyTestCase(unittest.TestCase):
         # Assertions
         self.assertEqual(result, sample_data)
         mock_exec_get_all.assert_called_once()
-
-    # @patch('src.db.login.exec_get_one')
-    # def test_b_validCredentials(self, mock_exec_get_one):
-    #     # Setup the mock to return a successful user lookup and password match
-    #     mock_exec_get_one.side_effect = [(1,), (1,)]
-
-    #     # Call the function with mocked valid credentials
-    #     result, status_code = check_user_credentials('valid_user', 'hashed_password')
-
-    #     # Assertions
-    #     self.assertEqual(result["message"], "Login Creds are Correct")
-    #     self.assertEqual(status_code, 200)
-    #     self.assertIsNotNone(result.get("sessionKey"))
 
     @patch('src.db.login.exec_get_one')
     def test_c_InvalidCredentials(self, mock_exec_get_one):
@@ -58,6 +47,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(result["message"], "Password Invalid")
         self.assertEqual(status_code, 411)
         self.assertIsNone(result.get("sessionKey"))
+
 
 if __name__ == '__main__':
     unittest.main()

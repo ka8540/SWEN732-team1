@@ -1,6 +1,5 @@
 import unittest
 from unittest.mock import patch
-# from db.products import get_all_products, get_product_by_id, search_products
 
 try:
     from ...src.db.products import get_all_products, get_product_by_id, search_products

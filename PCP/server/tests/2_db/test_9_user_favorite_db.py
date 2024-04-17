@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import patch
+
 from src.db.user_favorites import get_user_favorites, add_user_favorite
+
 
 class TestUserFavoritesDB(unittest.TestCase):
 
@@ -39,6 +41,7 @@ class TestUserFavoritesDB(unittest.TestCase):
             "INSERT INTO UserFavorites (user_id, ProductID) VALUES (%s, %s);",
             (user_id, product_id)
         )
+
 
 if __name__ == '__main__':
     unittest.main()
