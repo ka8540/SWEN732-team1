@@ -6,9 +6,9 @@ from flask_restful import reqparse
 import json
 
 try:
-    from src.db.signup import *
+    from src.db.signup import list_info_items, user_signup
 except:
-    from db.signup import *
+    from db.signup import list_info_items, user_signup
 
 class SignUpApi(Resource):
     def get(self):

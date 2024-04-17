@@ -10,11 +10,11 @@ from flask_restful import request
 from flask_restful import reqparse
 import json
 try:
-    from src.utilities.swen_344_db_utils import *
-    from src.db.logout import *
+    # from src.utilities.swen_344_db_utils import *
+    from src.db.logout import user_logout
 except:
-    from utilities.swen_344_db_utils import *
-    from db.logout import *
+    # from utilities.swen_344_db_utils import *
+    from db.logout import user_logout
 
 
 class LogoutAPI(Resource):

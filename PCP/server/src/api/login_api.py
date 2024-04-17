@@ -11,11 +11,11 @@ from flask_restful import reqparse
 import json
 import hashlib  # Importing hashlib module for password hashing
 try:
-    from src.utilities.swen_344_db_utils import *
-    from src.db.login import *
+    # from src.utilities.swen_344_db_utils import *
+    from src.db.login import check_user_credentials
 except:
-    from db.login import *
-    from utilities.swen_344_db_utils import *
+    from db.login import check_user_credentials
+    # from utilities.swen_344_db_utils import
 
 class LoginAPI(Resource):
     """

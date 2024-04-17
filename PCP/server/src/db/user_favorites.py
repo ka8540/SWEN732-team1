@@ -5,11 +5,11 @@ import numpy as np
 import sys
 import os
 try:
-    from src.api.user_favorites_api import *
-    from src.utilities.swen_344_db_utils import *
+    # from src.api.user_favorites_api import *
+    from src.utilities.swen_344_db_utils import exec_get_all, exec_commit
 except:
-    from api.user_favorites_api import *
-    from utilities.swen_344_db_utils import *
+    # from api.user_favorites_api import *
+    from utilities.swen_344_db_utils import exec_get_all, exec_commit
     
 
 def get_user_favorites(user_id):

@@ -1,10 +1,12 @@
+import os
+
 try:
     import pandas as pd
     import psycopg2
     from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-    from src.utilities.swen_344_db_utils import *
+    from src.utilities.swen_344_db_utils import exec_commit, exec_get_one
 except:
-    from utilities.swen_344_db_utils import *
+    from utilities.swen_344_db_utils import exec_commit, exec_get_one
     import pandas as pd
     import psycopg2
     from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT

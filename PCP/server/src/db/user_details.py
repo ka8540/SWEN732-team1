@@ -6,13 +6,13 @@ import numpy as np
 import sys
 import os
 try:
-    from src.api.user_detail_api import *
-    from src.utilities.swen_344_db_utils import *
-    from src.model.user import *
+    # from src.api.user_detail_api import *
+    from src.utilities.swen_344_db_utils import exec_get_all
+    # from src.model.user import *
 except:
-    from api.user_detail_api import *
-    from utilities.swen_344_db_utils import *
-    from model.user import *
+    # from api.user_detail_api import *
+    from utilities.swen_344_db_utils import exec_get_all
+    # from model.user import *
 import hashlib
 import secrets
 

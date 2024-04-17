@@ -6,11 +6,11 @@ from flask_restful import reqparse
 import json
 
 try:
-    from src.utilities.swen_344_db_utils import *
-    from src.db.retailers import *
+    # from src.utilities.swen_344_db_utils import *
+    from src.db.retailers import get_all_retailers, get_retailer_by_id
 except:
-    from utilities.swen_344_db_utils import *
-    from db.retailers import *
+    # from utilities.swen_344_db_utils import *
+    from db.retailers import get_all_retailers, get_retailer_by_id
     
     
 class Retailers(Resource):

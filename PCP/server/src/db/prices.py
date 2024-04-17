@@ -5,11 +5,11 @@ import numpy as np
 import sys
 import os
 try:
-    from src.api.prices_api import *
-    from src.utilities.swen_344_db_utils import *
+    # from src.api.prices_api import *
+    from src.utilities.swen_344_db_utils import exec_get_all
 except:
-    from api.prices_api import *
-    from utilities.swen_344_db_utils import *
+    # from api.prices_api import *
+    from utilities.swen_344_db_utils import exec_get_all
     
 def get_prices_by_product(product_id):
     sql = """

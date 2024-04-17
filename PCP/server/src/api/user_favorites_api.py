@@ -6,11 +6,11 @@ from flask_restful import reqparse
 import json
 
 try:
-    from src.utilities.swen_344_db_utils import *
-    from src.db.user_favorites import *
+    # from src.utilities.swen_344_db_utils import *
+    from src.db.user_favorites import add_user_favorite, get_user_favorites
 except:
-    from utilities.swen_344_db_utils import *
-    from db.user_favorites import *
+    # from utilities.swen_344_db_utils import *
+    from db.user_favorites import add_user_favorite, get_user_favorites
     
 
 class UserFavorites(Resource):

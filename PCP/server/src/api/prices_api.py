@@ -6,11 +6,11 @@ from flask_restful import reqparse
 import json
 
 try:
-    from src.utilities.swen_344_db_utils import *
-    from src.db.prices import *
+    # from src.utilities.swen_344_db_utils import *
+    from src.db.prices import get_prices_by_product, get_all_prices
 except:
-    from utilities.swen_344_db_utils import *
-    from db.prices import *
+    # from utilities.swen_344_db_utils import *
+    from db.prices import get_prices_by_product, get_all_prices
     
     
 class PricesByProduct(Resource):
