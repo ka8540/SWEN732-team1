@@ -3,6 +3,8 @@ from unittest.mock import patch, MagicMock
 
 from tests.test_utils import *
 
+from api.cart_api import get
+
 
 class LogOutApiTestCase(unittest.TestCase):
     SignUp_URL = 'http://localhost:5000/signUp'
@@ -40,7 +42,7 @@ class LogOutApiTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Simulating extracting session key from login response
-        session_key = response.json().get('sessionKey')
+        session_key = response.get('sessionKey')
         self.assertIsNotNone(session_key, "Session key should not be None")
 
         # Simulating logout with the session key
