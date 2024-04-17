@@ -2,15 +2,11 @@ from flask import make_response
 from flask_restful import Resource
 from flask import jsonify
 from flask_restful import request
-from flask_restful import reqparse
-import json
 
 try:
-    from src.utilities.swen_344_db_utils import *
-    from src.db.categories import *
+    from src.db.categories import get_all_categories, get_category_by_id, search_categories
 except:
-    from utilities.swen_344_db_utils import *
-    from db.categories import *
+    from db.categories import get_all_categories, get_category_by_id, search_categories
     
 class ProductCategories(Resource):
     def get(self):

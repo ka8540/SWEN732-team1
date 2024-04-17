@@ -1,15 +1,7 @@
-import psycopg2
-import yaml
-import pandas as pd
-import numpy as np
-import sys
-import os
 try:
-    from src.api.retailer_api import *
-    from src.utilities.swen_344_db_utils import *
+    from src.utilities.swen_344_db_utils import exec_get_all, exec_get_one
 except:
-    from api.retailer_api import *
-    from utilities.swen_344_db_utils import *
+    from utilities.swen_344_db_utils import exec_get_all, exec_get_one
     
 
 def get_all_retailers():

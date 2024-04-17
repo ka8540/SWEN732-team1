@@ -1,19 +1,8 @@
-import psycopg2
-import yaml
-import os
-import pandas as pd
-import numpy as np
-import sys
-import os
 try:
-    from src.api.signup_api import *
-    from src.utilities.swen_344_db_utils import *
+    from src.utilities.swen_344_db_utils import exec_get_all, exec_commit
 except:
-    from api.signup_api import *
-    from utilities.swen_344_db_utils import *
+    from utilities.swen_344_db_utils import exec_get_all, exec_commit
 import hashlib
-import secrets
-
 
 
 def list_info_items():

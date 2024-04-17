@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch
 
-# from db.prices import get_prices_by_product, get_all_prices
 
 try:
     from ...src.db.prices import get_prices_by_product, get_all_prices

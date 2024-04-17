@@ -1,12 +1,15 @@
-import json
 import unittest
 from unittest.mock import patch, MagicMock
 import requests
+import unittest
+from unittest.mock import patch, MagicMock
+
+import requests
+
 
 class TestPriceAPI(unittest.TestCase):
-
     BASE_URL = 'http://localhost:5000'
-    
+
     @patch('requests.get')
     def test_get_prices_by_product(self, mock_get):
         product_id = 1
@@ -39,6 +42,7 @@ class TestPriceAPI(unittest.TestCase):
         data = response.json()
         self.assertIsInstance(data, list)
         mock_get.assert_called_once_with(url)
+
 
 if __name__ == '__main__':
     unittest.main()

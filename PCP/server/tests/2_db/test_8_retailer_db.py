@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import patch
+
 from src.db.retailers import get_all_retailers, get_retailer_by_id
+
 
 class TestRetailersDB(unittest.TestCase):
 
@@ -33,6 +35,7 @@ class TestRetailersDB(unittest.TestCase):
         # Perform assertions
         self.assertEqual(result, mock_retailer_data)
         mock_exec_get_one.assert_called_once_with("SELECT * FROM Retailers WHERE RetailerID = %s;", (retailer_id,))
+
 
 if __name__ == '__main__':
     unittest.main()
