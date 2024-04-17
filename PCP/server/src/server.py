@@ -14,8 +14,8 @@ try:
     from api.retailer_api import *
     from api.prices_api import *
     from api.user_favorites_api import *
-    from api.cart_api import Cart
-except:
+    from api.cart_api import Cart, AddToCart, RemoveFromCart
+except ImportError:
     from .utilities.swen_344_db_utils import *
     from .api.login_api import *
     from .api.signup_api import *
@@ -27,8 +27,8 @@ except:
     from .api.retailer_api import *
     from .api.prices_api import *
     from .api.user_favorites_api import *
-    from .api.cart_api import Cart
-    
+    from .api.cart_api import Cart, AddToCart, RemoveFromCart
+
 app = Flask(__name__)  # create Flask instance
 CORS(app)  # Enable CORS on Flask server to work with Nodejs pages
 api = Api(app)  # api router
@@ -50,6 +50,8 @@ api.add_resource(Prices, '/prices')
 api.add_resource(UserFavorites, '/user_favorites')
 api.add_resource(UserFavoritesById, '/user_favorites/<int:user_id>')
 api.add_resource(Cart, '/cart/<int:user_id>')
+api.add_resource(AddToCart, '/add-to-cart/<int:user_id>/<int:product_id>/<int:quantity>')
+api.add_resource(RemoveFromCart, '/remove-from-cart/<int:user_id>/<int:product_id>')
 
 
 def setup_database():

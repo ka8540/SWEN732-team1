@@ -7,15 +7,16 @@ except ImportError:
     from db.cart import get_cart_contents, add_item_to_cart, remove_item_from_cart
 
 
-def get(user_id):
-    """Fetches all items in a user's shopping cart by their user ID."""
-    try:
-        cart_items = get_cart_contents(user_id)
-        if not cart_items:
-            return jsonify({"error": "No items found in the cart"}), 404
-        return jsonify({"cart_items": cart_items})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+class Cart(Resource):
+    def get(self, user_id):
+        """Fetches all items in a user's shopping cart by their user ID."""
+        try:
+            cart_items = get_cart_contents(user_id)
+            if not cart_items:
+                return jsonify({"error": "No items found in the cart"}), 404
+            return jsonify({"cart_items": cart_items})
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
 
 class AddToCart(Resource):
