@@ -63,3 +63,5 @@ class CartAPIById(Resource):
 
         remove_item_from_cart(user_id, product_id)  # Use the `product_id` parameter
         return make_response(jsonify({'message': 'Item removed from cart successfully'}), 204)
+
+#ka8540
