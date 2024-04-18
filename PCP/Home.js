@@ -60,9 +60,9 @@ export default function Home({navigation}) {
     } else if (item.CategoryName === 'Musical Instruments') {
       imageSource = { uri: 'https://upload.wikimedia.org/wikipedia/commons/4/45/GuitareClassique5.png' };
     } else if (item.CategoryName === 'Wearable Technology') {
-      imageSource = { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvc6dYdSWzTOK05bo18hZx3Ix3FYRQFx_WNg&s' };
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/61SxKn69eRL._AC_SL1500_.jpg' };
     } else if (item.CategoryName === 'Laptops') {
-      imageSource = { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJVAu2vLXne-HWnDzE4ntJ-YlHLQAa6x0m1A&s' };
+      imageSource = { uri: 'https://static.nationalcreditdirect.com/common/images/products/BBY-6499751_sd.jpg' };
     }
   
     return (
