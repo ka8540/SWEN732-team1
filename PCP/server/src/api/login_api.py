@@ -10,9 +10,10 @@ import hashlib  # Used for password hashing
 # Try to import the necessary functions and classes explicitly
 try:
     from src.utilities.swen_344_db_utils import exec_get_all  # Assuming this function is used within check_user_credentials
-    from src.db.login import check_user_credentials  # Ensure this is the correct function used for login logic
+    from src.db.login import check_user_credentials # Ensure this is the correct function used for login logic
 except ImportError:
     from utilities.swen_344_db_utils import exec_get_all
+    from db.login import check_user_credentials
 
 
 class LoginAPI(Resource):
@@ -40,6 +41,7 @@ class LoginAPI(Resource):
         hashed_password = hashlib.sha224(args['password'].encode()).hexdigest()
 
         # Check user credentials
+        print("reached here")
         response, status_code = check_user_credentials(args['username'], hashed_password)
         
         print("username:"+args['username']+"password:"+args['password']+"hashed_password:"+hashed_password)

@@ -1,9 +1,3 @@
-try:
-    from src.db.login import check_username_exists, validate_credentials  # Assuming these are the functions you use from login
-except ImportError:
-    from db.login import check_username_exists, validate_credentials
-
-
 import secrets
 def check_username_and_password(result_username, result_credentials,session_key):
     if result_credentials:
@@ -30,6 +24,7 @@ def check_username(username):
     return None
 
 def generate_session_key():
+    print("reached here in model")
     # Generate a 16-byte (128-bit) hex string
     return secrets.token_hex(16)
 

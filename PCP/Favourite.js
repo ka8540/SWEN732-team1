@@ -1,29 +1,47 @@
-import React, { useState } from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
-const FAVOURITE_ITEMS = [
-  { id: '1', title: 'Favourite Item 1' },
-  { id: '2', title: 'Favourite Item 2' },
-  { id: '3', title: 'Favourite Item 3' },
-];
+import React, { useState, useEffect } from 'react';
+import { Image, SafeAreaView, View, Text, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 
 const FavouritesScreen = ({ navigation }) => {
-  const [favourites, setFavourites] = useState(FAVOURITE_ITEMS);
+  const [favourites, setFavourites] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
-  // Now, these functions are defined inside the component, so they have access to the `navigation` prop.
+  useEffect(() => {
+    const fetchFavourites = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/products');
+        const data = await response.json();
+        setFavourites(data);  
+      } catch (error) {
+        console.error('Failed to fetch favourite items:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFavourites();
+  }, []);  // Empty dependency array means this effect runs only once after the initial render
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Text style={styles.itemText}>{item.title}</Text>
+      <Image source={{ uri: item.ImageURL }} style={styles.itemImage} />
+      <Text style={styles.itemText}>{item.ProductName} (ID: {item.ProductID})</Text>
     </View>
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <Text>FAVOURITE_ITEMS</Text>
-      </View>
+      {isLoading ? (
+        <View style={styles.content}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      ) : (
+        <FlatList
+          data={favourites}
+          renderItem={renderItem}
+          keyExtractor={item => item.ProductID.toString()}
+          contentContainerStyle={styles.content}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -33,32 +51,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  navbar: {
-    height: 60,
+  itemContainer: {
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'cyan',
   },
-  navbarText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
+  itemImage: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+    borderRadius: 25,  // optional, for rounded images
+  },
+  itemText: {
+    fontSize: 18,
+    flexShrink: 1,  // ensures text does not push other elements out of view
   },
   content: {
-    flex: 1,
-    alignItems: 'center',
+    flexGrow: 1,
     justifyContent: 'center',
-  },
-  footer: {
-    flexDirection: 'row',
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: 'cyan',
-  },
-  footerButton: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
   },
 });
 
