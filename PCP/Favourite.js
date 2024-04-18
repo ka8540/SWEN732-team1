@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types'; // Import PropTypes
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
 
 const FAVOURITE_ITEMS = [
   { id: '1', title: 'Favourite Item 1' },
@@ -10,8 +10,6 @@ const FAVOURITE_ITEMS = [
 
 const FavouritesScreen = ({ navigation }) => {
   const [favourites, setFavourites] = useState(FAVOURITE_ITEMS);
-
-  // Now, these functions are defined inside the component, so they have access to the `navigation` prop.
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
@@ -28,37 +26,19 @@ const FavouritesScreen = ({ navigation }) => {
   );
 };
 
+FavouritesScreen.propTypes = {
+  navigation: PropTypes.object.isRequired, // Define the prop type for navigation
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
-  navbar: {
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'cyan',
-  },
-  navbarText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
   content: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  footer: {
-    flexDirection: 'row',
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: 'cyan',
-  },
-  footerButton: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
   },
 });
 

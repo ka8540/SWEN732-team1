@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS Retailers CASCADE;
 DROP TABLE IF EXISTS ProductCategories CASCADE;
 DROP TABLE IF EXISTS user_authentication CASCADE;
 DROP TABLE IF EXISTS Currency CASCADE;
+DROP TABLE IF EXISTS ConvertedPrices;
 
 
 -- Create Product User Authentication Table
@@ -92,4 +93,13 @@ CREATE TABLE PriceAlerts (
     IsActive BOOLEAN NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user_authentication(user_id) ON DELETE CASCADE,
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE
+);
+
+-- Create ConvertedPrices Table
+CREATE TABLE ConvertedPrices (
+    ConvertedPriceID SERIAL PRIMARY KEY,
+    PriceID INT NOT NULL,
+    ConvertedPrice DECIMAL(10, 2) NOT NULL,
+    ConvertedCurrency VARCHAR(3) NOT NULL,
+    FOREIGN KEY (PriceID) REFERENCES Prices(PriceID) ON DELETE CASCADE
 );

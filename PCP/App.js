@@ -38,7 +38,7 @@ function MainAppTabs() {
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
           }  else if (route.name === 'Favourites') {
-            iconName = focused ? 'bookmark-outline' : 'bookmark-outline';
+            iconName = focused ? 'bookmark' : 'bookmark-outline';
           } else if (route.name === 'ShoppingCart') {
             iconName = focused ? 'cart' : 'cart-outline';
           }else if (route.name === 'Account') {
