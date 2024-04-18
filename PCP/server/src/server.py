@@ -26,7 +26,7 @@ except ImportError:
     from api.products_api import Products, ProductById, ProductSearch
     from api.retailer_api import Retailers, RetailerById
     from api.prices_api import Prices, PricesByProduct
-    from api.user_favorites_api import UserFavorites, UserFavoritesById
+    from api.user_favorites_api import UserFavorites
     from model.amazon import insert_data_from_excel
     
 app = Flask(__name__)  # create Flask instance
@@ -48,7 +48,6 @@ api.add_resource(RetailerById, '/retailers/<int:retailer_id>')
 api.add_resource(PricesByProduct, '/prices/products/<int:product_id>')
 api.add_resource(Prices, '/prices')
 api.add_resource(UserFavorites, '/user_favorites')
-api.add_resource(UserFavoritesById, '/user_favorites/<int:user_id>')
 
 
 def setup_database():
