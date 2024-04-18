@@ -7,6 +7,7 @@ try:
     from src.utilities.swen_344_db_utils import exec_get_all  # Assuming exec_get_all is used within retailer functions
     from src.db.retailers import get_all_retailers, get_retailer_by_id
 except ImportError:
+    from db.retailers import get_all_retailers, get_retailer_by_id
     from utilities.swen_344_db_utils import exec_get_all
 
     
