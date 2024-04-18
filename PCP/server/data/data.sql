@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS Retailers CASCADE;
 DROP TABLE IF EXISTS ProductCategories CASCADE;
 DROP TABLE IF EXISTS user_authentication CASCADE;
 DROP TABLE IF EXISTS Currency CASCADE;
-
+DROP Table IF EXISTS Cart;
 
 -- Using VARCHAR as it is the standard string type in PostgreSQL
 
@@ -104,5 +104,6 @@ CREATE TABLE Cart (
     ProductID INT NOT NULL,
     Quantity INT NOT NULL DEFAULT 1,
     FOREIGN KEY (UserID) REFERENCES user_authentication(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE,
+    UNIQUE (UserID, ProductID) -- Adding a unique constraint covering both UserID and ProductID
 );

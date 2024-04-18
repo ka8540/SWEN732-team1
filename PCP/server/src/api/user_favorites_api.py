@@ -16,11 +16,13 @@ def verify_session_key(session_key):
     """Check the session key and return the user ID if valid."""
     query = "SELECT user_id FROM user_authentication WHERE session_key = %s;"
     result = exec_get_all(query, (session_key,))
+    print(result)
     return result[0][0] if result else None
 
 class UserFavorites(Resource):
     def post(self):
         session_key = request.headers.get('X-Session-Key')
+        print(session_key)
         if not session_key:
             return {"message": "No session key given."}, 401
 
@@ -48,6 +50,9 @@ class UserFavorites(Resource):
 
         return jsonify([{'FavoriteID': fav[4], 'ProductID': fav[0], 'ProductName': fav[1], 'ProductDescription': fav[2], 'ImageURL': fav[3]} for fav in favorites])
     
+    
+
+class UserFavoritesById(Resource):
     def delete(self, product_id):
         session_key = request.headers.get('X-Session-Key')
         if not session_key:
@@ -56,7 +61,6 @@ class UserFavorites(Resource):
         user_id = verify_session_key(session_key)
         if not user_id:
             return {"message": "Invalid session key given."}, 401
-
+        print("idhar aa gaya")
         delete_user_favorite(user_id, product_id)
         return make_response(jsonify({'message': 'Favorite product deleted successfully'}), 204)
-

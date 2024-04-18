@@ -13,7 +13,8 @@ try:
     from src.api.products_api import Products, ProductById, ProductSearch
     from src.api.retailer_api import Retailers, RetailerById
     from src.api.prices_api import Prices, PricesByProduct
-    from src.api.user_favorites_api import UserFavorites, UserFavoritesById
+    from src.api.user_favorites_api import UserFavorites
+    from src.api.cart_api import CartAPI, CartAPIById
     from src.model.amazon import insert_data_from_excel  # Assuming this is the correct function name for handling data insertions from the model
 except ImportError:
     # For relative imports within a package structure
@@ -26,7 +27,8 @@ except ImportError:
     from api.products_api import Products, ProductById, ProductSearch
     from api.retailer_api import Retailers, RetailerById
     from api.prices_api import Prices, PricesByProduct
-    from api.user_favorites_api import UserFavorites
+    from api.user_favorites_api import UserFavorites, UserFavoritesById
+    from api.cart_api import CartAPI, CartAPIById
     from model.amazon import insert_data_from_excel
     
 app = Flask(__name__)  # create Flask instance
@@ -48,6 +50,9 @@ api.add_resource(RetailerById, '/retailers/<int:retailer_id>')
 api.add_resource(PricesByProduct, '/prices/products/<int:product_id>')
 api.add_resource(Prices, '/prices')
 api.add_resource(UserFavorites, '/user_favorites')
+api.add_resource(UserFavoritesById, '/user_favorites/<int:product_id>')
+api.add_resource(CartAPI, '/cart')
+api.add_resource(CartAPIById, '/cart/<int:product_id>')
 
 
 def setup_database():
