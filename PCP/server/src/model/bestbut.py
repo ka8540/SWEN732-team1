@@ -11,49 +11,49 @@ except ImportError:
 
 def insert_data_from_excel_bestbuy():
     # Load the data from Excel
-    excel_file = os.path.join(os.path.dirname(__file__), '../../data/BestBuy.xlsx')
-    df = pd.read_excel(excel_file)
+    excel_file_bestbuy = os.path.join(os.path.dirname(__file__), '../../data/BestBuy.xlsx')
+    df_bestbuy = pd.read_excel(excel_file_bestbuy)
     
-    for index, row in df.iterrows():
+    for index, row in df_bestbuy.iterrows():
         # Assuming your Excel has columns: ProductName, ProductDescription, Category, ImageURL
-        product_name = row.get('ProductName')
-        product_description = row.get('ProductDescription')
-        category_name = row.get('Category')
-        image_url = row.get('ImageURL')
-        retailer = row.get('Retailer')
-        product_price = row.get('Price')
+        product_name_bestbuy = row.get('ProductName')
+        product_description_bestbuy = row.get('ProductDescription')
+        category_name_bestbuy = row.get('Category')
+        image_url_bestbuy = row.get('ImageURL')
+        retailer_bestbuy = row.get('Retailer')
+        product_price_bestbuy = row.get('Price')
         
         # Check if the category already exists, insert if not, and get the CategoryID
-        category_id = exec_get_one("SELECT CategoryID FROM ProductCategories WHERE CategoryName = %s", (category_name,))
-        if not category_id:
-            exec_commit("INSERT INTO ProductCategories (CategoryName) VALUES (%s)", (category_name,))
-            category_id = exec_get_one("SELECT CategoryID FROM ProductCategories WHERE CategoryName = %s", (category_name,))
+        category_id_bestbuy = exec_get_one("SELECT CategoryID FROM ProductCategories WHERE CategoryName = %s", (category_name_bestbuy,))
+        if not category_id_bestbuy:
+            exec_commit("INSERT INTO ProductCategories (CategoryName) VALUES (%s)", (category_name_bestbuy,))
+            category_id_bestbuy = exec_get_one("SELECT CategoryID FROM ProductCategories WHERE CategoryName = %s", (category_name_bestbuy,))
         
          # Assuming CategoryID is the first element of the returned tuple
-        category_id = category_id[0]
+        category_id_bestbuy = category_id_bestbuy[0]
         
         # Check if the product already exists, insert if not and get product id
-        product_id = exec_get_one("SELECT ProductID FROM Products WHERE ProductName = %s", (product_name,))
-        if not product_id:
-            exec_commit("""INSERT INTO Products (ProductName, ProductDescription, CategoryID, ImageURL) VALUES (%s, %s, %s, %s)""", (product_name, product_description, category_id, image_url))
-            product_id = exec_get_one("SELECT ProductID FROM Products WHERE ProductName = %s", (product_name,))
+        product_id_bestbuy = exec_get_one("SELECT ProductID FROM Products WHERE ProductName = %s", (product_name_bestbuy,))
+        if not product_id_bestbuy:
+            exec_commit("""INSERT INTO Products (ProductName, ProductDescription, CategoryID, ImageURL) VALUES (%s, %s, %s, %s)""", (product_name_bestbuy, product_description_bestbuy, category_id, image_url_bestbuy))
+            product_id_bestbuy = exec_get_one("SELECT ProductID FROM Products WHERE ProductName = %s", (product_name_bestbuy,))
         
         # Assuming CategoryID is the first element of the returned tuple
-        product_id = product_id[0]
+        product_id_bestbuy = product_id_bestbuy[0]
         
         # Check if the retailer already exists, insert if not, and get the RetailerID
-        retailer_id = exec_get_one("SELECT RetailerID FROM Retailers WHERE RetailerName = %s", (retailer,))
+        retailer_id_bestbuy = exec_get_one("SELECT RetailerID FROM Retailers WHERE RetailerName = %s", (retailer_bestbuy,))
         retailer_website = 'https://www.bestbuy.com/'
-        if not retailer_id:
-            exec_commit("INSERT INTO Retailers (RetailerName,WebsiteURL) VALUES (%s,%s)", (retailer,retailer_website,))
-            retailer_id = exec_get_one("SELECT RetailerID FROM Retailers WHERE RetailerName = %s", (retailer,))
+        if not retailer_id_bestbuy:
+            exec_commit("INSERT INTO Retailers (RetailerName,WebsiteURL) VALUES (%s,%s)", (retailer_bestbuy,retailer_website,))
+            retailer_id_bestbuy = exec_get_one("SELECT RetailerID FROM Retailers WHERE RetailerName = %s", (retailer_bestbuy,))
             
         # Assuming RetailerID is the first element of the returned tuple
-        retailer_id = retailer_id[0]
+        retailer_id_bestbuy = retailer_id_bestbuy[0]
         
         # insert price data
-        price_currency = 'USD'
+        price_currency_bestbuy = 'USD'
         exec_commit("""
             INSERT INTO Prices(ProductID,RetailerID,Price,Currency)
             VALUES (%s, %s, %s, %s)
-            """,(product_id,retailer_id,product_price,price_currency))
+            """,(product_id_bestbuy,retailer_id_bestbuy,product_price_bestbuy,price_currency_bestbuy))
