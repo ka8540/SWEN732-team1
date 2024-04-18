@@ -39,30 +39,18 @@ export default function Home({navigation}) {
   }, []);
   
   const renderCategoryButton = ({ item }) => {
-    let imageSource = require('images/1M.jpeg');
+    let imageSource = { uri: 'https://via.placeholder.com/150' }; 
     
-    if (item.CategoryName === 'TV & Video') {
-      imageSource = require('images/1M.jpeg');
-    } else if (item.CategoryName === 'Home Audio & Theater') {
-      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/2M.jpeg');
-    } else if (item.CategoryName === 'Camera Photo & Video') {
-      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/3M.jpeg');
-    } else if (item.CategoryName === 'Cell Phones & Accessories') {
-      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/4M.jpeg');
-    } else if (item.CategoryName === 'Headphones') {
-      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/5M.jpeg');
-    } else if (item.CategoryName === 'Video Games') {
-      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/6M.png');
-    } else if (item.CategoryName === 'Bluetooth & Wireless Speakers') {
-      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/7M.webp');
-    } else if (item.CategoryName === 'Car Electronics') {
-      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/8M.jpeg');
-    } else if (item.CategoryName === 'Musical Instruments') {
-      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/9M.png');
-    } else if (item.CategoryName === 'Wearable Technology') {
-      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/10M.jpeg');
-    } else if (item.CategoryName === 'Laptops') {
-      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/11M.jpeg');
+    if (item.CategoryName === 'Phone') {
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/71WcjsOVOmL._AC_SX679_.jpg' };
+    } else if (item.CategoryName === 'Headphone') {
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/71Hx8b6HGbL._AC_SY450_.jpg' };
+    } else if (item.CategoryName === 'Entertainment') {
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/51d5Rc6DNML._AC_SY450_.jpg' };
+    } else if (item.CategoryName === 'Accessories') {
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/71gY9E+cTaS._AC_SX679_.jpg' };
+    } else if (item.CategoryName === 'Tablet') {
+      imageSource = { uri: 'https://m.media-amazon.com/images/I/716NHsSc3HL._AC_SX425_.jpg' };
     }
   
     return (
