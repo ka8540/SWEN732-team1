@@ -7,6 +7,7 @@ try:
     from src.utilities.swen_344_db_utils import exec_get_all
     from src.db.prices import get_prices_by_product, get_all_prices
 except ImportError:
+    from db.prices import get_prices_by_product, get_all_prices
     from utilities.swen_344_db_utils import exec_get_all
 
     
