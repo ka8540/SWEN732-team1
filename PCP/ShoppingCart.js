@@ -1,68 +1,101 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-
-// Static data for shopping cart items (In a real app, this could come from an API or device storage)
-const SHOPPING_CART_ITEMS = [
-  { id: '1', title: 'Product Item 1', quantity: 1 },
-  { id: '2', title: 'Product Item 2', quantity: 2 },
-  { id: '3', title: 'Product Item 3', quantity: 3 },
-  // Add more items as needed
-];
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, StyleSheet, Image, ActivityIndicator } from 'react-native';
 
 const ShoppingCart = () => {
-  // State to manage cart items
-  const [cartItems, setCartItems] = useState(SHOPPING_CART_ITEMS);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Render each item in the list
-  const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Text style={styles.itemText}>{item.title}</Text>
-      <Text style={styles.quantityText}>Quantity: {item.quantity}</Text>
-    </View>
-  );
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/products');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (data.length === 0) {
+          throw new Error('No data found');
+        }
+        setProducts(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.center}>
+        <Text>Error: {error}</Text>
+      </View>
+    );
+  }
+
+  const renderItem = ({ item }) => {
+    return (
+      <View style={styles.itemContainer}>
+        <Image source={{ uri: item.ImageURL }} style={styles.itemImage} />
+        <Text style={styles.itemText}>{item.ProductName} (ID: {item.ProductID})</Text>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>My Shopping Cart</Text>
       <FlatList
-        data={cartItems}
+        data={products}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.ProductID.toString()}
+        contentContainerStyle={styles.content}
       />
     </View>
   );
 };
 
-// Styles for the shopping cart screen components
 const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    backgroundColor: '#fff',
   },
   itemContainer: {
-    backgroundColor: '#f9c2ff',
     padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    borderRadius: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc',
     flexDirection: 'row',
-    justifyContent: 'space-between', // To separate the title and quantity
+    alignItems: 'center',
+  },
+  itemImage: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+    borderRadius: 25,
   },
   itemText: {
     fontSize: 18,
+    flexShrink: 1,
   },
-  quantityText: {
-    fontSize: 16,
-    fontWeight: 'bold',
+  content: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
 });
 
-// Export the ShoppingCart component to use it in your app
 export default ShoppingCart;
