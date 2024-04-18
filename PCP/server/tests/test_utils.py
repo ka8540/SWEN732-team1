@@ -1,8 +1,6 @@
 import json
 import requests
 from psycopg2.extras import execute_values
-from src.utilities.swen_344_db_utils import *
-# The client (unittest) can only contact the server using RESTful API calls
 
 
 # For API calls using GET.  params and header are defaulted to 'empty'
