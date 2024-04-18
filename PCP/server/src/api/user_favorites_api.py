@@ -22,11 +22,11 @@ class UserFavorites(Resource):
     def post(self):
         session_key = request.headers.get('X-Session-Key')
         if not session_key:
-            return {"message": "No session key provided."}, 401
+            return {"message": "No session key given."}, 401
 
         user_id = verify_session_key(session_key)
         if not user_id:
-            return {"message": "Invalid session key."}, 401
+            return {"message": "Invalid session key Provided."}, 401
 
         parser = reqparse.RequestParser()
         parser.add_argument('product_id', type=int, required=True, help="Product ID cannot be blank!")
@@ -51,11 +51,11 @@ class UserFavoritesById(Resource):
     def delete(self, product_id):
         session_key = request.headers.get('X-Session-Key')
         if not session_key:
-            return {"message": "No session key provided."}, 401
+            return {"message": "No session key present."}, 401
 
         user_id = verify_session_key(session_key)
         if not user_id:
-            return {"message": "Invalid session key."}, 401
+            return {"message": "Invalid session key given."}, 401
 
         delete_user_favorite(user_id, product_id)
         return make_response(jsonify({'message': 'Favorite product deleted successfully'}), 204)
