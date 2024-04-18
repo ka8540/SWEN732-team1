@@ -50,8 +50,8 @@ api.add_resource(Prices, '/prices')
 api.add_resource(UserFavorites, '/user_favorites')
 api.add_resource(UserFavoritesById, '/user_favorites/<int:user_id>')
 api.add_resource(Cart, '/cart/<int:user_id>')
-api.add_resource(AddToCart, '/add-to-cart/<int:user_id>/<int:product_id>/<int:quantity>')
-api.add_resource(RemoveFromCart, '/remove-from-cart/<int:user_id>/<int:product_id>')
+api.add_resource(AddToCart, '/addtocart/<int:user_id>/<int:product_id>/<int:quantity>')
+api.add_resource(RemoveFromCart, '/removefromcart/<int:user_id>/<int:product_id>')
 
 
 def setup_database():
