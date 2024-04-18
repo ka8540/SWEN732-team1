@@ -50,5 +50,6 @@ class LoginAPI(Resource):
             # If credentials are correct, return JSON response with user ID
             return make_response(jsonify(response),status_code)
         else:
+            response = "Cannot Login"
             # If credentials are incorrect, return an error message
             return make_response(jsonify(response),status_code)

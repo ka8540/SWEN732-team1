@@ -18,8 +18,7 @@ class TestPricesDB(unittest.TestCase):
             'password': 'password123',
             'email': 'bp6191@rit.com'
         }
-        existing_user = {"username": "existing_user"}
-        mock_database = [existing_user]
+        
 
         # Call user_signup with an existing username
         result, status_code = user_signup(**user_data)

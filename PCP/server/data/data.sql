@@ -9,6 +9,8 @@ DROP TABLE IF EXISTS user_authentication CASCADE;
 DROP TABLE IF EXISTS Currency CASCADE;
 
 
+-- Using VARCHAR as it is the standard string type in PostgreSQL
+
 -- Create Product User Authentication Table
 CREATE TABLE user_authentication (
     user_id SERIAL PRIMARY KEY,
