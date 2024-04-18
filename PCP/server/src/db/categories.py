@@ -7,6 +7,7 @@ try:
     from src.utilities.swen_344_db_utils import exec_get_all, exec_get_one
 except ImportError:
     from utilities.swen_344_db_utils import exec_get_all, exec_get_one
+
     
 def get_all_categories():
     """Fetches all records from the produtcategories table."""

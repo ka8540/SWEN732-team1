@@ -1,8 +1,6 @@
 import unittest
 from unittest.mock import patch
 
-# from db.categories import get_all_categories, get_category_by_id, search_categories
-
 try:
     from ...src.db.categories import get_all_categories, get_category_by_id, search_categories
 except:

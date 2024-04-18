@@ -1,11 +1,13 @@
 import unittest
 from unittest.mock import patch
+
 # from db.user_details import list_user_detail, verify_session_key
 
 try:
     from ...src.db.user_details import list_user_detail, verify_session_key
 except:
     from src.db.user_details import list_user_detail, verify_session_key
+
 
 class MyTestCase(unittest.TestCase):
     @patch('src.db.user_details.exec_get_all')
@@ -27,10 +29,10 @@ class MyTestCase(unittest.TestCase):
 
     @patch('src.db.user_details.exec_get_all')
     def test_b_non_existing_user(self, mock_exec_get_all):
-
         mock_exec_get_all.return_value = []
         result = list_user_detail('bp6191')
         self.assertEqual(result, [])
+
 
 if __name__ == '__main__':
     unittest.main()

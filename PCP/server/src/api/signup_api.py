@@ -1,11 +1,13 @@
 from flask import Flask, jsonify, make_response
 from flask_restful import Api, Resource, reqparse
 
+
 # Import only the necessary functions from the signup module
 try:
     from src.db.signup import user_signup, list_info_items
 except ImportError:
     from db.signup import user_signup, list_info_items
+
 
 class SignUpApi(Resource):
     def get(self):

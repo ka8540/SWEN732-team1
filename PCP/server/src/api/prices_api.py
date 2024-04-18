@@ -1,13 +1,14 @@
 from flask import Flask, jsonify, make_response
 from flask_restful import Api, Resource, reqparse
 
+
 # Import only necessary functions from the utilities and price database module
 try:
     from src.utilities.swen_344_db_utils import exec_get_all
     from src.db.prices import get_prices_by_product, get_all_prices
 except ImportError:
     from utilities.swen_344_db_utils import exec_get_all
-    from db.prices import get_prices_by_product, get_all_prices
+
     
     
 class PricesByProduct(Resource):

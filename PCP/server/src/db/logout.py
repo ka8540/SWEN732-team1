@@ -7,6 +7,7 @@ try:
 except ImportError:
     from utilities.swen_344_db_utils import exec_commit
 
+
 def user_logout(kwargs):
     session_key = kwargs.get('session_key')
     logout_query = '''UPDATE user_authentication SET session_key = NULL WHERE session_key = %s;'''

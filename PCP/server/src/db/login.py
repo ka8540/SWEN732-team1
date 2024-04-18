@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 from psycopg2 import connect  # Import psycopg2 if you need it for database operations, otherwise remove it
-
 try:
     from src.utilities.swen_344_db_utils import exec_get_all, exec_get_one, exec_commit
 except ImportError:

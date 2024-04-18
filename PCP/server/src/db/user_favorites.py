@@ -1,9 +1,3 @@
-import psycopg2
-import yaml
-import pandas as pd
-import numpy as np
-import sys
-import os
 try:
     from src.utilities.swen_344_db_utils import exec_get_all, exec_commit
 except ImportError:

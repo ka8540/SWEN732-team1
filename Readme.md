@@ -2,6 +2,7 @@
 
 [![codecov](https://codecov.io/gh/ka8540/SWEN732-team1/graph/badge.svg?token=EDJ42TSNSN)](https://codecov.io/gh/ka8540/SWEN732-team1)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ka8540_SWEN732-team1&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ka8540_SWEN732-team1)
 
 ## Project Name: Price Compare Plus
 

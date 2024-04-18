@@ -1,7 +1,6 @@
+from flask import jsonify
 from flask import make_response
 from flask_restful import Resource
-from flask import jsonify
-from flask_restful import request
 from flask_restful import reqparse
 
 try:
@@ -11,6 +10,7 @@ except ImportError:
     from utilities.swen_344_db_utils import exec_get_all
     from db.user_favorites import add_user_favorite, get_user_favorites,delete_user_favorite
     
+
 
 def verify_session_key(session_key):
     """Check the session key and return the user ID if valid."""
@@ -46,6 +46,7 @@ class UserFavoritesById(Resource):
             return {"message": "Invalid session key."}, 401
 
         favorites = get_user_favorites(user_id)
+
         return jsonify([{'FavoriteID': fav[4], 'ProductID': fav[0], 'ProductName': fav[1], 'ProductDescription': fav[2], 'ImageURL': fav[3]} for fav in favorites])
     
     def delete(self, product_id):
@@ -59,3 +60,4 @@ class UserFavoritesById(Resource):
 
         delete_user_favorite(user_id, product_id)
         return make_response(jsonify({'message': 'Favorite product deleted successfully'}), 204)
+

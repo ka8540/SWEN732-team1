@@ -13,7 +13,7 @@ try:
     from src.db.login import check_user_credentials  # Ensure this is the correct function used for login logic
 except ImportError:
     from utilities.swen_344_db_utils import exec_get_all
-    from db.login import check_user_credentials
+
 
 class LoginAPI(Resource):
     """

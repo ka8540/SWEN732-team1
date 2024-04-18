@@ -36,7 +36,6 @@ jobs:
           pip install pandas
           pip install -r requirements.txt
           pip install coverage
-
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=${{ github.workspace }}/PCP/server/src" >> $GITHUB_ENV
 

@@ -1,24 +1,26 @@
-import json
 import requests
 import unittest
 from unittest.mock import patch, MagicMock
-from tests.test_utils import *  
+
+import requests
+from tests.test_utils import *
+
 
 class UserDetailApiTestCase(unittest.TestCase):
-    
     SignUp_URL = 'http://localhost:5000/signUp'
     Login_URL = 'http://localhost:5000/login'
     UserDetail_URL = 'http://localhost:5000/userdetail'
-    
+
     @patch('requests.post')
     def setUp(self, mock_post):
         # Creating a mock response object for  user registration and user login with a session key
         mock_sign_up_response = MagicMock(status_code=200)
-        mock_login_response = MagicMock(status_code=200, json=MagicMock(return_value={'sessionKey': 'mock_session_key'}))
+        mock_login_response = MagicMock(status_code=200,
+                                        json=MagicMock(return_value={'sessionKey': 'mock_session_key'}))
 
         # Setting the side effect of the mock to return the different responses
         mock_post.side_effect = [mock_sign_up_response, mock_login_response]
-        
+
         # Simulating user registration
         test_user = {
             "username": "ss3679",
@@ -40,7 +42,6 @@ class UserDetailApiTestCase(unittest.TestCase):
 
     @patch('requests.get')
     def test_1_user_detail_retrieval(self, mock_get):
-        
         self.assertIsNotNone(self.session_key, "Session key should not be None")
 
         # Mock response for user detail retrieval
@@ -55,8 +56,7 @@ class UserDetailApiTestCase(unittest.TestCase):
         # Request (mocked) user details using the session key
         headers = {'X-Session-Key': self.session_key}
         response = requests.get(self.UserDetail_URL, headers=headers)
-        
-        
+
         self.assertEqual(response.status_code, 200)
 
         # Verifying the mocked user details
@@ -71,6 +71,7 @@ class UserDetailApiTestCase(unittest.TestCase):
 
         # Mock Assertion 
         mock_get.assert_called_once_with(self.UserDetail_URL, headers=headers)
+
 
 if __name__ == '__main__':
     unittest.main()

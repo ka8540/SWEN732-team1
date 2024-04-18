@@ -8,6 +8,7 @@ try:
 except ImportError:
     from utilities.swen_344_db_utils import exec_commit, exec_get_one
 
+
 def insert_data_from_excel():
     # Load the data from Excel
     excel_file = os.path.join(os.path.dirname(__file__), '../../data/Amazon.xlsx')

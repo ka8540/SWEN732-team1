@@ -7,7 +7,6 @@ except ImportError:
     from utilities.swen_344_db_utils import exec_get_all, exec_commit
 
 
-
 def list_info_items():
     result = exec_get_all('''SELECT * FROM user_authentication''')
     return result

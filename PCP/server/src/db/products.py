@@ -3,6 +3,7 @@ try:
 except ImportError:
     from utilities.swen_344_db_utils import exec_get_all, exec_get_one
 
+
 def get_all_products():
     """Fetches all records from the Products table."""
     sql = "SELECT * FROM Products;"
