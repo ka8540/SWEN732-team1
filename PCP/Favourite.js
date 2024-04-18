@@ -14,20 +14,20 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FavouritesScreen = ({ navigation }) => {
-  const [favourites, setFavourites] = useState([]);
-  const [selectedFav, setSelectedFav] = useState(null);
-  const [isLoading, setLoading] = useState(true);
-  const [isRefreshing, setRefreshing] = useState(false);
+  const [favouriteItems, setFavouriteItems] = useState([]);
+  const [activeFavourite, setActiveFavourite] = useState(null);
+  const [isFavLoading, setFavLoading] = useState(true);
+  const [isFavRefreshing, setFavRefreshing] = useState(false);
 
-  const fetchFavourites = useCallback(async () => {
-    setLoading(true);
-    setRefreshing(true);
+  const fetchFavouriteItems = useCallback(async () => {
+    setFavLoading(true);
+    setFavRefreshing(true);
     try {
       const sessionKey = await AsyncStorage.getItem('sessionKey');
       if (!sessionKey) {
         console.error('Session key not found');
-        setLoading(false);
-        setRefreshing(false);
+        setFavLoading(false);
+        setFavRefreshing(false);
         return;
       }
 
@@ -43,13 +43,11 @@ const FavouritesScreen = ({ navigation }) => {
       }
 
       let favData = await favResponse.json();
-      // Filter duplicates based on ProductID
       favData = favData.filter(
         (fav, index, self) =>
           index === self.findIndex((t) => t.ProductID === fav.ProductID)
       );
 
-      // Fetch detailed product information for each favourite
       const detailedFavourites = await Promise.all(
         favData.map(async (fav) => {
           const productResponse = await fetch(`http://127.0.0.1:5000/products/${fav.ProductID}`);
@@ -60,18 +58,18 @@ const FavouritesScreen = ({ navigation }) => {
         })
       );
 
-      setFavourites(detailedFavourites);
+      setFavouriteItems(detailedFavourites);
     } catch (error) {
       console.error('Failed to fetch favourite items:', error);
     } finally {
-      setLoading(false);
-      setRefreshing(false);
+      setFavLoading(false);
+      setFavRefreshing(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchFavourites();
-  }, [fetchFavourites]);
+    fetchFavouriteItems();
+  }, [fetchFavouriteItems]);
   
   const onRemoveFavourite = async () => {
     try {
@@ -81,7 +79,7 @@ const FavouritesScreen = ({ navigation }) => {
         return;
       }
   
-      const url = `http://127.0.0.1:5000/user_favorites/${selectedFav}`; // URL with the product ID
+      const url = `http://127.0.0.1:5000/user_favorites/${activeFavourite}`;
       const requestOptions = {
         method: 'DELETE',
         headers: {
@@ -93,9 +91,8 @@ const FavouritesScreen = ({ navigation }) => {
       const response = await fetch(url, requestOptions);
   
       if (response.ok) {
-        // If the delete operation was successful
         console.log('Favourite deleted successfully');
-        fetchFavourites(); // Refresh favourites
+        fetchFavouriteItems();
       } else {
         const errorText = await response.text();
         console.error('Failed to delete favourite item:', errorText);
@@ -106,7 +103,7 @@ const FavouritesScreen = ({ navigation }) => {
   };
   
   const onSelectFav = (productId) => {
-    setSelectedFav(productId === selectedFav ? null : productId); // Toggle selection
+    setActiveFavourite(productId === activeFavourite ? null : productId);
   };
 
   const renderItem = ({ item }) => (
@@ -118,7 +115,7 @@ const FavouritesScreen = ({ navigation }) => {
       <Text style={styles.itemText}>
         {item.ProductName} (ID: {item.ProductID})
       </Text>
-      {selectedFav === item.ProductID && (
+      {activeFavourite === item.ProductID && (
         <Text style={styles.selectedText}>Selected</Text>
       )}
     </TouchableOpacity>
@@ -126,27 +123,27 @@ const FavouritesScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {isLoading ? (
+      {isFavLoading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
         <>
           <FlatList
-            data={favourites}
+            data={favouriteItems}
             renderItem={renderItem}
             keyExtractor={item => item.ProductID.toString()}
             contentContainerStyle={styles.content}
             refreshControl={
               <RefreshControl
-                refreshing={isRefreshing}
-                onRefresh={fetchFavourites}
+                refreshing={isFavRefreshing}
+                onRefresh={fetchFavouriteItems}
               />
             }
-            extraData={selectedFav}
+            extraData={activeFavourite}
           />
           <Button
             title="Remove Selected Favourite"
             onPress={onRemoveFavourite}
-            disabled={!selectedFav}
+            disabled={!activeFavourite}
           />
         </>
       )}
