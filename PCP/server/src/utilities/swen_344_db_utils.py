@@ -96,3 +96,4 @@ def update_dataframe(df, table, record_id):
             updated_record_id = cur.fetchone()[0]  # Fetch the returned id after the update
             conn.commit()  # Commit the transaction to make sure changes are saved
             return updated_record_id
+
