@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 
 import requests
-from tests.test_utils import *
+from tests.test_utils import requests
 
 
 class UserDetailApiTestCase(unittest.TestCase):

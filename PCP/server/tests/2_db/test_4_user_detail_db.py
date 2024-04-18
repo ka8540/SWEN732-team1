@@ -1,8 +1,6 @@
 import unittest
 from unittest.mock import patch
 
-# from db.user_details import list_user_detail, verify_session_key
-
 try:
     from ...src.db.user_details import list_user_detail, verify_session_key
 except:

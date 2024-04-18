@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch
 
-# from db.signup import user_signup
 try:
     from ...src.db.signup import list_info_items, user_signup
 except:

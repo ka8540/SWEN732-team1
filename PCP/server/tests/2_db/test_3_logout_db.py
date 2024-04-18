@@ -1,8 +1,6 @@
 import unittest
 from unittest.mock import patch
 
-# from db.logout import user_logout
-
 try:
     from ...src.db.logout import user_logout
 except:

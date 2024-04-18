@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from tests.test_utils import *
+from tests.test_utils import requests
 
 
 class SignUpApiTestCase(unittest.TestCase):
