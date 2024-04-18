@@ -13,9 +13,10 @@ try:
     from src.api.products_api import Products, ProductById, ProductSearch
     from src.api.retailer_api import Retailers, RetailerById
     from src.api.prices_api import Prices, PricesByProduct
+    from src.api.cart_api import CartAPI, CartAPIById
     from src.api.user_favorites_api import UserFavorites, UserFavoritesById
-    from src.api.cart_api import CartAPI
     from src.api.price_conversion_api import Canadian,Indian
+
     from src.model.amazon import insert_data_from_excel  # Assuming this is the correct function name for handling data insertions from the model
     from src.model.bestbut import insert_data_from_excel_bestbuy
 except ImportError:
@@ -29,8 +30,8 @@ except ImportError:
     from api.products_api import Products, ProductById, ProductSearch
     from api.retailer_api import Retailers, RetailerById
     from api.prices_api import Prices, PricesByProduct
-    from api.user_favorites_api import UserFavorites
-    from api.cart_api import CartAPI
+    from api.user_favorites_api import UserFavorites, UserFavoritesById
+    from api.cart_api import CartAPI, CartAPIById
     from api.price_conversion_api import Canadian,Indian
     from model.amazon import insert_data_from_excel
     from model.bestbut import insert_data_from_excel_bestbuy
@@ -54,9 +55,12 @@ api.add_resource(RetailerById, '/retailers/<int:retailer_id>')
 api.add_resource(PricesByProduct, '/prices/products/<int:product_id>')
 api.add_resource(Prices, '/prices')
 api.add_resource(UserFavorites, '/user_favorites')
+api.add_resource(UserFavoritesById, '/user_favorites/<int:product_id>')
 api.add_resource(CartAPI, '/cart')
+api.add_resource(CartAPIById, '/cart/<int:product_id>')
 api.add_resource(Canadian, '/cad_price')
 api.add_resource(Indian, '/inr_price')
+
 
 
 def setup_database():

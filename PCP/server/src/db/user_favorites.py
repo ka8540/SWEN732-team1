@@ -21,6 +21,7 @@ def add_user_favorite(user_id, product_id):
 
 
 def delete_user_favorite(user_id, product_id):
+    print("andar aa gaya")
     """Deletes a favorite product for a user."""
     sql = "DELETE FROM UserFavorites WHERE user_id = %s AND ProductID = %s;"
     exec_commit(sql, (user_id, product_id))
