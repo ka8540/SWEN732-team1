@@ -39,30 +39,30 @@ export default function Home({navigation}) {
   }, []);
   
   const renderCategoryButton = ({ item }) => {
-    let imageSource = { uri: 'https://via.placeholder.com/150' }; 
+    let imageSource = require('images/1M.jpeg');
     
     if (item.CategoryName === 'TV & Video') {
-      imageSource = { uri: 'https://www.digitaltrends.com/wp-content/uploads/2022/12/Sony-75-inch-X95J-Series-4K-TV.jpg' };
+      imageSource = require('images/1M.jpeg');
     } else if (item.CategoryName === 'Home Audio & Theater') {
-      imageSource = { uri: 'https://www.bhphotovideo.com/cdn-cgi/image/format=auto,fit=scale-down,width=500,quality=95/https://www.bhphotovideo.com/images/images500x500/enclave_audio_technologies_ea_1000_pro_thx_cinehome_pro_edition_5_1_1585224397_1554695.jpg' };
+      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/2M.jpeg');
     } else if (item.CategoryName === 'Camera Photo & Video') {
-      imageSource = { uri: 'https://www.dpreview.com/files/p/articles/5481327930/panasonic-s1h-prores-raw-with-atomos-ninja-v.jpeg' };
+      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/3M.jpeg');
     } else if (item.CategoryName === 'Cell Phones & Accessories') {
-      imageSource = { uri: 'https://media.wired.com/photos/5b22c5c4b878a15e9ce80d92/master/w_2240,c_limit/iphonex-TA.jpg' };
+      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/4M.jpeg');
     } else if (item.CategoryName === 'Headphones') {
-      imageSource = { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0j9eu-xoKRtWZAk701ireSFxve150zD6Swg&s' };
+      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/5M.jpeg');
     } else if (item.CategoryName === 'Video Games') {
-      imageSource = { uri: 'https://a0.anyrgb.com/pngimg/596/620/analog-stick-gamepad-joystick-game-controller-game-controllers-controller-computer-hardware-video-game-electronics-monochrome-thumbnail.png' };
+      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/6M.png');
     } else if (item.CategoryName === 'Bluetooth & Wireless Speakers') {
-      imageSource = { uri: 'https://i.ebayimg.com/images/g/xIcAAOSwQBpiA3y1/s-l1200.webp' };
+      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/7M.webp');
     } else if (item.CategoryName === 'Car Electronics') {
-      imageSource = { uri: 'https://www.shutterstock.com/image-vector/electric-car-e-plug-green-600nw-2303576823.jpg' };
+      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/8M.jpeg');
     } else if (item.CategoryName === 'Musical Instruments') {
-      imageSource = { uri: 'https://upload.wikimedia.org/wikipedia/commons/4/45/GuitareClassique5.png' };
+      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/9M.png');
     } else if (item.CategoryName === 'Wearable Technology') {
-      imageSource = { uri: 'https://m.media-amazon.com/images/I/61SxKn69eRL._AC_SL1500_.jpg' };
+      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/10M.jpeg');
     } else if (item.CategoryName === 'Laptops') {
-      imageSource = { uri: 'https://static.nationalcreditdirect.com/common/images/products/BBY-6499751_sd.jpg' };
+      imageSource = require('/Users/kayahir/Desktop/SWEN732-team1/images/11M.jpeg');
     }
   
     return (
