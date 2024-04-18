@@ -19,6 +19,7 @@ Price Compare Plus is a comprehensive price comparison application that allows u
   - Username
   - Password
   - Confirm Password
+ ![Sign Up](images/SignUp.png)
 
 #### Login Page
 
