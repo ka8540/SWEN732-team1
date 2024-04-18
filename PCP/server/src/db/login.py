@@ -3,8 +3,11 @@ import pandas as pd
 from psycopg2 import connect  # Import psycopg2 if you need it for database operations, otherwise remove it
 try:
     from src.utilities.swen_344_db_utils import exec_get_all, exec_get_one, exec_commit
+    from src.model.user import generate_session_key
 except ImportError:
     from utilities.swen_344_db_utils import exec_get_all, exec_get_one, exec_commit
+    from model.user import generate_session_key
+
 
 def list_info_items():
     """Fetches all records from the User table."""
@@ -12,6 +15,7 @@ def list_info_items():
     return result
 
 def check_user_credentials(username, hashed_password):
+    print("reached here in db")
     # Check if the username exists
     query_username_exists = '''SELECT 1 FROM user_authentication WHERE username = %s;'''
     username_exists = exec_get_one(query_username_exists, (username,))

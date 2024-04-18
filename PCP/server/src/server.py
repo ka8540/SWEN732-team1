@@ -4,6 +4,19 @@ from flask_cors import CORS
 
 try:
     # Import only necessary functions and classes
+    from src.utilities.swen_344_db_utils import exec_sql_file
+    from src.api.login_api import LoginAPI
+    from src.api.signup_api import SignUpApi
+    from src.api.user_detail_api import UserDetail
+    from src.api.logout_api import LogoutAPI
+    from src.api.categories_api import ProductCategories, CategoryById, CategorySearch
+    from src.api.products_api import Products, ProductById, ProductSearch
+    from src.api.retailer_api import Retailers, RetailerById
+    from src.api.prices_api import Prices, PricesByProduct
+    from src.api.user_favorites_api import UserFavorites, UserFavoritesById
+    from src.model.amazon import insert_data_from_excel  # Assuming this is the correct function name for handling data insertions from the model
+except ImportError:
+    # For relative imports within a package structure
     from utilities.swen_344_db_utils import exec_sql_file
     from api.login_api import LoginAPI
     from api.signup_api import SignUpApi
@@ -14,20 +27,7 @@ try:
     from api.retailer_api import Retailers, RetailerById
     from api.prices_api import Prices, PricesByProduct
     from api.user_favorites_api import UserFavorites, UserFavoritesById
-    from model.amazon import insert_data_from_excel  # Assuming this is the correct function name for handling data insertions from the model
-except ImportError:
-    # For relative imports within a package structure
-    from .utilities.swen_344_db_utils import exec_sql_file
-    from .api.login_api import LoginAPI
-    from .api.signup_api import SignUpApi
-    from .api.user_detail_api import UserDetail
-    from .api.logout_api import LogoutAPI
-    from .api.categories_api import ProductCategories, CategoryById, CategorySearch
-    from .api.products_api import Products, ProductById, ProductSearch
-    from .api.retailer_api import Retailers, RetailerById
-    from .api.prices_api import Prices, PricesByProduct
-    from .api.user_favorites_api import UserFavorites, UserFavoritesById
-    from .model.amazon import insert_data_from_excel
+    from model.amazon import insert_data_from_excel
     
 app = Flask(__name__)  # create Flask instance
 CORS(app)  # Enable CORS on Flask server to work with Nodejs pages
