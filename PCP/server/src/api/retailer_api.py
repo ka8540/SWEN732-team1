@@ -1,10 +1,14 @@
-from flask_restful import Resource
-from flask import jsonify
+from flask import Flask, jsonify, make_response
+from flask_restful import Api, Resource, request
 
+
+# Import only the necessary functions from the utilities and retailer database module
 try:
+    from src.utilities.swen_344_db_utils import exec_get_all  # Assuming exec_get_all is used within retailer functions
     from src.db.retailers import get_all_retailers, get_retailer_by_id
-except:
-    from db.retailers import get_all_retailers, get_retailer_by_id
+except ImportError:
+    from utilities.swen_344_db_utils import exec_get_all
+
     
     
 class Retailers(Resource):

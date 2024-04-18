@@ -1,6 +1,6 @@
 try:
     from src.utilities.swen_344_db_utils import exec_get_all, exec_get_one
-except:
+except ImportError:
     from utilities.swen_344_db_utils import exec_get_all, exec_get_one
     
 

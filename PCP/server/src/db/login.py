@@ -1,11 +1,10 @@
+import os
+import pandas as pd
+from psycopg2 import connect  # Import psycopg2 if you need it for database operations, otherwise remove it
 try:
     from src.utilities.swen_344_db_utils import exec_get_all, exec_get_one, exec_commit
-    from src.model.user import generate_session_key
-except:
+except ImportError:
     from utilities.swen_344_db_utils import exec_get_all, exec_get_one, exec_commit
-    from model.user import generate_session_key
-
-
 
 def list_info_items():
     """Fetches all records from the User table."""

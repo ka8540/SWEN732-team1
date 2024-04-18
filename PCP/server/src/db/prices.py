@@ -1,6 +1,6 @@
 try:
     from src.utilities.swen_344_db_utils import exec_get_all
-except:
+except ImportError:
     from utilities.swen_344_db_utils import exec_get_all
     
 def get_prices_by_product(product_id):

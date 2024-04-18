@@ -1,8 +1,10 @@
+# Import only necessary modules and functions
+import hashlib
+import secrets
 try:
     from src.utilities.swen_344_db_utils import exec_get_all, exec_commit
-except:
+except ImportError:
     from utilities.swen_344_db_utils import exec_get_all, exec_commit
-import hashlib
 
 
 def list_info_items():

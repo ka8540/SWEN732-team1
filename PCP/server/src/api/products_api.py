@@ -1,12 +1,15 @@
-from flask import make_response
-from flask_restful import Resource
-from flask import jsonify
-from flask_restful import request
+from flask import Flask, jsonify, make_response, request
+from flask_restful import Api, Resource
 
+
+# Import only the necessary functions from the utilities and products database module
 try:
-    from src.db.products import get_all_products,get_product_by_id,search_products
-except:
-    from db.products import get_all_products,get_product_by_id,search_products
+    from src.utilities.swen_344_db_utils import exec_get_all  # Assuming exec_get_all is used within your product functions
+    from src.db.products import get_all_products, get_product_by_id, search_products
+except ImportError:
+    from utilities.swen_344_db_utils import exec_get_all
+    from db.products import get_all_products, get_product_by_id, search_products
+
     
 class Products(Resource):
     def get(self):

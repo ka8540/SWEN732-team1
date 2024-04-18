@@ -1,6 +1,8 @@
+import hashlib
+import secrets
 try:
     from src.utilities.swen_344_db_utils import exec_get_all
-except:
+except ImportError:
     from utilities.swen_344_db_utils import exec_get_all
 
 
