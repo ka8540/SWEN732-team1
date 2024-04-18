@@ -1,5 +1,5 @@
-from flask import Flask, jsonify, make_response
-from flask_restful import Api, Resource, reqparse, request
+from flask import Flask, jsonify, make_response, request
+from flask_restful import Api, Resource, reqparse
 
 
 # Import only necessary functions from the utilities and price database module

@@ -54,6 +54,9 @@ api.add_resource(RetailerById, '/retailers/<int:retailer_id>')
 api.add_resource(PricesByProduct, '/prices/products/<int:product_id>')
 api.add_resource(Prices, '/prices')
 api.add_resource(UserFavorites, '/user_favorites')
+api.add_resource(CartAPI, '/cart')
+api.add_resource(Canadian, '/cad_price')
+api.add_resource(Indian, '/inr_price')
 
 
 def setup_database():

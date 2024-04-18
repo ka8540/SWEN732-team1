@@ -1,8 +1,3 @@
-try:
-    from src.utilities.swen_344_db_utils import exec_get_all
-except ImportError:
-    from utilities.swen_344_db_utils import exec_get_all
-    
 def get_convert_price_to_canadian(price_usd):
     # Current exchange rate from USD to CAD
     exchange_rate = 1.38  # Example rate, replace with actual rate
