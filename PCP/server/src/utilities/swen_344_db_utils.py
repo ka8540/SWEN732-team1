@@ -81,15 +81,18 @@ def commit_dataframe(df, table):
             finally:
                 cursor.close()
 
-def update_dataframe(df, table, id):
+def update_dataframe(df, table, record_id):
     """Update records in a table from a DataFrame based on the ID."""
     with connect() as conn:
         with conn.cursor() as cur:
+            # Convert DataFrame rows to tuples, adding the record_id at the end for the WHERE clause
             tuples = [tuple(x) for x in df.to_numpy()]
-            tuples[0] = tuples[0] + (id, )
+            tuples[0] = tuples[0] + (record_id,)
+            # Generate the SET part of the SQL statement dynamically from DataFrame columns
             cols = ', '.join([f"{col} = %s" for col in df.columns])
             query = f"UPDATE {table} SET {cols} WHERE id = %s RETURNING id"
+            # Execute the UPDATE query with the tuple containing column values and the record_id
             cur.execute(query, tuples[0])
-            id = cur.fetchone()[0]
-            conn.commit()
-            return id
+            updated_record_id = cur.fetchone()[0]  # Fetch the returned id after the update
+            conn.commit()  # Commit the transaction to make sure changes are saved
+            return updated_record_id

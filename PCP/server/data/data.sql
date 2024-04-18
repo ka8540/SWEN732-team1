@@ -95,3 +95,14 @@ CREATE TABLE PriceAlerts (
     FOREIGN KEY (user_id) REFERENCES user_authentication(user_id) ON DELETE CASCADE,
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE
 );
+
+
+-- Create Cart table
+CREATE TABLE Cart (
+    CartID SERIAL PRIMARY KEY,
+    UserID INT NOT NULL,
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL DEFAULT 1,
+    FOREIGN KEY (UserID) REFERENCES user_authentication(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE
+);

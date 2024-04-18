@@ -23,7 +23,7 @@ class MyTestCase(unittest.TestCase):
     def test_b_get_product_by_id(self, mock_exec_get_one):
         # Simulate an existing product with ID 42
         existing_product = {"ProductID": 42, "ProductName": "Widget"}
-        mock_database = [existing_product]
+        
 
         mock_exec_get_one.return_value = existing_product
 

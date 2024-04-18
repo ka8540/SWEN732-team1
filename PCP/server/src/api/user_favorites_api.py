@@ -1,7 +1,7 @@
 from flask import jsonify
 from flask import make_response
 from flask_restful import Resource
-from flask_restful import reqparse
+from flask_restful import reqparse, request
 
 try:
     from src.utilities.swen_344_db_utils import exec_get_all
@@ -34,8 +34,7 @@ class UserFavorites(Resource):
         
         add_user_favorite(user_id, args['product_id'])
         return make_response(jsonify({'message': 'Favorite product added successfully'}), 201)
-
-class UserFavoritesById(Resource):
+    
     def get(self):
         session_key = request.headers.get('X-Session-Key')
         if not session_key:
