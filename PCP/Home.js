@@ -38,20 +38,7 @@ export default function Home({navigation}) {
     fetchCategoriesAndProducts();
   }, []);
   
-  const renderCategoryButton = ({ item }) => {
-    let imageSource = { uri: 'https://via.placeholder.com/150' }; 
-    
-    if (item.CategoryName === 'Phone') {
-      imageSource = { uri: 'https://m.media-amazon.com/images/I/71WcjsOVOmL._AC_SX679_.jpg' };
-    } else if (item.CategoryName === 'Headphone') {
-      imageSource = { uri: 'https://m.media-amazon.com/images/I/71Hx8b6HGbL._AC_SY450_.jpg' };
-    } else if (item.CategoryName === 'Entertainment') {
-      imageSource = { uri: 'https://m.media-amazon.com/images/I/51d5Rc6DNML._AC_SY450_.jpg' };
-    } else if (item.CategoryName === 'Accessories') {
-      imageSource = { uri: 'https://m.media-amazon.com/images/I/71gY9E+cTaS._AC_SX679_.jpg' };
-    } else if (item.CategoryName === 'Tablet') {
-      imageSource = { uri: 'https://m.media-amazon.com/images/I/716NHsSc3HL._AC_SX425_.jpg' };
-    }
+ 
   
     return (
       <View style={styles.categoryCard}>
