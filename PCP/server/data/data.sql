@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS Retailers CASCADE;
 DROP TABLE IF EXISTS ProductCategories CASCADE;
 DROP TABLE IF EXISTS user_authentication CASCADE;
 DROP TABLE IF EXISTS Currency CASCADE;
-DROP Table IF EXISTS Cart;
+DROP TABLE IF EXISTS Cart;
 
 -- Using VARCHAR as it is the standard string type in PostgreSQL
 
