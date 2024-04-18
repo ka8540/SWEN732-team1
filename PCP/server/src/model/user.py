@@ -1,7 +1,8 @@
 try:
-    from src.db.login import *
-except:
-    from db.login import *
+    from src.db.login import check_username_exists, validate_credentials  # Assuming these are the functions you use from login
+except ImportError:
+    from db.login import check_username_exists, validate_credentials
+
 import secrets
 def check_username_and_password(result_username, result_credentials,session_key):
     if result_credentials:

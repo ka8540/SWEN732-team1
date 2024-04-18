@@ -1,16 +1,12 @@
-import psycopg2
-import yaml
+import os 
+from psycopg2 import connect
 import pandas as pd
-import numpy as np
-import sys
-import os
+
+# Import only necessary functions from your utility module
 try:
-    from src.api.categories_api import *
-    from src.utilities.swen_344_db_utils import *
-except:
-    from api.categories_api import *
-    from utilities.swen_344_db_utils import *
-    
+    from src.utilities.swen_344_db_utils import exec_get_all, exec_get_one
+except ImportError:
+    from utilities.swen_344_db_utils import exec_get_all, exec_get_one
     
 def get_all_categories():
     """Fetches all records from the produtcategories table."""

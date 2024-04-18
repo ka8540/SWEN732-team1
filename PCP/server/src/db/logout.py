@@ -1,20 +1,11 @@
-import psycopg2
-import yaml
-import os
-import pandas as pd
-import numpy as np
-import sys
-import os
+import secrets  # Include only if you're generating new session keys or similar
+from psycopg2 import connect  # Include this only if you're directly using psycopg2 for connections in other parts of your script
+
+# Import only necessary functions from your utilities and models
 try:
-    from src.api.logout_api import *
-    from src.utilities.swen_344_db_utils import *
-    from src.model.user import *
-except:
-    from api.logout_api import *
-    from utilities.swen_344_db_utils import *
-    from model.user import *
-import hashlib
-import secrets
+    from src.utilities.swen_344_db_utils import exec_commit
+except ImportError:
+    from utilities.swen_344_db_utils import exec_commit
 
 def user_logout(kwargs):
     session_key = kwargs.get('session_key')

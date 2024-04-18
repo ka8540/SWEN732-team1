@@ -1,20 +1,11 @@
-import psycopg2
-import yaml
 import os
 import pandas as pd
-import numpy as np
-import sys
-import os
+from psycopg2 import connect  # Import psycopg2 if you need it for database operations, otherwise remove it
+
 try:
-    from src.api.login_api import *
-    from src.utilities.swen_344_db_utils import *
-    from src.model.user import *
-except:
-    from api.login_api import *
-    from utilities.swen_344_db_utils import *
-    from model.user import *
-
-
+    from src.utilities.swen_344_db_utils import exec_get_all, exec_get_one, exec_commit
+except ImportError:
+    from utilities.swen_344_db_utils import exec_get_all, exec_get_one, exec_commit
 
 def list_info_items():
     """Fetches all records from the User table."""

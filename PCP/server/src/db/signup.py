@@ -1,18 +1,10 @@
-import psycopg2
-import yaml
-import os
-import pandas as pd
-import numpy as np
-import sys
-import os
-try:
-    from src.api.signup_api import *
-    from src.utilities.swen_344_db_utils import *
-except:
-    from api.signup_api import *
-    from utilities.swen_344_db_utils import *
+# Import only necessary modules and functions
 import hashlib
 import secrets
+try:
+    from src.utilities.swen_344_db_utils import exec_get_all, exec_commit
+except ImportError:
+    from utilities.swen_344_db_utils import exec_get_all, exec_commit
 
 
 

@@ -3,19 +3,17 @@ API Endpoints for user management and authentication.
 
 These endpoints handle user registration and login functionality.
 """
-from flask import make_response
-from flask_restful import Resource
-from flask import jsonify
-from flask_restful import request
-from flask_restful import reqparse
-import json
-import hashlib  # Importing hashlib module for password hashing
+from flask import Flask, jsonify, make_response
+from flask_restful import Api, Resource, reqparse
+import hashlib  # Used for password hashing
+
+# Try to import the necessary functions and classes explicitly
 try:
-    from src.utilities.swen_344_db_utils import *
-    from src.db.login import *
-except:
-    from db.login import *
-    from utilities.swen_344_db_utils import *
+    from src.utilities.swen_344_db_utils import exec_get_all  # Assuming this function is used within check_user_credentials
+    from src.db.login import check_user_credentials  # Ensure this is the correct function used for login logic
+except ImportError:
+    from utilities.swen_344_db_utils import exec_get_all
+    from db.login import check_user_credentials
 
 class LoginAPI(Resource):
     """

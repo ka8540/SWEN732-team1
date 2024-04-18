@@ -1,16 +1,14 @@
-from flask import make_response
-from flask_restful import Resource
-from flask import jsonify
-from flask_restful import request
-from flask_restful import reqparse
-import json
+from flask import Flask, jsonify, make_response, request
+from flask_restful import Api, Resource
 
+# Import only necessary functions from the database utility and category modules
 try:
-    from src.utilities.swen_344_db_utils import *
-    from src.db.categories import *
-except:
-    from utilities.swen_344_db_utils import *
-    from db.categories import *
+    from src.utilities.swen_344_db_utils import exec_get_all, exec_get_one
+    from src.db.categories import get_all_categories, get_category_by_id, search_categories
+except ImportError:
+    from utilities.swen_344_db_utils import exec_get_all, exec_get_one
+    from db.categories import get_all_categories, get_category_by_id, search_categories
+
     
 class ProductCategories(Resource):
     def get(self):

@@ -1,16 +1,7 @@
-import psycopg2
-import yaml
-import pandas as pd
-import numpy as np
-import sys
-import os
 try:
-    # from src.api.products_api import *
-    from src.utilities.swen_344_db_utils import *
-except:
-    # from api.products_api import *
-    from utilities.swen_344_db_utils import *
-    
+    from src.utilities.swen_344_db_utils import exec_get_all, exec_get_one
+except ImportError:
+    from utilities.swen_344_db_utils import exec_get_all, exec_get_one
 
 def get_all_products():
     """Fetches all records from the Products table."""

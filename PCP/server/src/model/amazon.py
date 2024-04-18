@@ -1,13 +1,12 @@
+import os
+import pandas as pd
+import psycopg2
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+
 try:
-    import pandas as pd
-    import psycopg2
-    from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-    from src.utilities.swen_344_db_utils import *
-except:
-    from utilities.swen_344_db_utils import *
-    import pandas as pd
-    import psycopg2
-    from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+    from src.utilities.swen_344_db_utils import exec_commit, exec_get_one
+except ImportError:
+    from utilities.swen_344_db_utils import exec_commit, exec_get_one
 
 def insert_data_from_excel():
     # Load the data from Excel
