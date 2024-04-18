@@ -93,3 +93,4 @@ def update_dataframe(df, table, id):
             id = cur.fetchone()[0]
             conn.commit()
             return id
+
