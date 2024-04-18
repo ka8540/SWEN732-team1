@@ -1,10 +1,9 @@
 import unittest
 from unittest.mock import patch
 
-# from db.signup import user_signup
 try:
     from ...src.db.signup import list_info_items, user_signup
-except:
+except ImportError:
     from src.db.signup import list_info_items, user_signup
 
 
@@ -19,8 +18,7 @@ class TestPricesDB(unittest.TestCase):
             'password': 'password123',
             'email': 'bp6191@rit.com'
         }
-        existing_user = {"username": "existing_user"}
-        mock_database = [existing_user]
+        
 
         # Call user_signup with an existing username
         result, status_code = user_signup(**user_data)

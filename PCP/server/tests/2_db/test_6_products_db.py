@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 try:
     from ...src.db.products import get_all_products, get_product_by_id, search_products
-except:
+except ImportError:
     from src.db.products import get_all_products, get_product_by_id, search_products
 
 class MyTestCase(unittest.TestCase):

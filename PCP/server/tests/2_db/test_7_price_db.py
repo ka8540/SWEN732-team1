@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 try:
     from ...src.db.prices import get_prices_by_product, get_all_prices
-except:
+except ImportError:
     from src.db.prices import get_prices_by_product, get_all_prices
 
 
