@@ -1,5 +1,5 @@
 from flask import jsonify
-from flask import make_response
+from flask import make_response, request
 from flask_restful import Resource
 from flask_restful import reqparse
 from flask import request

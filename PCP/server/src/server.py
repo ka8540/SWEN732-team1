@@ -13,9 +13,12 @@ try:
     from src.api.products_api import Products, ProductById, ProductSearch
     from src.api.retailer_api import Retailers, RetailerById
     from src.api.prices_api import Prices, PricesByProduct
-    from src.api.user_favorites_api import UserFavorites
     from src.api.cart_api import CartAPI, CartAPIById
+    from src.api.user_favorites_api import UserFavorites, UserFavoritesById
+    from src.api.price_conversion_api import Canadian,Indian
+
     from src.model.amazon import insert_data_from_excel  # Assuming this is the correct function name for handling data insertions from the model
+    from src.model.bestbut import insert_data_from_excel_bestbuy
 except ImportError:
     # For relative imports within a package structure
     from utilities.swen_344_db_utils import exec_sql_file
@@ -29,7 +32,9 @@ except ImportError:
     from api.prices_api import Prices, PricesByProduct
     from api.user_favorites_api import UserFavorites, UserFavoritesById
     from api.cart_api import CartAPI, CartAPIById
+    from api.price_conversion_api import Canadian,Indian
     from model.amazon import insert_data_from_excel
+    from model.bestbut import insert_data_from_excel_bestbuy
     
 app = Flask(__name__)  # create Flask instance
 CORS(app)  # Enable CORS on Flask server to work with Nodejs pages
@@ -53,6 +58,9 @@ api.add_resource(UserFavorites, '/user_favorites')
 api.add_resource(UserFavoritesById, '/user_favorites/<int:product_id>')
 api.add_resource(CartAPI, '/cart')
 api.add_resource(CartAPIById, '/cart/<int:product_id>')
+api.add_resource(Canadian, '/cad_price')
+api.add_resource(Indian, '/inr_price')
+
 
 
 def setup_database():
@@ -60,6 +68,7 @@ def setup_database():
     # exec_sql_file('data/UserDetail.sql')
     exec_sql_file('data/data.sql')
     insert_data_from_excel()
+    insert_data_from_excel_bestbuy()
 
 
 if __name__ == '__main__':
