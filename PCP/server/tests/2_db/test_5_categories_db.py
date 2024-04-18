@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 try:
     from ...src.db.categories import get_all_categories, get_category_by_id, search_categories
-except:
+except ImportError:
     from src.db.categories import get_all_categories, get_category_by_id, search_categories
 
 

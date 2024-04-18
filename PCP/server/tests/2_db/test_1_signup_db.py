@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 try:
     from ...src.db.signup import list_info_items, user_signup
-except:
+except ImportError:
     from src.db.signup import list_info_items, user_signup
 
 

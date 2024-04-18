@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 try:
     from ...src.db.logout import user_logout
-except:
+except ImportError:
     from src.db.logout import user_logout
 
 
