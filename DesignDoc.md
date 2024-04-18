@@ -20,8 +20,6 @@ Price Compare Plus is a comprehensive price comparison application that allows u
   - Password
   - Confirm Password
 
-![Sign Up](images/SignUp.png)
-
 #### Login Page
 
 - **Path**: `/login`
@@ -29,8 +27,6 @@ Price Compare Plus is a comprehensive price comparison application that allows u
 - **Fields**:
   - Username
   - Password
-
-![Login](images/Login.png)
 
 ### 2. Product Search
 
@@ -40,28 +36,20 @@ Price Compare Plus is a comprehensive price comparison application that allows u
   - Auto-complete suggestions
   - Search history
 
-![Home Page](images/Home_Page.png)
-
 ### 3. Product Details Display
 
 - **Path**: `/product/:id`
 - **Description**: Displays detailed information about products, including specs, reviews, and pricing options from different retailers.
-
-![Product Description](images/ProductDescription.png)
 
 ### 4. Price Comparison
 
 - **Path**: `/product/:id/prices`
 - **Description**: Shows a comparative price listing from various online retailers.
 
-![Product Retailers](images/RetailerPrice.png)
-
 ### 5. Save Favorites
 
 - **Path**: `/favorites`
 - **Description**: Allows users to save and manage their favorite products.
-
-![Favorites Page](images/Favorites.png)
 
 ### 6. Notifications
 
@@ -70,6 +58,27 @@ Price Compare Plus is a comprehensive price comparison application that allows u
 ### 7. Responsive Design
 
 - **Description**: Ensures that the application is accessible and user-friendly on various devices, including tablets and smartphones.
+
+### 8. Product Reviews
+
+- **Path**: `/product/:id/reviews`
+- **Description**: Integrates product review functionality to provide users with insights from other consumers' experiences.
+
+### 9. Sort and Filter Options
+
+- **Description**: Provides users with the ability to sort search results by criteria such as price, relevance, or ratings, and filter results based on factors like brand, price range, or availability.
+
+### 10. Product Image Display
+
+- **Description**: Shows images of the searched product to help users identify it visually.
+
+### 11. Basic User Interface (UI)
+
+- **Description**: A simple intuitive user interface with essential components such as search bar, product display area, and navigation menu.
+
+### 12. Currency Conversion
+
+- **Description**: Incorporates currency conversion functionality to allow users to view prices in their preferred currency. This feature can be especially useful for users who shop across different regions or countries.
 
 ## Architecture and Design
 
