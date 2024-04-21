@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     height: 250, // Adjusted for proportionate display
     resizeMode: 'contain',
     borderRadius: 10, // Rounded corners for the image
-    marginTop: 20,
+    marginTop: 21,
   },
   quantityInput: {
     fontSize: 18,
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 }, // Positioning of the shadow
     shadowOpacity: 0.25, // Opacity of the shadow
     shadowRadius: 3.84,
-    marginBottom: 10,
+    marginBottom: 15,
   },
   buttonCart: {
     backgroundColor: '#008000', // Green for the cart button
@@ -270,13 +270,13 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#ffffff', // White text color
-    fontSize: 18, // Slightly larger font size
+    fontSize: 17, // Slightly larger font size
     fontWeight: '600', // Medium font weight
     textAlign: 'center', // Center text
     fontSize: 20,
   },
   productDescription: {
-    fontSize: 18,
+    fontSize: 24,
     color: '#666', // Dark grey for readability
     textAlign: 'justify', // Justified text for cleaner presentation
     marginBottom: 20,
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   retailerName: {
-    fontSize: 20,
+    fontSize: 21,
     fontWeight: '600',
     color: '#007bff', // Slightly darker for better visibility
   },
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   productPrice: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600', // Bold for the price
     color: '#008000', // Green for the price
     marginLeft: 4, // Space between the retailer name and the price
