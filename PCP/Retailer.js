@@ -245,13 +245,11 @@ const styles = StyleSheet.create({
     borderRadius: 10, // Rounded corners
     alignSelf: 'center', // Center the button
     marginTop: 10, // Space from the top element
-    marginBottom: 5, // Space from the bottom element
     elevation: 2, // Drop shadow for Android (optional)
     shadowColor: '#000', // Black color for the shadow
     shadowOffset: { width: 0, height: 2 }, // Positioning of the shadow
     shadowOpacity: 0.25, // Opacity of the shadow
     shadowRadius: 3.84,
-    marginBottom: 15,
   },
   buttonCart: {
     backgroundColor: '#008000', // Green for the cart button
@@ -270,7 +268,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#ffffff', // White text color
-    fontSize: 17, // Slightly larger font size
     fontWeight: '600', // Medium font weight
     textAlign: 'center', // Center text
     fontSize: 20,
