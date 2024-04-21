@@ -15,3 +15,16 @@ def add_item_to_cart(user_id, product_id, quantity):
 def remove_item_from_cart(user_id, product_id):
     sql = "DELETE FROM Cart WHERE UserID = %s AND ProductID = %s;"
     exec_commit(sql, (user_id, product_id))
+
+def update_item_quantity(user_id, product_id, quantity):
+    if quantity <= 0:
+        # If quantity is zero or negative, remove the item
+        remove_item_from_cart(user_id, product_id)
+    else:
+        # Update the quantity of the existing item
+        sql = """
+        UPDATE Cart 
+        SET Quantity = %s 
+        WHERE UserID = %s AND ProductID = %s;
+        """
+        exec_commit(sql, (quantity, user_id, product_id))

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   Image,
   SafeAreaView,
-  View,
   Text,
   StyleSheet,
   FlatList,
@@ -113,7 +112,7 @@ const FavouritesScreen = ({ navigation }) => {
     >
       <Image source={{ uri: item.ImageURL }} style={styles.itemImage} />
       <Text style={styles.itemText}>
-        {item.ProductName} (ID: {item.ProductID})
+        {item.ProductName}
       </Text>
       {activeFavourite === item.ProductID && (
         <Text style={styles.selectedText}>Selected</Text>

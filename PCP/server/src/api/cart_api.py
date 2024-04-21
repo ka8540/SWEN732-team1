@@ -6,10 +6,10 @@ from flask import request
 
 try:
     from src.utilities.swen_344_db_utils import exec_get_all, exec_commit
-    from src.db.cart import add_item_to_cart, get_cart_contents, remove_item_from_cart
+    from src.db.cart import add_item_to_cart, get_cart_contents, remove_item_from_cart , update_item_quantity
 except ImportError:
     from utilities.swen_344_db_utils import exec_get_all, exec_commit
-    from db.cart import add_item_to_cart, get_cart_contents, remove_item_from_cart
+    from db.cart import add_item_to_cart, get_cart_contents, remove_item_from_cart, update_item_quantity
     
 
 
@@ -63,5 +63,22 @@ class CartAPIById(Resource):
 
         remove_item_from_cart(user_id, product_id)  # Use the `product_id` parameter
         return make_response(jsonify({'message': 'Item removed from cart successfully'}), 204)
+    
+    def put(self, product_id):
+        session_key = request.headers.get('X-Session-Key')
+        if not session_key:
+            return {"message": "No session key provided."}, 401
+        print(session_key,"Session Key received")
 
-#ka8540
+        user_id = verify_session_key(session_key)
+        if not user_id:
+            return {"message": "Invalid session key."}, 401
+        print(user_id,"user received")
+        parser = reqparse.RequestParser()
+        parser.add_argument('quantity', type=int, required=True, help="Quantity cannot be blank!")
+        args = parser.parse_args()
+        print(args['quantity'])
+        # Assuming you have a function to update item quantity in the cart
+        update_item_quantity(user_id, product_id, args['quantity'])
+        
+        return make_response(jsonify({'message': 'Item quantity updated successfully'}), 200)
