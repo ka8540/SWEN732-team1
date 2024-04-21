@@ -14,12 +14,25 @@ except ImportError:
     
 class Canadian(Resource):
     def get(self):
-        price_usd = request.headers.get('Price')
-        price_cad = get_convert_price_to_canadian(price_usd)
-        return price_cad
-        
+        price_usd_str = request.headers.get('Price')
+        print(price_usd_str, "USD Prices!!")
+        try:
+            price_usd = float(price_usd_str)
+            price_cad = get_convert_price_to_canadian(price_usd)
+            print(price_cad,"price_result!!")
+            print(jsonify({'price_cad': price_cad}))
+            return jsonify({'price_cad': price_cad})
+        except (ValueError, TypeError):
+            return make_response(jsonify({'error': 'Invalid price value'}), 400)
+
 class Indian(Resource):
     def get(self):
-        price_usd = request.headers.get('Price')
-        price_inr = get_convert_price_to_canadian(price_usd)
-        return price_inr
+        price_usd_str = request.headers.get('Price')
+        try:
+            price_usd = float(price_usd_str)
+            print(price_usd)
+            price_inr = get_convert_price_to_indian(price_usd)
+            print("INR PRICE RESULT:",price_inr)
+            return jsonify({'price_inr': price_inr})
+        except (ValueError, TypeError):
+            return make_response(jsonify({'error': 'Invalid price value'}), 400)
