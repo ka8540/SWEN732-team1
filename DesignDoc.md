@@ -147,7 +147,7 @@ Passwords are hashed before storage.
 
 ### Log In
 
-![Login Page](images/Login copy.png)
+![Login Page](images/Login_2.png)
 
 Returning users will authenticate themselves on the login page by entering their:
 
