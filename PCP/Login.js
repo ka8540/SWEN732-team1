@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
-import { SafeAreaView, Alert, StyleSheet, Text, View, TextInput, TouchableOpacity,Image} from 'react-native';
-import { Platform,StatusBar } from 'expo-status-bar';
+import { SafeAreaView, Alert, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native';
 
 export default function Login({ navigation }) {
   const [username, setUsername] = useState('');
@@ -10,9 +9,10 @@ export default function Login({ navigation }) {
   const navigateToSignUp = () => {
     navigation.navigate('SignUp');
   };
+
   const handleSubmit = () => {
     if (!username || !password) {
-      Alert.alert("Invalid Input", "username and password must not be empty");
+      Alert.alert("Invalid Input", "Username and password must not be empty");
       return;
     }
     const url = 'http://127.0.0.1:5000/login';
@@ -29,84 +29,60 @@ export default function Login({ navigation }) {
     };
   
     fetch(url, requestOptions)
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else if (response.status === 410) {
-        throw new Error('username or password is wrong');
-      }  else if (response.status === 411) {
-        throw new Error('Invalid Password');
-      } else {
-        throw new Error('Some error occurred, please try again later.');
-      }
-    })
-    .then(data => {
-      console.log(data);
-      console.log("API Response:", data);
-      // Assuming `data` includes something like { sessionKey: 'your_session_key_here' }
-      const sessionKey = data.sessionKey;
-      // Store the session key
-      AsyncStorage.setItem('sessionKey', sessionKey)
-        .then(() => {
-          Alert.alert("Login Successfully");
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'MainApp' }], // Navigates to Home after login
-          });
-
-        })
-        .catch(error => console.error('AsyncStorage error: ', error));
-    })
-    .catch(error => {
-      if (error.message === 'username or password is wrong') {
-        Alert.alert("Invalide Username or Password", error.message);
-      }else if (error.message === 'Invalid Password') {
-        Alert.alert("Password is incorrect", error.message);
-      }else {
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Some error occurred, please try again later.');
+        }
+      })
+      .then(data => {
+        AsyncStorage.setItem('sessionKey', data.sessionKey)
+          .then(() => {
+            Alert.alert("Login Successfully");
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'MainApp' }],
+            });
+          })
+          .catch(error => console.error('AsyncStorage error: ', error));
+      })
+      .catch(error => {
+        Alert.alert("Login Error", error.message);
         console.error('Error:', error);
-      }
-    });
+      });
   };
-  
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      
-      {/* Orange Navbar */}
-      <TouchableOpacity onPress={navigateToSignUp} style={styles.signupButton}>
-        <Text style={styles.signupButtonText}>Signup</Text>
-      </TouchableOpacity>
-      
-      {/* App Content */}
       <View style={styles.content}>
-      <Image 
+        <Image 
           source={{ uri: '/Users/kayahir/Desktop/SWEN732/SWEN732-team1/images/icon.png' }} 
           style={styles.image}
         />
         <Text style={styles.header}>Login</Text>
-        <View style={styles.row}>
-      </View>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-        keyboardType="default"
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          value={username}
+          onChangeText={setUsername}
+          keyboardType="default"
         />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        keyboardType="default"
-        secureTextEntry={true}
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          keyboardType="default"
+          secureTextEntry={true}
         />
-
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        <Text style={styles.signupPrompt}>
+          Don't have an account? <Text onPress={navigateToSignUp} style={styles.signupLink}>SignUp</Text>
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -116,31 +92,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  navbar: {
-    backgroundColor: 'orange',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    paddingHorizontal: 10,
-  },
-  navbarText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  signupButton: {
-    backgroundColor: 'green', 
-    padding: 5,
-    marginTop: 5,
-    marginLeft:300, // Adjust the margin as needed
-    borderRadius: 10,
-    width: '20%',
-    alignItems: 'center',
-  },
-  signupButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
   },
   content: {
     flex: 1,
@@ -163,9 +114,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   image: {
-    width: 120, 
-    height: 250,
-    borderRadius: 5,
+    width: 320, 
+    height: 320,
+    marginBottom: 20, 
+    borderRadius: 60, 
   },
   button: {
     backgroundColor: 'navy',
@@ -179,13 +131,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '90%',
+  signupPrompt: {
+    marginTop: 20,
+    fontSize: 14,
   },
-  halfInput: {
-    width: '48%', 
+  signupLink: {
+    fontWeight: 'bold',
+    color: 'blue',
   }
-  
 });
