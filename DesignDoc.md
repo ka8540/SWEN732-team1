@@ -9,13 +9,11 @@ The "Price Compare Plus" MVP is a mobile application that enables users to brows
 3. Product Details Display: Display detailed information about each product, including its features, specifications, and descriptions.
 4. Price Comparison: Gather pricing information for the searched product from different online retailers and display them in a comparative format.
 5. Save Favorites: Allow users to save products they're interested in, to a favorites list for easy access later.
-6. Product Reviews: Integrate product review functionality to provide users with insights from other consumers' experiences.
-7. Sort and Filter Options: Provide users with the ability to sort search results by criteria such as price, relevance, or ratings, and filter results based on factors like brand, price range, or availability.
-8. Product Image Display: Show images of the searched product to help users identify it visually.
-9. Basic User Interface (UI): Create a simple intuitive user interface with essential components such as search bar, product display area, and navigation menu.
-10. Responsive Design: Ensure that the app is responsive and works well on various mobile devices and screen sizes.
-11. Currency Conversion: Incorporate currency conversion functionality to allow users to view prices in their preferred currency. This feature can be especially useful for users who shop across different regions or countries.
-12. Price Drop Notifications: Enable users to receive notifications when the prices of their saved favorite products drop below a specified threshold. This feature allows users to take advantage of discounts and promotions without constantly monitoring prices themselves.
+6. Sort and Filter Options: Provide users with the ability to sort search results by criteria such as price, relevance, or ratings, and filter results based on factors like brand, price range, or availability.
+7. Product Image Display: Show images of the searched product to help users identify it visually.
+8. Basic User Interface (UI): Create a simple intuitive user interface with essential components such as search bar, product display area, and navigation menu.
+9. Responsive Design: Ensure that the app is responsive and works well on various mobile devices and screen sizes.
+10. Currency Conversion: Incorporate currency conversion functionality to allow users to view prices in their preferred currency. This feature can be especially useful for users who shop across different regions or countries.
 
 ## Architecture and Design
 
@@ -52,21 +50,22 @@ The architecture supports both RESTful services and third-party API integration,
 - The Manage User use case is specifically related to the Admin actor, indicating their ability to manage user-related functionalities.
 
 ### Class Diagram
+
 ![class diagram.drawio.png](images/class_diagram_drawio.jpg)
 
 ### Class Diagram Description
-- **User Class:**
-  -**Attributes:**:
-    UserID: int - A unique identifier for each user.
-    Username: String - The username of the user.
-    Password: String - The password of the user.
-    Email: String - The email address of the user.
-  -**Operations**:
-    login(): void - Allows the user to log in to the application.
-    register(): void - Allows the user to register for an account.
-    logout(): void - Allows the user to log out of the application.
+
+- **User Class:** -**Attributes:**:
+  UserID: int - A unique identifier for each user.
+  Username: String - The username of the user.
+  Password: String - The password of the user.
+  Email: String - The email address of the user. -**Operations**:
+  login(): void - Allows the user to log in to the application.
+  register(): void - Allows the user to register for an account.
+  logout(): void - Allows the user to log out of the application.
 
 - **Product Class**:
+
   - **Attributes**:
     productID: int - A unique identifier for each product.
     description: String - A description of the product.
@@ -77,6 +76,7 @@ The architecture supports both RESTful services and third-party API integration,
     imageurl(): void - Retrieves the image URL of a product.
 
 - **Notification Class**:
+
   - **Attributes**:
     notificationID: int - A unique identifier for each notification.
     userID: int - The ID of the user who received the notification.
@@ -84,6 +84,7 @@ The architecture supports both RESTful services and third-party API integration,
     timestamp: DateTime - The date and time the notification was sent.
 
 - **Authentication Class**:
+
   - **Attributes**:
     Username: String - The username of the user.
     Password: String - The password of the user.
@@ -92,6 +93,7 @@ The architecture supports both RESTful services and third-party API integration,
     logout(): void - Allows the user to log out of the application.
 
 - **Shopping Cart Class**:
+
   - **Attributes**:
     cartID: int - A unique identifier for each shopping cart.
     userID: int - The ID of the user who owns the shopping cart.
@@ -103,12 +105,14 @@ The architecture supports both RESTful services and third-party API integration,
     checkout():void - Completes the checkout process.
 
 - **Favorites Class**:
+
   - **Attributes**:
     favoriteID: int - A unique identifier for each favorite item.
     userID int - The ID of the user who favorited the item.
     productID: int - The ID of the product that is favorited.
 
 - **Price Comparison Class**:
+
   - **Attributes**:
     ProductID: int - The ID of the product
     retailerD int - The ID of the retailer who is selling it.
@@ -116,8 +120,7 @@ The architecture supports both RESTful services and third-party API integration,
 - **Currency Conversion Class**:
   - **Operations**:
     convert: int - Converts currency into different types.
-    
-  
+
 # Price Compare Plus - User Authentication Feature
 
 ## Overview
@@ -162,8 +165,9 @@ Upon successful authentication, a unique session key is generated to manage the 
 
 ### Home
 
-![Home Page](images/Home_Page.png)
+![Home Page](images/Home_Page_2.png)
 
+Once the User is Authenticated it navigates to the HomePage
 The home page serves as the main dashboard, featuring:
 
 - A search bar for product queries.
@@ -172,7 +176,7 @@ The home page serves as the main dashboard, featuring:
 
 ### Product
 
-![Products](images/Products.png)
+![Products](images/Products_2.png)
 The Products page showcases a list of items available for comparison. Users can browse through the selection of phones and electronic devices, view detailed descriptions, and compare prices from different retailers.
 
 featuring:
@@ -182,8 +186,8 @@ featuring:
 
 ### ProductDescription
 
-![ProductsDescription](images/ProductDescription.png)
-![ProductsRetailers](images/RetailerPrice.png)
+![ProductsDescription](images/ProductDescription_2y.png)
+![ProductsRetailers](images/Retailers.png)
 The Product Description page provides in-depth information about each product, including camera specs, processor details, and other unique features.
 
 featuring:
@@ -195,9 +199,27 @@ featuring:
 
 ### Shopping Cart
 
-![Shopping Cart](images/ShoppingCart.png)
+![Shopping Cart](images/Cart.png)
 
 The shopping cart displays all the products that the user intends to purchase. Each product includes details like quantity and pricing.
+
+it induces features like:
+
+- Update Quanitity
+- Remove the Product from Cart
+  ![Shopping Cart](images/CartUpdateQuantity.png)
+
+### Favourite
+
+![Shopping Cart](images/Favourite.png)
+
+The Favourite section let's user save their favourites so that they can come anytime to checkout the new price if it's been updated
+
+it include features like :
+
+- Remove Favourites
+
+![Shopping Cart](images/FavRemove.png)
 
 ### Account
 
@@ -213,4 +235,3 @@ The Account section displays the logged-in user's:
 A logout option is available for users to end their session. On logout, the session key is reset to null to maintain security, preventing unauthorized access and maintaining the privacy and integrity of the user's session.
 
 ---
-
