@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image, TextInput, FlatList, Dimensions, Button } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
@@ -23,7 +22,7 @@ export default function Home({ navigation }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [categories, setCategories] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-
+  const [carouselKey, setCarouselKey] = useState(0);
   useEffect(() => {
     const fetchCategoriesAndProducts = async () => {
       try {
@@ -66,9 +65,9 @@ export default function Home({ navigation }) {
   };
 
   const carouselItems = [
-    { source: '/Users/kayahir/Desktop/SWEN732/SWEN732-team1/images/mcimage.jpeg' },
-    { source: '/Users/kayahir/Desktop/SWEN732/SWEN732-team1/images/ipimage.png' },
-    { source: '/Users/kayahir/Desktop/SWEN732/SWEN732-team1/images/accimage.jpeg' },
+    { key: '1', source: 'https://i.ytimg.com/vi/BS68LIWjR3g/maxresdefault.jpg' },
+    { key: '2', source: 'https://image-us.samsung.com/SamsungUS/home/mobile/mobile-accessories/pcd/060120/MobileAccessories_KV_AccyGroup_M.jpg?$cm-g-fb-full-bleed-img-mobile-jpg$' },
+    { key: '3', source: 'https://hips.hearstapps.com/hmg-prod/images/reviews-top-portable-bluetooth-speakers-65e883a6d8581.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*' },
   ];
 
   const handleSearch = async (query) => {
@@ -91,6 +90,7 @@ export default function Home({ navigation }) {
           console.log('No categories or products found for this search query.');
         }
       }
+      setCarouselKey(prevKey => prevKey + 1);
     } catch (error) {
       console.error("Error during search:", error);
     }
@@ -121,14 +121,15 @@ export default function Home({ navigation }) {
       </View>
 
       <View style={styles.carouselContainer}>
-        <Carousel
-          layout={"default"}
-          data={carouselItems}
-          sliderWidth={Dimensions.get('window').width}
-          itemWidth={500}
-          renderItem={renderItem}
-          onSnapToItem={index => setActiveIndex(index)}
-        />
+      <Carousel
+        key={carouselKey}
+        layout={"default"}
+        data={carouselItems}
+        sliderWidth={Dimensions.get('window').width}
+        itemWidth={500}
+        renderItem={renderItem}
+        onSnapToItem={index => setActiveIndex(index)}
+      />
       </View>
 
       <View style={styles.content}>
@@ -169,13 +170,13 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 5,
+    paddingHorizontal: -2,
   },
   columnWrapper: {
     justifyContent: 'space-between',
   },
   listContentContainer: {
-    paddingHorizontal: 10,
+    paddingHorizontal: -5,
   },
   button: {
     justifyContent: 'center',
@@ -224,6 +225,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     overflow: 'hidden',
     borderRadius: 20,
+    paddingHorizontal:-200,
   },
   carouselItem: {
     backgroundColor: '#fff',
@@ -231,7 +233,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingRight:70,
   },
   image: {
     width: '90%',
