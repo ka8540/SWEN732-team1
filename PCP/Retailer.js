@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, Button, ActivityIndicator, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView,ActivityIndicator, TouchableOpacity, TextInput, ActionSheetIOS } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Picker } from '@react-native-picker/picker';
-import { ActionSheetIOS } from 'react-native';
 const ProductDetails = () => {
   const [productDescription, setProductDescription] = useState('');
   const [product, setProduct] = useState(null);
@@ -235,7 +233,6 @@ const styles = StyleSheet.create({
     borderRadius: 5, // Rounded corners for the input field
     padding: 10,
     backgroundColor: '#fff', // White background to stand out from container
-    marginBottom: 20,
     marginTop:20,
   },
   buttonFavorite: {
@@ -264,7 +261,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 }, // Positioning of the shadow
     shadowOpacity: 0.25, // Opacity of the shadow
     shadowRadius: 3.84, // Blur radius of the shadow
-    marginBottom: 15,
   },
   buttonText: {
     color: '#ffffff', // White text color
@@ -287,7 +283,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
     width: '100%',
-    marginBottom: 10,
   },
   retailerName: {
     fontSize: 21,
